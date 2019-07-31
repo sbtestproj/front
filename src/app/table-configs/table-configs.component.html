@@ -5,13 +5,13 @@
 <div *ngIf ="httpData" style=" position: relative ; top: 50px;">
   <div class="ColumnHeaders">
     <div style="display:table-cell; position: relative;   width: 200px; border-right: solid  1px black;"  >
-      <input [(ngModel)]="searchTerm"  type="text" (keyup)="onkeyup($event)"  class="form-control ml-2"/>
+      <input [(ngModel)]="searchTerm2"  type="text" (keyup)="onkeyup($event)"  class="form-control ml-2"/>
     </div>
     <div style="display:table-cell; position: relative;   width: 200px; border-right: solid  1px black;"  >
      <!-- <input class="form-control ml-2" type="text" [formControl]="filter"/>  -->
     </div>
     <div style="display:table-cell; position: relative;   width: 200px; border-right: solid  1px black;"  >
-      <input [(ngModel)]="searchTerm2" style="position: relative; width: 100%  ; border: none" />
+      <input [(ngModel)]="searchTerm" style="position: relative; width: 100%  ; border: none" />
     </div>
   </div>
 
