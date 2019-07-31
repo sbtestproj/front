@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule, MatTreeModule} from '@angular/material';
-import { TableTestComponent } from './table-test/table-test.component';
 import {MatPaginatorModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination' ;
@@ -18,7 +17,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     AppComponent,
     HeaderComponent,
-    TableTestComponent,
     TableConfigsComponent
   ],
   imports: [
