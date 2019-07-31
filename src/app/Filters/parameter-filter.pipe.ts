@@ -9,8 +9,8 @@ import {Parameter} from '../Models/parameter';
 
 export class ParameterFilterPipe implements PipeTransform {
   transform(params: Parameter[], searchTerm: string): Parameter[] {
-    if (!params || !searchTerm) {
-      return null;
+    if (!searchTerm) {
+      return params;
     }
     return params.filter(param => ((param.name.toLowerCase().indexOf(searchTerm.toLowerCase())))
       !== -1);
