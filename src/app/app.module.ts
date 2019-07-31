@@ -12,12 +12,15 @@ import { NgxPaginationModule } from 'ngx-pagination' ;
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { TableConfigsComponent } from './table-configs/table-configs.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ParameterFilterPipe} from './Filters/parameter-filter.pipe';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    TableConfigsComponent
+    TableConfigsComponent,
+    ParameterFilterPipe
   ],
   imports: [
     BrowserModule, Ng2SearchPipeModule,
@@ -27,7 +30,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatPaginatorModule,
     MatTreeModule,
     HttpClientModule,
-    NgxPaginationModule, NgbModule,
+    NgxPaginationModule, NgbModule, FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
