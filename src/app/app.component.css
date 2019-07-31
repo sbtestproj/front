@@ -1,0 +1,43 @@
+.mytable{
+  width: auto;
+  margin: 100px;
+ /* border: double 5px black; */
+  border: none;
+  position: relative;
+}
+
+
+
+
+.first{
+  background-color: deepskyblue;
+  height: 50px;
+  position: relative;
+  top:20px;
+}
+
+.Second {
+  background-color: green;
+  height:200px;
+  position: relative;
+  top: 40px;
+}
+
+.Third {
+  position: relative;
+  background-color: red;
+  height: 100px;
+  top: 60px;
+}
+.secondSecond{
+  background-color: blue;
+  position: relative;
+  top: 20px;
+}
+.SecondFirst{
+  top: 5px;
+  background-color: yellow;
+  position: absolute;
+}
+
+
