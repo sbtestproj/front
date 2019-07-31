@@ -1,0 +1,16 @@
+.Header{
+  height: 25%;
+  background-color: #00afaa;
+  position: relative;
+}
+
+.Header p {
+  position: absolute;
+  color: white;
+  top: 20%;
+  left: 50%;
+  margin-left: -100px;
+  font-size: 30px;
+
+  font-weight: bold ;
+}

@@ -1,0 +1,35 @@
+<div style="position: relative; " >
+  <button class="ButtonGetData" (click)="getFakeData()" > Get data </button>
+</div>
+
+<div *ngIf ="httpData" style=" position: relative ; top: 50px;">
+  <div class="ColumnHeaders">
+    <div style="display:table-cell; position: relative;   width: 200px; border-right: solid  1px black;"  >
+      <input type="text" (keyup)="onkeyup($event)" />
+    </div>
+    <div style="display:table-cell; position: relative;   width: 200px; border-right: solid  1px black;"  >
+     <!-- <input class="form-control ml-2" type="text" [formControl]="filter"/>  -->
+    </div>
+    <div style="display:table-cell; position: relative;   width: 200px; border-right: solid  1px black;"  >
+      <input style="position: relative; width: 100%  ; border: none" />
+    </div>
+  </div>
+
+
+<!--  table data -->
+
+  <div class="MyClass"   *ngFor="let cell of httpData
+| paginate: {itemsPerPage: 2, currentPage: p} ; let i=index " style=" position: relative ;">
+
+    <div  (click)="showLog()">   <!-- для выделения всей строки -->
+      <!--div class = "Row" > {{i}}</div-->   <!--*ngIf="myCondition(cell)" -->
+    <!--  <ngb-highlight [result]="cell.area | number" [term]="filter.value"></ngb-highlight> -->
+      <ngb-highlight [result]="i"></ngb-highlight>
+      <div class = "Row" > {{cell.id}}</div>
+      <div class = "Row" >{{cell.name}}</div>
+      <div class = "Row" > {{cell.verif}}</div>
+    </div>
+  </div>
+  <pagination-controls (pageChange) = "p=$event"  style="font-size: 8px" ></pagination-controls>
+
+</div>
