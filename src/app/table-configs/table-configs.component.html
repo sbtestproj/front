@@ -18,8 +18,8 @@
 
 <!--  table data -->
 
-  <div class="MyClass"   *ngFor="let cell of httpData
-| paginate: {itemsPerPage: 2, currentPage: p} | paramFilter: searchTerm ; let i=index " style=" position: relative ;">
+  <div class="MyClass"   *ngFor="let cell of httpData | paramFilter: searchTerm
+| paginate: {itemsPerPage: 2, currentPage: p}  ; let i=index " style=" position: relative ;">
 
     <div  (click)="showLog()">   <!-- для выделения всей строки -->
       <!--div class = "Row" > {{i}}</div-->   <!--*ngIf="myCondition(cell)" -->
