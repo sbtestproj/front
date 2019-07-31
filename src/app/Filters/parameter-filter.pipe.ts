@@ -1,4 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
+import { HttpData} from '../OutData';
 
 import { mapTo, delay } from 'rxjs/operators';
 import {Parameter} from '../Models/parameter';
@@ -8,7 +9,7 @@ import {Parameter} from '../Models/parameter';
 })
 
 export class ParameterFilterPipe implements PipeTransform {
-  transform(params: Parameter[], searchTerm: string): Parameter[] {
+  transform(params: HttpData[], searchTerm: string): HttpData[] {
     if (!searchTerm) {
       return params;
     }

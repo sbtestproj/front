@@ -5,13 +5,14 @@
 <div *ngIf ="httpData" style=" position: relative ; top: 50px;">
   <div class="ColumnHeaders">
     <div style="display:table-cell; position: relative;   width: 200px; border-right: solid  1px black;"  >
-      <input [(ngModel)]="searchTerm2"  type="text" (keyup)="onkeyup($event)"  class="form-control ml-2"/>
-    </div>
-    <div style="display:table-cell; position: relative;   width: 200px; border-right: solid  1px black;"  >
-     <!-- <input class="form-control ml-2" type="text" [formControl]="filter"/>  -->
+      <input [(ngModel)]="searchTerm2" style="position: relative; width: 100%  ; border: none"/>
     </div>
     <div style="display:table-cell; position: relative;   width: 200px; border-right: solid  1px black;"  >
       <input [(ngModel)]="searchTerm" style="position: relative; width: 100%  ; border: none" />
+
+    </div>
+    <div style="display:table-cell; position: relative;   width: 200px; border-right: solid  1px black;"  >
+      <input class="form-control ml-2" style="position: relative; width: 100%  ; border: none" />
     </div>
   </div>
 
@@ -24,7 +25,6 @@
     <div  (click)="showLog()">   <!-- для выделения всей строки -->
       <!--div class = "Row" > {{i}}</div-->   <!--*ngIf="myCondition(cell)" -->
     <!--  <ngb-highlight [result]="cell.area | number" [term]="filter.value"></ngb-highlight> -->
-      <ngb-highlight [result]="i"></ngb-highlight>
       <div class = "Row" > {{cell.id}}</div>
       <div class = "Row" >{{cell.name}}</div>
       <div class = "Row" > {{cell.verif}}</div>

@@ -48,7 +48,7 @@ export class TableConfigsComponent implements OnInit {
     console.log('Message');
   }
   getFakeData(): void {
-    this.httpData = this.ServiceHttp.getFakeData();
+    this.httpData = this.ServiceHttp.getDataTable();
     /*  this.ServiceHttp.getDataTable().subscribe((data: HttpData[]) => (this.httpData = data));*/
   }
   // ***********************************
