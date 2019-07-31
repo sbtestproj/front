@@ -11,14 +11,14 @@
      <!-- <input class="form-control ml-2" type="text" [formControl]="filter"/>  -->
     </div>
     <div style="display:table-cell; position: relative;   width: 200px; border-right: solid  1px black;"  >
-      <input style="position: relative; width: 100%  ; border: none" />
+      <input [(ngModel)]="searchTerm2" style="position: relative; width: 100%  ; border: none" />
     </div>
   </div>
 
 
 <!--  table data -->
 
-  <div class="MyClass"   *ngFor="let cell of httpData | paramFilter: searchTerm
+  <div class="MyClass"   *ngFor="let cell of httpData | paramFilter: searchTerm | paramFilter_id: searchTerm2
 | paginate: {itemsPerPage: 2, currentPage: p}  ; let i=index " style=" position: relative ;">
 
     <div  (click)="showLog()">   <!-- для выделения всей строки -->

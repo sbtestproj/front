@@ -4,14 +4,14 @@ import { mapTo, delay } from 'rxjs/operators';
 import {Parameter} from '../Models/parameter';
 
 @Pipe({
-  name: 'paramFilter'
+  name: 'paramFilter_id'
 })
 
-export class ParameterFilterPipe implements PipeTransform {
+export class ParameterFilterByidPipe implements PipeTransform {
   transform(params: Parameter[], searchTerm: string): Parameter[] {
     if (!searchTerm) {
       return params;
     }
-    return params.filter(param => ((param.name.toLowerCase().indexOf(searchTerm.toLowerCase()))) !== -1);
+    return params.filter(param => ((param.id.toString().toLowerCase().indexOf(searchTerm.toLowerCase()))) !== -1);
   }
 }

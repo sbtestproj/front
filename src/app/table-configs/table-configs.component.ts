@@ -18,6 +18,8 @@ import {Observable} from 'rxjs';
 export class TableConfigsComponent implements OnInit {
   title = 'front';
   searchTerm: string;
+  searchTerm2: string;
+
  // constructor( private  ServiceHttp: ServiceHttpService) { }
   constructor( private  ServiceHttp: ServiceHttpService) { }
 

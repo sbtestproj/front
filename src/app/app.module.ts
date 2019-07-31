@@ -14,13 +14,15 @@ import { TableConfigsComponent } from './table-configs/table-configs.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ParameterFilterPipe} from './Filters/parameter-filter.pipe';
 import {FormsModule} from '@angular/forms';
+import {ParameterFilterByidPipe} from './Filters/parameter-filter-byid.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     TableConfigsComponent,
-    ParameterFilterPipe
+    ParameterFilterPipe,
+    ParameterFilterByidPipe
   ],
   imports: [
     BrowserModule, Ng2SearchPipeModule,
