@@ -1,18 +1,19 @@
 <div style="position: relative; " >
-  <button class="ButtonGetData" (click)="getFakeData()" > Get data </button>
+  <input  type="text" (keyup) = "onEveryClick($event)"  />
+  <button class="ButtonGetData" (click)="getDataTableNew()" > Get data </button>
 </div>
 
 <div *ngIf ="httpData" style=" position: relative ; top: 50px;">
   <div class="ColumnHeaders">
     <div style="display:table-cell; position: relative;   width: 200px; border-right: solid  1px black;"  >
-      <input [(ngModel)]="searchTerm2" style="position: relative; width: 100%  ; border: none"/>
+      <input [(ngModel)]="searchTerm2"  placeholder="Search" style="position: relative; width: 100%  ; border: none"/>
     </div>
     <div style="display:table-cell; position: relative;   width: 200px; border-right: solid  1px black;"  >
-      <input [(ngModel)]="searchTerm" style="position: relative; width: 100%  ; border: none" />
+      <input [(ngModel)]="searchTerm" placeholder="Search" style="position: relative; width: 100%  ; border: none" />
 
     </div>
     <div style="display:table-cell; position: relative;   width: 200px; border-right: solid  1px black;"  >
-      <input class="form-control ml-2" style="position: relative; width: 100%  ; border: none" />
+      <input class="form-control ml-2" placeholder="Search" style="position: relative; width: 100%  ; border: none" />
     </div>
   </div>
 
@@ -20,7 +21,7 @@
 <!--  table data -->
 
   <div class="MyClass"   *ngFor="let cell of httpData | paramFilter: searchTerm | paramFilter_id: searchTerm2
-| paginate: {itemsPerPage: 2, currentPage: p}  ; let i=index " style=" position: relative ;">
+| paginate: {itemsPerPage: 3, currentPage: p}  ; let i=index " style=" position: relative ;">
 
     <div  (click)="showLog()">   <!-- для выделения всей строки -->
       <!--div class = "Row" > {{i}}</div-->   <!--*ngIf="myCondition(cell)" -->

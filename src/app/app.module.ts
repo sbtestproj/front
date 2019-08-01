@@ -15,6 +15,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ParameterFilterPipe} from './Filters/parameter-filter.pipe';
 import {FormsModule} from '@angular/forms';
 import {ParameterFilterByidPipe} from './Filters/parameter-filter-byid.pipe';
+import { ServiceHttpService} from './Service/service-http.service';
+import { InterceptorModule } from './interceptor/interceptor.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import {ParameterFilterByidPipe} from './Filters/parameter-filter-byid.pipe';
     ParameterFilterByidPipe
   ],
   imports: [
+    InterceptorModule,
     BrowserModule, Ng2SearchPipeModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -32,7 +35,7 @@ import {ParameterFilterByidPipe} from './Filters/parameter-filter-byid.pipe';
     MatPaginatorModule,
     MatTreeModule,
     HttpClientModule,
-    NgxPaginationModule, NgbModule, FormsModule,
+    NgxPaginationModule, NgbModule, FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

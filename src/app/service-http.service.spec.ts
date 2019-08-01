@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ServiceHttpService } from './service-http.service';
+import { ServiceHttpService } from './Service/service-http.service';
 
 describe('ServiceHttpService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
