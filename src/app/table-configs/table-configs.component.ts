@@ -3,7 +3,7 @@ import { ServiceHttpService} from '../Service/service-http.service';
 import {HttpData} from '../OutData';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-
+import { MessagesService} from '../Service/messages.service';
 
 @Component({
   selector: 'app-table-configs',
@@ -17,7 +17,7 @@ export class TableConfigsComponent implements OnInit {
   searchTerm2: string;
 
  // constructor( private  ServiceHttp: ServiceHttpService) { }
-  constructor( private  ServiceHttp: ServiceHttpService, public httpclient: HttpClient) { }
+  constructor(public ResultMessages: MessagesService, private  ServiceHttp: ServiceHttpService, public httpclient: HttpClient) { }
 
 // ********** variables *************
   // HttpData: IniArtibutesType[];
@@ -26,14 +26,14 @@ export class TableConfigsComponent implements OnInit {
   httpData: any;
   temp: any;
   p = 1; // for pagination
-
+   ResultLenght: number;
   stringdata = ''; // using it in our service for add get param
 // **********************************
 
 // ********** functions *************
 
   onEveryClick(event: any) {
-   this.stringdata = event.target.value;
+      this.stringdata = event.target.value;
   }
 
   // ********************************
@@ -54,10 +54,7 @@ export class TableConfigsComponent implements OnInit {
    //   this.ServiceHttp.getDataTable(this.stringdata).subscribe((data: any) => (this.httpData = data));
   }
   // ***********************************
-  onkeyup(event: any) {
-     console.log(event.target.value);
-  }
-// **********************************
+
 // it woks insted of service
   getDataTableNew(): void {
     this.stringUrl = 'http://localhost:8080/hiberProject/test?name=';
@@ -65,13 +62,23 @@ export class TableConfigsComponent implements OnInit {
    
     console.log('stringUrl: ' + this.stringUrl);
     this.httpclient.get(this.stringUrl)
-      .subscribe((data: any) => {console.log(  data );  console.log('verif : ' + data[0].verif); this.httpData = data; });
-   // return this.outData;
+      .subscribe((data: any) => {
+        console.log(data + ' lenght: ' + (data).length);
+        this.httpData = data; /* console.log('verif : ' + data[0].verif); */
+        if ((data).length === 0) {
+          this.ResultMessages.add(' SearchResult: 0');
+          this.httpData = [];
+        } else { this.ResultMessages.add('SearchResult :' + (data).length); }
+      });
+       // this.ResultLenght = (data).length; console.log('lenght res: ' + this.ResultLenght); }) ;
+
+    // return this.outData;
   }
 
 
 
   ngOnInit() {
+
    // this.ServiceHttp.getDataTable(this.stringdata);
 
   }
