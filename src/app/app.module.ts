@@ -17,6 +17,8 @@ import {FormsModule} from '@angular/forms';
 import {ParameterFilterByidPipe} from './Filters/parameter-filter-byid.pipe';
 import { ServiceHttpService} from './Service/service-http.service';
 import { InterceptorModule } from './interceptor/interceptor.module';
+import { DetailsComponent } from './details/details.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { InterceptorModule } from './interceptor/interceptor.module';
     HeaderComponent,
     TableConfigsComponent,
     ParameterFilterPipe,
-    ParameterFilterByidPipe
+    ParameterFilterByidPipe,
+    DetailsComponent
   ],
   imports: [
     InterceptorModule,
@@ -35,7 +38,11 @@ import { InterceptorModule } from './interceptor/interceptor.module';
     MatPaginatorModule,
     MatTreeModule,
     HttpClientModule,
-    NgxPaginationModule, NgbModule, FormsModule
+    NgxPaginationModule, NgbModule, FormsModule,
+    RouterModule.forRoot([
+      {path:'table-configs', component:TableConfigsComponent},
+      {path:'details', component:DetailsComponent}
+      ])
   ],
   providers: [],
   bootstrap: [AppComponent]

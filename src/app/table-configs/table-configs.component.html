@@ -10,7 +10,8 @@
     <td>verif</td>
   </tr>
   <tr>
-    <td><input [(ngModel)]="searchTerm2" class="Filter" placeholder="Filter" /></td>
+    <td><input [(ngModel)]="searchTerm2" class="Filter" placeholder="Filter"></td>
+
     <td><input [(ngModel)]="searchTerm" class="Filter" placeholder="Filter"  /></td>
     <td><input class="Filter" placeholder="Filter"  /></td>
   </tr>
@@ -22,7 +23,7 @@
   <tr  *ngFor="let cell of httpData | paramFilter: searchTerm | paramFilter_id: searchTerm2
 | paginate: {itemsPerPage: 5, currentPage: p}  ; let i=index ">
     <td>{{cell.id}}</td>
-    <td>{{cell.name}}</td>
+    <td><a routerLink="/details">Dashboard/></a>{{cell.name}}</td>
     <td>{{cell.verif}}</td>
   </tr>
 
