@@ -1,6 +1,16 @@
 <div class="Header">
-  <p>Knoff-Off </p>
+  <p>Siqma Knowhow </p>
 <br/>
   <span style=" position: absolute; left: 40%; color: white; top: 110px; font-size: 20px"> The S&B KnowledgeBase </span>
+
+  <li ngbDropdown class="nav-item dropdown"style="width:120px; background-color: white; float:right">
+  <div>
+    <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Create New</a>
+  </div>
+    <div ngbDropdownMenu class="dropdown-menu " aria-labelledby="dropdown01">
+      <a class="dropdown-item" routerLink="add_param">Parameter</a>
+      <a class="dropdown-item " (click)="openDialog()" >Module</a>
+    </div>
+  </li>
 
 </div>

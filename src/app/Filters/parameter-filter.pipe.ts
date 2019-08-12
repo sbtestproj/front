@@ -13,6 +13,6 @@ export class ParameterFilterPipe implements PipeTransform {
     if (!searchTerm) {
       return params;
     }
-    return params.filter(param => ((param.name.toLowerCase().indexOf(searchTerm.toLowerCase()))) !== -1);
+    return params.filter(param => ((param[1].toLowerCase().indexOf(searchTerm.toLowerCase()))) !== -1);
   }
 }

@@ -12,6 +12,6 @@ export class ParameterFilterByidPipe implements PipeTransform {
     if (!searchTerm) {
       return params;
     }
-    return params.filter(param => ((param.id.toString().toLowerCase().indexOf(searchTerm.toLowerCase()))) !== -1);
+    return params.filter(param => ((param[0].toString().toLowerCase().indexOf(searchTerm.toLowerCase()))) !== -1);
   }
 }

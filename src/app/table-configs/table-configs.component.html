@@ -5,14 +5,22 @@
 <table>
   <thead>
   <tr>
-    <td>id</td>
-    <td>name</td>
-    <td>verif</td>
+    <td>ConfigItemName</td>
+    <td>ConfigItemType</td>
+    <td>Default</td>
+    <td>Description</td>
+    <td>Device</td>
+    <td>ConfigSourceType</td>
+    <td>ConfigSourceName</td>
   </tr>
   <tr>
     <td><input [(ngModel)]="searchTerm2" class="Filter" placeholder="Filter"></td>
 
     <td><input [(ngModel)]="searchTerm" class="Filter" placeholder="Filter"  /></td>
+    <td><input class="Filter" placeholder="Filter"  /></td>
+    <td><input class="Filter" placeholder="Filter"  /></td>
+    <td><input class="Filter" placeholder="Filter"  /></td>
+    <td><input class="Filter" placeholder="Filter"  /></td>
     <td><input class="Filter" placeholder="Filter"  /></td>
   </tr>
   </thead>
@@ -20,11 +28,15 @@
 
   <tbody>
 
-  <tr  *ngFor="let cell of httpData | paramFilter: searchTerm | paramFilter_id: searchTerm2
-| paginate: {itemsPerPage: 5, currentPage: p}  ; let i=index ">
-    <td>{{cell.id}}</td>
-    <td><a routerLink="/details">Dashboard/></a>{{cell.name}}</td>
-    <td>{{cell.verif}}</td>
+  <tr  (click)="openDialog(cell)"  *ngFor="let cell of httpData | paramFilter: searchTerm | paramFilter_id: searchTerm2
+| paginate: {itemsPerPage: 5, currentPage: p}  ; let i=index ; ">
+    <td>{{cell[0]}}</td>
+    <td>{{cell[1]}}</td>
+    <td>{{cell[2]}}</td>
+    <td>{{cell[3]}}</td>
+    <td>{{cell[4]}}</td>
+    <td>{{cell[5]}}</td>
+    <td>{{cell[6]}}</td>
   </tr>
 
   </tbody>
@@ -35,5 +47,5 @@
 
 
 
-<input class="MainSearch"  type="text" (keyup.enter)="getDataTableNew()" (keyup) = "onEveryClick($event)" placeholder="Search"  />
+<input class="MainSearch"  type="text" (keyup.enter)="getDataTableNew()" (keyup) = "onEveryClick($event)" placeholder="Search" autofocus  />
 

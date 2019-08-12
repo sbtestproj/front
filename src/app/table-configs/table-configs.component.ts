@@ -5,6 +5,13 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import { MessagesService} from '../Service/messages.service';
 
+/*                  meterial                         */
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {DialogtestComponent} from '../dialogtest/dialogtest.component';
+// *******************************************************
+
+
+
 @Component({
   selector: 'app-table-configs',
   templateUrl: './table-configs.component.html',
@@ -17,7 +24,10 @@ export class TableConfigsComponent implements OnInit {
   searchTerm2: string;
 
  // constructor( private  ServiceHttp: ServiceHttpService) { }
-  constructor(public ResultMessages: MessagesService, private  ServiceHttp: ServiceHttpService, public httpclient: HttpClient) { }
+  constructor(public ResultMessages: MessagesService, private  ServiceHttp: ServiceHttpService,
+              public httpclient: HttpClient,
+              /* for material */
+              public  dialog: MatDialog) { }
 
 // ********** variables *************
   // HttpData: IniArtibutesType[];
@@ -31,7 +41,23 @@ export class TableConfigsComponent implements OnInit {
 // **********************************
 
 // ********** functions *************
+   // ****  Dialog Functions ****
+  name: any;
+  color ;
+ // openDialog(): void {
+  openDialog( mytemp) {
+    const dialogRef = this.dialog.open(DialogtestComponent, {
+      width: '1000px',
+      height: '500px',
+     // this.name = 'test';
+      data: {location: mytemp[0], filename: mytemp[1], section: mytemp[2], parameter: mytemp[3]}
+    });
 
+    dialogRef.afterClosed().subscribe(res => {
+      this.color = res;
+    });
+  }
+  // *************************************
   onEveryClick(event: any) {
       this.stringdata = event.target.value;
   }
