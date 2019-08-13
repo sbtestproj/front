@@ -1,0 +1,24 @@
+
+<div style="position: relative; width: 50%; overflow: auto;">
+<div>
+  <h1 mat-dialog-title>location : {{data.location}}  <input style="position: relative; left: 100px " matInput [(ngModel)]="data.location"> </h1>
+</div>
+
+  <h1 mat-dialog-title>file name : {{data.filename}}</h1>
+<h1 mat-dialog-title>section : {{data.section}}</h1>
+<h1 mat-dialog-title>parameter : {{data.parameter}}</h1>
+
+</div>
+<div mat-dialog-content style="position: relative; ">
+
+  <p>Put new value :</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="outname">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Close</button>
+  <button mat-button [mat-dialog-close]="data.parameter" cdkFocusInitial>Save</button>
+</div>
+
+

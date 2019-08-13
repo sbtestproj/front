@@ -29,7 +29,7 @@
   <tbody>
 
   <tr  (click)="openDialog(cell)"  *ngFor="let cell of httpData | paramFilter: searchTerm | paramFilter_id: searchTerm2
-| paginate: {itemsPerPage: 5, currentPage: p}  ; let i=index ; ">
+| paginate: {itemsPerPage: 10, currentPage: p}  ; let i=index ; ">
     <td>{{cell[0]}}</td>
     <td>{{cell[1]}}</td>
     <td>{{cell[2]}}</td>
