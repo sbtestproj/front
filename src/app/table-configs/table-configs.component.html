@@ -14,22 +14,21 @@
     <td>ConfigSourceName</td>
   </tr>
   <tr>
-    <td><input [(ngModel)]="searchTerm2" class="Filter" placeholder="Filter"></td>
-
-    <td><input [(ngModel)]="searchTerm" class="Filter" placeholder="Filter"  /></td>
-    <td><input class="Filter" placeholder="Filter"  /></td>
-    <td><input class="Filter" placeholder="Filter"  /></td>
-    <td><input class="Filter" placeholder="Filter"  /></td>
-    <td><input class="Filter" placeholder="Filter"  /></td>
-    <td><input class="Filter" placeholder="Filter"  /></td>
+    <td><input [(ngModel)]="confItemName" class="Filter" placeholder="Filter"></td>
+    <td><input [(ngModel)]="confItemType" class="Filter" placeholder="Filter"  /></td>
+    <td><input [(ngModel)]="defValue" class="Filter" placeholder="Filter"  /></td>
+    <td><input [(ngModel)]="des" class="Filter" placeholder="Filter"  /></td>
+    <td><input [(ngModel)]="deviceName" class="Filter" placeholder="Filter"  /></td>
+    <td><input [(ngModel)]="sourceName" class="Filter" placeholder="Filter"  /></td>
+    <td><input [(ngModel)]="sourceType" class="Filter" placeholder="Filter"  /></td>
   </tr>
   </thead>
 
-
   <tbody>
 
-  <tr  (click)="openDialog(cell)"  *ngFor="let cell of httpData | paramFilter: searchTerm | paramFilter_id: searchTerm2
-| paginate: {itemsPerPage: 10, currentPage: p}  ; let i=index ; ">
+  <tr  (click)="openDialog(cell)"  *ngFor="let cell of httpData | paramFilterByConfigItemName: confItemName | paramFilterByConfigItemType: confItemType
+| paramFilterByDefaultValue: defValue | paramFilterByDescription: des | paramFilterByDevice: deviceName | paramFilterBySourceName: sourceName |
+ paramFilterBySourceType: sourceType |paginate: {itemsPerPage: 10, currentPage: p}  ; let i=index ; ">
     <td>{{cell[0]}}</td>
     <td>{{cell[1]}}</td>
     <td>{{cell[2]}}</td>
@@ -41,10 +40,6 @@
 
   </tbody>
 </table>
-
-
-
-
 
 
 <input class="MainSearch"  type="text" (keyup.enter)="getDataTableNew()" (keyup) = "onEveryClick($event)" placeholder="Search" autofocus  />

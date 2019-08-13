@@ -20,8 +20,13 @@ import {DialogtestComponent} from '../dialogtest/dialogtest.component';
 
 export class TableConfigsComponent implements OnInit {
   title = 'front';
-  searchTerm: string;
-  searchTerm2: string;
+  confItemName: string;
+  confItemType: string;
+  defValue: string;
+  des: string;
+  deviceName: string;
+  sourceName: string;
+  sourceType: string;
 
  // constructor( private  ServiceHttp: ServiceHttpService) { }
   constructor(public ResultMessages: MessagesService, private  ServiceHttp: ServiceHttpService,

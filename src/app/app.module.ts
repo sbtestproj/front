@@ -26,6 +26,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DialogtestComponent } from './dialogtest/dialogtest.component';
 import { AddparamwindowComponent } from './addparamwindow/addparamwindow.component';
+import {ParameterFilterByConfigItemNamePipe} from './Filters/parameter-filter-by-configItemName.pipe';
+import {ParameterFilterByConfigItemTypePipe} from './Filters/parameter-filter-by-configItemType.pipe';
+import {ParameterFilterByDefaultValuePipe} from './Filters/parameter-filter-by-defaultValue.pipe';
+import {ParameterFilterByDescriptionPipe} from './Filters/parameter-filter-by-description.pipe';
+import {ParameterFilterByDevicePipe} from './Filters/parameter-filter-by-device.pipe';
+import {ParameterFilterBySourceNamePipe} from './Filters/parameter-filter-by-sourceName.pipe';
+import {ParameterFilterBySourceTypePipe} from './Filters/parameter-filter-by-sourceType.pipe';
 /*  end material */
 
 
@@ -39,7 +46,14 @@ import { AddparamwindowComponent } from './addparamwindow/addparamwindow.compone
     DetailsComponent,
     FillCofigTableComponent,
     DialogtestComponent,
-    AddparamwindowComponent
+    AddparamwindowComponent,
+    ParameterFilterByConfigItemNamePipe,
+    ParameterFilterByConfigItemTypePipe,
+    ParameterFilterByDefaultValuePipe,
+    ParameterFilterByDescriptionPipe,
+    ParameterFilterByDevicePipe,
+    ParameterFilterBySourceNamePipe,
+    ParameterFilterBySourceTypePipe
   ],
   imports: [
     InterceptorModule,
