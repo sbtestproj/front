@@ -18,7 +18,7 @@ import { ServiceHttpService} from './Service/service-http.service';
 import { InterceptorModule } from './Modules/interceptor.module';
 import { DetailsComponent } from './details/details.component';
 import {RouterModule} from '@angular/router';
-import { FillCofigTableComponent } from './fill-cofig-table/fill-cofig-table.component';
+
 
 /*material*/
 import { MaterialModule} from './Modules/material.module';
@@ -44,7 +44,6 @@ import {ParameterFilterBySourceTypePipe} from './Filters/parameter-filter-by-sou
     ParameterFilterPipe,
     ParameterFilterByidPipe,
     DetailsComponent,
-    FillCofigTableComponent,
     DialogtestComponent,
     AddparamwindowComponent,
     ParameterFilterByConfigItemNamePipe,

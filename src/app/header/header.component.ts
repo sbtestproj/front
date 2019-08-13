@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceHttpService } from '../Service/service-http.service';
 
 
 /*                  meterial                         */
@@ -15,7 +16,7 @@ import { TableConfigsComponent } from '../table-configs/table-configs.component'
 
 export class HeaderComponent implements OnInit {
 
-  constructor(public  dialog: MatDialog) {}
+  constructor(public  dialog: MatDialog , public httpService: ServiceHttpService ) {}
   // ****  Dialog Functions ****
 
   startPage = 'Adding new params'

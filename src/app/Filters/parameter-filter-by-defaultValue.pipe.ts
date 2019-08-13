@@ -9,7 +9,8 @@ import {Parameter} from '../Models/parameter';
 })
 
 export class ParameterFilterByDefaultValuePipe implements PipeTransform {
-  transform(params: Parameter[], searchTerm: string): Parameter[] {
+  transform(params: HttpData[], searchTerm: string): HttpData[] {
+    if (params != null) {
     for (let i = 0; i < params.length ; i++)
     {
       if (params[i][2] == null){
@@ -19,6 +20,7 @@ export class ParameterFilterByDefaultValuePipe implements PipeTransform {
     if (!searchTerm) {
       return params;
     }
+  }
     return params.filter(param => ((param[2].toLowerCase().indexOf(searchTerm.toLowerCase()))) !== -1);
   }
 }

@@ -9,7 +9,8 @@ export class ParamInterceptor implements HttpInterceptor {
   dupReq;
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    this.dupReq = req.clone({headers: req.headers.set('Access-Control-Allow-Origin', 'http://localhost:8080/hiberProject/test')});
+  //  this.dupReq = req.clone({headers: req.headers.set('Access-Control-Allow-Origin', 'http://localhost:8080/hiberProject/test')});
+    this.dupReq = req.clone({headers: req.headers.set('Access-Control-Allow-Origin', '*')});
 
     return next.handle(this.dupReq);
   }

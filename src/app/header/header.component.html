@@ -9,7 +9,7 @@
   </div>
     <div ngbDropdownMenu class="dropdown-menu " aria-labelledby="dropdown01">
       <a class="dropdown-item" (click)="openDialog()" >Parameter</a>
-      <a class="dropdown-item">Module</a>
+      <a class="dropdown-item" (click)="httpService.postData('test')"  >Module</a>
     </div>
   </li>
 

@@ -8,6 +8,7 @@ import { MessagesService} from '../Service/messages.service';
 /*                  meterial                         */
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import {DialogtestComponent} from '../dialogtest/dialogtest.component';
+import {Parameter} from '../Models/parameter';
 // *******************************************************
 
 
@@ -88,6 +89,7 @@ export class TableConfigsComponent implements OnInit {
 
 // it woks insted of service
   getDataTableNew(): void {
+
     this.stringUrl = 'http://localhost:8080/hiberProject/test?name=';
     this.stringUrl = this.stringUrl + this.stringdata;
    
