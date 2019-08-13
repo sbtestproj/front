@@ -9,7 +9,7 @@ import {Parameter} from '../Models/parameter';
 })
 
 export class ParameterFilterByConfigItemNamePipe implements PipeTransform {
-  transform(params: Parameter[], searchTerm: string): HttpData[] {
+  transform(params: any, searchTerm: string): HttpData[] {
     if (!searchTerm) {
       return params;
     }

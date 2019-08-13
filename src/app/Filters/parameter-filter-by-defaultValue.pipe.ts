@@ -9,7 +9,13 @@ import {Parameter} from '../Models/parameter';
 })
 
 export class ParameterFilterByDefaultValuePipe implements PipeTransform {
-  transform(params: Parameter[], searchTerm: string): HttpData[] {
+  transform(params: Parameter[], searchTerm: string): Parameter[] {
+    for (let i = 0; i < params.length ; i++)
+    {
+      if (params[i][2] == null){
+        params[i][2] = ' ';
+      }
+    }
     if (!searchTerm) {
       return params;
     }
