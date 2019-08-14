@@ -1,9 +1,10 @@
-export interface Config_item_out {
+export class ConfigItemOut {
+  test: number;
   configItemName: string;
-  configSourcesId: bigint;
-  moduleVersionsId: bigint;
-  configItemTypesId: bigint;
-  dataTypeId: bigint;
+  configSourcesId: number;
+  moduleVersionsId: number;
+  configItemTypesId: number;
+  dataTypeId: number;
   verifiedByExpert: boolean;
   dynamicFlag: boolean;
   ignoreFlag: boolean;
