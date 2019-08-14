@@ -14,6 +14,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ParameterFilterPipe} from './Filters/parameter-filter.pipe';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ParameterFilterByidPipe} from './Filters/parameter-filter-byid.pipe';
+import { ServiceHttpService} from './Service/service-http.service';
 import { InterceptorModule } from './Modules/interceptor.module';
 import { DetailsComponent } from './details/details.component';
 import {RouterModule} from '@angular/router';
@@ -32,8 +33,8 @@ import {ParameterFilterByDescriptionPipe} from './Filters/parameter-filter-by-de
 import {ParameterFilterByDevicePipe} from './Filters/parameter-filter-by-device.pipe';
 import {ParameterFilterBySourceNamePipe} from './Filters/parameter-filter-by-sourceName.pipe';
 import {ParameterFilterBySourceTypePipe} from './Filters/parameter-filter-by-sourceType.pipe';
-import { AddModuleWindowComponent } from './add-module-window/add-module-window.component';
 /*  end material */
+
 
 @NgModule({
   declarations: [
@@ -51,8 +52,7 @@ import { AddModuleWindowComponent } from './add-module-window/add-module-window.
     ParameterFilterByDescriptionPipe,
     ParameterFilterByDevicePipe,
     ParameterFilterBySourceNamePipe,
-    ParameterFilterBySourceTypePipe,
-    AddModuleWindowComponent
+    ParameterFilterBySourceTypePipe
   ],
   imports: [
     InterceptorModule,
@@ -69,7 +69,7 @@ import { AddModuleWindowComponent } from './add-module-window/add-module-window.
       {path: 'table-configs', component: TableConfigsComponent},
       {path: 'details', component: DetailsComponent},
       {path: 'add_param', component: AddparamwindowComponent}
-    ]), ReactiveFormsModule, MatStepperModule
+    ]), MatStepperModule, ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

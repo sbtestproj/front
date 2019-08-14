@@ -80,11 +80,13 @@ export class TableConfigsComponent implements OnInit {
   showLog(): void {
     console.log('Message');
   }
+  /*
   getFakeData(): void {
 
     this.httpData = this.ServiceHttp.getDataTable(this.stringdata);
    //   this.ServiceHttp.getDataTable(this.stringdata).subscribe((data: any) => (this.httpData = data));
   }
+   */
   // ***********************************
 
 // it woks insted of service

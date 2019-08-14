@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {ModalData} from '../Models/Model_Data';
 import { AddNewParamDataModel } from '../Models/AddNewParamDataModel';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Config_item_out} from '../Models/config_item_out';
+import {ConfigItemOut} from '../Models/config_item_out';
 
 @Component({
   selector: 'app-addparamwindow',

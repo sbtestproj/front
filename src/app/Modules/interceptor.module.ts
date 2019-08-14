@@ -10,8 +10,8 @@ export class ParamInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
   //  this.dupReq = req.clone({headers: req.headers.set('Access-Control-Allow-Origin', 'http://localhost:8080/hiberProject/test')});
-    this.dupReq = req.clone({headers: req.headers.set('Access-Control-Allow-Origin', '*')});
-
+    this.dupReq = req.clone({headers: req.headers.set('Access-Control-Allow-Origin', 'GET,POST,PATCH,DELETE,PUT,OPTIONS')} );
+    console.log('Interceptor');
     return next.handle(this.dupReq);
   }
 }
