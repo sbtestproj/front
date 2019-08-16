@@ -26,7 +26,7 @@
 
   <tbody>
 
-  <tr  (click)="openDialog(cell)"  *ngFor="let cell of httpData | paramFilterByConfigItemName: confItemName | paramFilterByConfigItemType: confItemType
+  <tr  (click)="openDialog(cell)"  *ngFor="let cell of ServiceHttp.httpData | paramFilterByConfigItemName: confItemName | paramFilterByConfigItemType: confItemType
 | paramFilterByDefaultValue: defValue | paramFilterByDescription: des | paramFilterByDevice: deviceName | paramFilterBySourceName: sourceName |
  paramFilterBySourceType: sourceType |paginate: {itemsPerPage: 10, currentPage: p}  ; let i=index ; ">
     <td>{{cell[0]}}</td>
@@ -42,5 +42,5 @@
 </table>
 
 
-<input class="MainSearch"  type="text" (keyup.enter)="getDataTableNew()" (keyup) = "onEveryClick($event)" placeholder="Search" autofocus  />
+<input #mainSearch class="MainSearch"  type="text" (keyup.enter)="ServiceHttp.getDataTableNew(mainSearch.value.toLowerCase())" (keyup) = "onEveryClick($event)" placeholder="Search" autofocus  />
 

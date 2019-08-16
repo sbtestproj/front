@@ -1,61 +1,110 @@
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button>
-<mat-horizontal-stepper [linear]="isLinear"#stepper>
-  <mat-step [stepControl]="firstFormGroup" >
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Source</ng-template>
-      <mat-form-field>
-        <input matInput [(ngModel)]="configSourceName" placeholder="Source Name" formControlName="firstCtrl" required>
-      </mat-form-field>
-      <div>
+  <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+  </button>
+  <form>
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Module</ng-template>
         <mat-form-field>
-          <input matInput [(ngModel)]="configSourceType" placeholder="Source Type Name" formControlName="secondCtrl" required>
+          <input #in type="text" placeholder="Assignee" aria-label="Assignee" matInput
+                 [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of service.data1 | modul_filter:in.value.toLowerCase() " [value]="option" (select)="option.modules_id">
+              {{option.module_name}} -- {{option.modules_id}}
+            </mat-option>
+          </mat-autocomplete>
+<!--          <mat-select placeholder="Select" formControlName="thirdCtrl">-->
+<!--            <mat-option value="moduleVersions" *ngFor="let mv of modul">{{}}</mat-option>-->
+<!--          </mat-select>-->
         </mat-form-field>
-      </div>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Config Item Type</ng-template>
-      <mat-form-field>
-        <input matInput [(ngModel)]="configItemType" placeholder="Config Item Type Name" formControlName="secondCtrl" required>
-      </mat-form-field>
-      <div>
         <mat-form-field>
-          <input matInput [(ngModel)]="dataType" placeholder="Data Type Name" formControlName="secondCtrl" required>
+          <input #in2 type="text" placeholder="Assignee" aria-label="Assignee" matInput
+                 [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn2">
+            <mat-option *ngFor="let option of service.moduleVersions " [value]="option" (select)="option.modules_id">
+              {{option.version_number}} -- {{option.modules_id}}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
-      </div>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="fifthFormGroup">
-    <form [formGroup]="fifthFormGroup">
-      <ng-template matStepLabel>Descriptions</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Write a description" formControlName="secondCtrl" required>
-      </mat-form-field>
         <div>
-            <textarea [(ngModel)]="description">Write a description</textarea>
+          <mat-button-toggle (click)="service.getModules()"> get </mat-button-toggle>
         </div>
         <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="firstFormGroup" >
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Source</ng-template>
+        <mat-form-field>
+          <input matInput type="text" name="configSourceName" placeholder="Source Name" formControlName="firstCtrl" required #configSourceName>
+        </mat-form-field>
+        <div>
+          <mat-form-field>
+            <input matInput type="text" name="configSourceType" placeholder="Source Type Name" formControlName="firstCtrl" required #configSourceType>
+          </mat-form-field>
+        </div>
+        <div>
+        <mat-checkbox name="verifiedByExpert" formControlName="firstCtrl" required #verifiedByExpert>verifiedByExpert</mat-checkbox>
+        </div>
+        <div>
+          <mat-checkbox name="dynamicFlag" formControlName="firstCtrl" required #dynamicFlag>dynamicFlag</mat-checkbox>
+        </div>
+        <div>
+          <mat-checkbox name="ignoreFlag" formControlName="firstCtrl" required #ignoreFlag>ignoreFlag</mat-checkbox>
+        </div>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Config Item Type</ng-template>
+        <mat-form-field>
+          <input matInput type="text" name="configItemType" placeholder="Config Item Type Name" formControlName="secondCtrl" required #configItemType>
+        </mat-form-field>
+        <div>
+          <mat-form-field>
+            <input matInput type="text" name="dataType" placeholder="Data Type Name" formControlName="secondCtrl" required #dataType>
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="fifthFormGroup">
+      <form [formGroup]="fifthFormGroup">
+        <ng-template matStepLabel>Descriptions</ng-template>
+        <mat-form-field>
+          <div>
+            <textarea matInput #description formControlName="thirdCtrl"></textarea>
+          </div>
+        </mat-form-field>
+          <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-button type = "submit" value= "submit"
+                (click)="saveData(description.value ,dataType.value ,configSourceName.value
+                ,configSourceType.value ,verifiedByExpert.checked,
+                ignoreFlag.checked, dynamicFlag.checked)">
+          Save
+        </button>
       </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-</mat-horizontal-stepper>
+    </mat-step>
+  </mat-horizontal-stepper>
+  </form>

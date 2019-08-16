@@ -7,4 +7,5 @@ export interface Config_item_out {
   verifiedByExpert: boolean;
   dynamicFlag: boolean;
   ignoreFlag: boolean;
+  description: string;
 }

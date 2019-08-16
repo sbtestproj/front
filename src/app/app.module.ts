@@ -4,7 +4,16 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import {MatStepperModule, MatTableModule, MatTreeModule} from '@angular/material';
+import {
+  MatAutocompleteModule, MatButtonToggleModule,
+  MatCheckboxModule,
+  MatInputModule,
+  MatListModule,
+  MatSelectModule,
+  MatStepperModule,
+  MatTableModule,
+  MatTreeModule
+} from '@angular/material';
 import {MatPaginatorModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination' ;
@@ -33,6 +42,9 @@ import {ParameterFilterByDevicePipe} from './Filters/parameter-filter-by-device.
 import {ParameterFilterBySourceNamePipe} from './Filters/parameter-filter-by-sourceName.pipe';
 import {ParameterFilterBySourceTypePipe} from './Filters/parameter-filter-by-sourceType.pipe';
 import { AddModuleWindowComponent } from './add-module-window/add-module-window.component';
+import { JustTestComponent } from './just-test/just-test.component';
+import { JustTest2Component } from './just-test2/just-test2.component';
+import {Modul_filterPipe} from './Filters/modul_filter.pipe';
 /*  end material */
 
 @NgModule({
@@ -52,7 +64,10 @@ import { AddModuleWindowComponent } from './add-module-window/add-module-window.
     ParameterFilterByDevicePipe,
     ParameterFilterBySourceNamePipe,
     ParameterFilterBySourceTypePipe,
-    AddModuleWindowComponent
+    AddModuleWindowComponent,
+    JustTestComponent,
+    JustTest2Component,
+    Modul_filterPipe
   ],
   imports: [
     InterceptorModule,
@@ -61,7 +76,7 @@ import { AddModuleWindowComponent } from './add-module-window/add-module-window.
     AppRoutingModule,
     /* material */
     BrowserAnimationsModule, MatTableModule, MatPaginatorModule, MatTreeModule,
-    MaterialModule, //  from our module
+    MaterialModule, MatInputModule, //  from our module
     /* material end */
     HttpClientModule,
     NgxPaginationModule, NgbModule, FormsModule,
@@ -69,7 +84,7 @@ import { AddModuleWindowComponent } from './add-module-window/add-module-window.
       {path: 'table-configs', component: TableConfigsComponent},
       {path: 'details', component: DetailsComponent},
       {path: 'add_param', component: AddparamwindowComponent}
-    ]), ReactiveFormsModule, MatStepperModule
+    ]), ReactiveFormsModule, MatStepperModule, MatCheckboxModule, MatListModule, MatSelectModule, MatAutocompleteModule, MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent],

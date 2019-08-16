@@ -33,7 +33,7 @@ export class TableConfigsComponent implements OnInit {
   constructor(public ResultMessages: MessagesService, private  ServiceHttp: ServiceHttpService,
               public httpclient: HttpClient,
               /* for material */
-              public  dialog: MatDialog) { }
+              public  dialog: MatDialog, public service: ServiceHttpService) { }
 
 // ********** variables *************
   // HttpData: IniArtibutesType[];
@@ -80,42 +80,23 @@ export class TableConfigsComponent implements OnInit {
   showLog(): void {
     console.log('Message');
   }
-  getFakeData(): void {
-
-    this.httpData = this.ServiceHttp.getDataTable(this.stringdata);
-   //   this.ServiceHttp.getDataTable(this.stringdata).subscribe((data: any) => (this.httpData = data));
-  }
+  // getFakeData(): void {
+  //
+  //   this.httpData = this.ServiceHttp.getDataTable(this.stringdata);
+  //  //   this.ServiceHttp.getDataTable(this.stringdata).subscribe((data: any) => (this.httpData = data));
+  // }
   // ***********************************
 
 // it woks insted of service
-  getDataTableNew(): void {
 
-    this.stringUrl = 'http://localhost:8080/hiberProject/test?name=';
-    this.stringUrl = this.stringUrl + this.stringdata;
-   
-    console.log('stringUrl: ' + this.stringUrl);
-    this.httpclient.get(this.stringUrl)
-      .subscribe((data: any) => {
-        console.log(data + ' lenght: ' + (data).length);
-        this.httpData = data; /* console.log('verif : ' + data[0].verif); */
-        if ((data).length === 0) {
-          this.ResultMessages.add(' SearchResult: 0');
-          this.httpData = [];
-        } else { this.ResultMessages.add('SearchResult :' + (data).length); }
-      });
        // this.ResultLenght = (data).length; console.log('lenght res: ' + this.ResultLenght); }) ;
 
     // return this.outData;
-  }
-
-
 
   ngOnInit() {
 
    // this.ServiceHttp.getDataTable(this.stringdata);
 
   }
-
-
 
 }
