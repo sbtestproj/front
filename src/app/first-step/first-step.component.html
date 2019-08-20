@@ -1,10 +1,10 @@
 <form [formGroup]="firstFormGroup">
   <mat-form-field>
     <div>
-      <input #in type="text" placeholder="Modul Name" aria-label="Assignee" matInput
+      <input #in type="text" placeholder="Module Name" aria-label="Assignee" matInput
              [formControl]="myControl" formControlName="firstCtrl" [matAutocomplete]="auto" required >
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-        <mat-option *ngFor="let option of service.data1 | modul_filter:in.value.toString() " [value]="option" (click)="service.getModulesByName(in.value.toString())">
+        <mat-option *ngFor="let option of service.data1 | modul_filter:in.value.toString() " [value]="option" (click)="service.getModuleVersionsByModuleId(option.modules_id.toString())">
           {{option.module_name}}
         </mat-option>
       </mat-autocomplete>
@@ -13,7 +13,7 @@
   <mat-divider></mat-divider>
   <mat-form-field style="float: bottom">
     <div>
-      <input #in2 type="text" placeholder="Modul Version" aria-label="Assignee" matInput
+      <input #in2 type="text" placeholder="Module Version" aria-label="Assignee" matInput
              [formControl]="myControl2" formControlName="firstCtrl" [matAutocomplete]="auto2" required [value]="service.latestVersion" >
       <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn2">
         <mat-option *ngFor="let option of service.moduleVersions " [value]="option">
