@@ -1,75 +1,48 @@
-  <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-  </button>
+<!--  <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">-->
+<!--    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}-->
+<!--  </button>-->
   <form>
-  <mat-horizontal-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="thirdFormGroup">
-      <form [formGroup]="thirdFormGroup">
-        <ng-template matStepLabel>Module</ng-template>
-        <mat-form-field>
-          <input #in type="text" placeholder="Assignee" aria-label="Assignee" matInput
-                 [formControl]="myControl" [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let option of service.data1 | modul_filter:in.value.toLowerCase() " [value]="option" (select)="option.modules_id">
-              {{option.module_name}} -- {{option.modules_id}}
-            </mat-option>
-          </mat-autocomplete>
-<!--          <mat-select placeholder="Select" formControlName="thirdCtrl">-->
-<!--            <mat-option value="moduleVersions" *ngFor="let mv of modul">{{}}</mat-option>-->
-<!--          </mat-select>-->
-        </mat-form-field>
-        <mat-form-field>
-          <input #in2 type="text" placeholder="Assignee" aria-label="Assignee" matInput
-                 [formControl]="myControl" [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn2">
-            <mat-option *ngFor="let option of service.moduleVersions " [value]="option" (select)="option.modules_id">
-              {{option.version_number}} -- {{option.modules_id}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-        <div>
-          <mat-button-toggle (click)="service.getModules()"> get </mat-button-toggle>
-        </div>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="firstFormGroup" >
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Source</ng-template>
-        <mat-form-field>
-          <input matInput type="text" name="configSourceName" placeholder="Source Name" formControlName="firstCtrl" required #configSourceName>
-        </mat-form-field>
-        <div>
-          <mat-form-field>
-            <input matInput type="text" name="configSourceType" placeholder="Source Type Name" formControlName="firstCtrl" required #configSourceType>
-          </mat-form-field>
-        </div>
-        <div>
-        <mat-checkbox name="verifiedByExpert" formControlName="firstCtrl" required #verifiedByExpert>verifiedByExpert</mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox name="dynamicFlag" formControlName="firstCtrl" required #dynamicFlag>dynamicFlag</mat-checkbox>
-        </div>
-        <div>
-          <mat-checkbox name="ignoreFlag" formControlName="firstCtrl" required #ignoreFlag>ignoreFlag</mat-checkbox>
-        </div>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
+  <mat-horizontal-stepper #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>Module</ng-template>
+        <app-first-step></app-first-step>
+
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Config Item Type</ng-template>
+        <ng-template matStepLabel>Source</ng-template>
         <mat-form-field>
-          <input matInput type="text" name="configItemType" placeholder="Config Item Type Name" formControlName="secondCtrl" required #configItemType>
+          <input matInput type="text" name="configSourceName" placeholder="Source Name" formControlName="secondCtrl" required #configSourceName>
         </mat-form-field>
         <div>
           <mat-form-field>
-            <input matInput type="text" name="dataType" placeholder="Data Type Name" formControlName="secondCtrl" required #dataType>
+            <input matInput type="text" name="configSourceType" placeholder="Source Type Name" formControlName="secondCtrl" required #configSourceType>
+          </mat-form-field>
+        </div>
+        <div>
+        <mat-checkbox name="verifiedByExpert" formControlName="secondCtrl" required #verifiedByExpert>verifiedByExpert</mat-checkbox>
+        </div>
+        <div>
+          <mat-checkbox name="dynamicFlag" formControlName="secondCtrl" required #dynamicFlag>dynamicFlag</mat-checkbox>
+        </div>
+        <div>
+          <mat-checkbox name="ignoreFlag" formControlName="secondCtrl" required #ignoreFlag>ignoreFlag</mat-checkbox>
+        </div>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Config Item Type</ng-template>
+        <mat-form-field>
+          <input matInput type="text" name="configItemType" placeholder="Config Item Type Name" formControlName="thirdCtrl" required #configItemType>
+        </mat-form-field>
+        <div>
+          <mat-form-field>
+            <input matInput type="text" name="dataType" placeholder="Data Type Name" formControlName="thirdCtrl" required #dataType>
           </mat-form-field>
         </div>
         <div>
@@ -78,12 +51,12 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="fifthFormGroup">
-      <form [formGroup]="fifthFormGroup">
+    <mat-step [stepControl]="fourthFormGroup">
+      <form [formGroup]="fourthFormGroup">
         <ng-template matStepLabel>Descriptions</ng-template>
         <mat-form-field>
           <div>
-            <textarea matInput #description formControlName="thirdCtrl"></textarea>
+            <textarea matInput #description formControlName="fourthCtrl"></textarea>
           </div>
         </mat-form-field>
           <div>

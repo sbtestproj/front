@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {ModalData} from '../Models/Model_Data';
 import { AddNewParamDataModel } from '../Models/AddNewParamDataModel';
@@ -13,49 +13,33 @@ import {ServiceHttpService} from '../Service/service-http.service';
 import {HttpClient} from '@angular/common/http';
 import {MessagesService} from '../Service/messages.service';
 
-export interface Modules {
-  name: string;
-  versionNumber: any;
-}
-
 @Component({
-  selector: 'app-addparamwindow',
-  templateUrl: './addparamwindow.component.html',
-  styleUrls: ['./addparamwindow.component.css']
+  selector: 'app-first-step',
+  templateUrl: './first-step.component.html',
+  styleUrls: ['./first-step.component.css']
 })
-
-export class AddparamwindowComponent implements OnInit {
-
-  inn: moduleEntity;
+export class FirstStepComponent implements OnInit {
+  inn: string;
   inn2: string;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
-  fourthFormGroup: FormGroup;
-  constructor(private formBuilder: FormBuilder, public httpClient: HttpClient, public ResultMessages: MessagesService,
-              public service: ServiceHttpService) {
-  }
-
-  ngOnInit() {
+  myControl = new FormControl();
+  myControl2 = new FormControl();
+  constructor(private formBuilder: FormBuilder, public httpClient: HttpClient,
+              public ResultMessages: MessagesService,  public service: ServiceHttpService) {}
+              ngOnInit() {
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
     this.secondFormGroup = this.formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
-    this.thirdFormGroup = this.formBuilder.group({
-      thirdCtrl: ['', Validators.required]
-    });
-    this.fourthFormGroup = this.formBuilder.group({
-      fourthCtrl: ['', Validators.required]
-    });
   }
-
-  saveData(a, b, c, d, e, f, g) {
-      console.log(a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e + ' ' + f + ' ' + g);
-  }
-  show() {
-    console.log('inn:' + this.inn.module_name + '*******' + 'inn2:' + this.inn2);
+  show(a, b) {
+    this.inn = a;
+    this.inn2 = b;
+    console.log('inn:' + this.inn + '*******' + 'inn2:' + this.inn2);
+    console.log(' a : ' + a + 'b:' + b);
   }
   displayFn(user?: moduleEntity): string | undefined {
     return user ? (user.module_name) : undefined;
@@ -65,5 +49,4 @@ export class AddparamwindowComponent implements OnInit {
     return user ? user.version_number : undefined;
   }
 }
-
 

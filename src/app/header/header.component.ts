@@ -20,28 +20,14 @@ export class HeaderComponent implements OnInit {
   constructor(public  dialog: MatDialog , public httpService: ServiceHttpService ) {}
   // ****  Dialog Functions ****
 
-  startPage = 'Adding new params';
-  startPage2 = 'Adding new module';
+
   color ;
-  // openDialog(): void {
   openDialog() {
     const dialogRef = this.dialog.open(AddparamwindowComponent, {
       width: '1000px',
       height: '500px',
       // this.name = 'test';
       // data: {simplestring: this.startPage }
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      this.color = res;
-    });
-  }
-  openDialog2() {
-    const dialogRef = this.dialog.open(AddModuleWindowComponent, {
-      width: '1000px',
-      height: '500px',
-      // this.name = 'test';
-      // data: {simplestring: this.startPage2 }
     });
 
     dialogRef.afterClosed().subscribe(res => {

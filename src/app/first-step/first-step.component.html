@@ -1,0 +1,29 @@
+<form [formGroup]="firstFormGroup">
+  <mat-form-field>
+    <div>
+      <input #in type="text" placeholder="Modul Name" aria-label="Assignee" matInput
+             [formControl]="myControl" formControlName="firstCtrl" [matAutocomplete]="auto" required >
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of service.data1 | modul_filter:in.value.toString() " [value]="option" (click)="service.getModulesByName(in.value.toString())">
+          {{option.module_name}}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+  </mat-form-field>
+  <mat-divider></mat-divider>
+  <mat-form-field style="float: bottom">
+    <div>
+      <input #in2 type="text" placeholder="Modul Version" aria-label="Assignee" matInput
+             [formControl]="myControl2" formControlName="firstCtrl" [matAutocomplete]="auto2" required [value]="service.latestVersion" >
+      <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn2">
+        <mat-option *ngFor="let option of service.moduleVersions " [value]="option">
+          {{option.version_number}}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+  </mat-form-field>
+  <div>
+    <button mat-button matDialogClose >Close</button>
+    <button mat-button matStepperNext [disabled]="(!(myControl.value) && !(myControl2.value))" (click)="show(in.value, in2.value)">Next</button>
+  </div>
+</form>

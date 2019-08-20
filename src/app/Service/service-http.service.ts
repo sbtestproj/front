@@ -19,8 +19,11 @@ export class ServiceHttpService {
 // variables
   outData: any;
   httpData: any;
+  latestVersion: string;
   data1: moduleEntity[];
   moduleVersions: moduleVersionsEntity[];
+  modules2: moduleEntity[];
+  modules2Id: string;
 
   headers = new HttpHeaders()
     .set('Access-Control-Allow-Origin', '*');
@@ -96,6 +99,17 @@ export class ServiceHttpService {
       });
   }
 
+  getModulesByName(stringdata: string): void {
+    this.stringUrl = 'http://192.168.137.13:8080/hiberProject/modules?module_name=';
+    this.stringUrl = this.stringUrl + stringdata;
+    console.log('stringUrl = ' + this.stringUrl);
+    this.httpClient.get(this.stringUrl)
+      .subscribe((data: moduleEntity[]) => {
+        this.modules2 = data;
+        this.getModuleVersionsByModuleId(this.modules2[0].modules_id.toString());
+      });
+  }
+
   getModuleVersionsByModuleId(stringdata: string): void {
     this.stringUrl = 'http://192.168.137.13:8080/hiberProject/module_versions?modules_id=';
     this.stringUrl = this.stringUrl + stringdata;
@@ -105,13 +119,10 @@ export class ServiceHttpService {
       .subscribe((data: moduleVersionsEntity[]) => {
         console.log(data + ' lenght: ' + (data).length);
         this.moduleVersions = data; /* console.log('verif : ' + data[0].verif); */
-        if ((data).length === 0) {
-          this.ResultMessages.add(' SearchResult: 0');
-          this.httpData = [];
-        } else {
-          this.ResultMessages.add('SearchResult :' + (data).length);
-        }
+        this.modules2Id = data[0].modules_id.toString();
+        this.latestVersion = data[data.length - 1].version_number;
       });
+    //this.modules2Id = this.modules2[0].modules_id.toString();
   }
 
   getDataTableNew(stringdata: string): void {

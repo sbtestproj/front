@@ -45,6 +45,8 @@ import { AddModuleWindowComponent } from './add-module-window/add-module-window.
 import { JustTestComponent } from './just-test/just-test.component';
 import { JustTest2Component } from './just-test2/just-test2.component';
 import {Modul_filterPipe} from './Filters/modul_filter.pipe';
+import { FirstStepComponent } from './first-step/first-step.component';
+import { ThirdStepComponent } from './third-step/third-step.component';
 /*  end material */
 
 @NgModule({
@@ -67,7 +69,9 @@ import {Modul_filterPipe} from './Filters/modul_filter.pipe';
     AddModuleWindowComponent,
     JustTestComponent,
     JustTest2Component,
-    Modul_filterPipe
+    Modul_filterPipe,
+    FirstStepComponent,
+    ThirdStepComponent
   ],
   imports: [
     InterceptorModule,
