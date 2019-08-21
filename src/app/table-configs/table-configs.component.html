@@ -26,7 +26,7 @@
 
   <tbody>
 
-  <tr  (click)="openDialog(cell)"  *ngFor="let cell of ServiceHttp.httpData | paramFilterByConfigItemName: confItemName | paramFilterByConfigItemType: confItemType
+  <tr  (click)="openDialog(cell)"  *ngFor="let cell of ServiceHttp.httpData  | paramFilterByConfigItemName: confItemName | paramFilterByConfigItemType: confItemType
 | paramFilterByDefaultValue: defValue | paramFilterByDescription: des | paramFilterByDevice: deviceName | paramFilterBySourceName: sourceName |
  paramFilterBySourceType: sourceType |paginate: {itemsPerPage: 10, currentPage: p}  ; let i=index ; ">
     <td>{{cell[0]}}</td>

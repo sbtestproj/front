@@ -11,7 +11,7 @@ import {
   MatListModule,
   MatSelectModule,
   MatStepperModule,
-  MatTableModule,
+  MatTableModule, MatTabsModule,
   MatTreeModule
 } from '@angular/material';
 import {MatPaginatorModule} from '@angular/material';
@@ -41,10 +41,16 @@ import {ParameterFilterByDescriptionPipe} from './Filters/parameter-filter-by-de
 import {ParameterFilterByDevicePipe} from './Filters/parameter-filter-by-device.pipe';
 import {ParameterFilterBySourceNamePipe} from './Filters/parameter-filter-by-sourceName.pipe';
 import {ParameterFilterBySourceTypePipe} from './Filters/parameter-filter-by-sourceType.pipe';
-import { AddModuleWindowComponent } from './add-module-window/add-module-window.component';
-import { JustTestComponent } from './just-test/just-test.component';
-import { JustTest2Component } from './just-test2/just-test2.component';
+
 import {Modul_filterPipe} from './Filters/modul_filter.pipe';
+import { Step2Component } from './addparamwindow/step2/step2.component';
+
+import {SectionFilterPipe} from './Filters/section-filter.pipe';
+import {DataTypeFilterPipe} from './Filters/data-type-filter.pipe';
+import {FirstStepComponent} from './addparamwindow/first1/first-step.component';
+import { Step3Component } from './addparamwindow/step3/step3.component';
+import {Modul_version_filterPipe} from './Filters/modul_version_filter.pipe';
+
 /*  end material */
 
 @NgModule({
@@ -64,10 +70,19 @@ import {Modul_filterPipe} from './Filters/modul_filter.pipe';
     ParameterFilterByDevicePipe,
     ParameterFilterBySourceNamePipe,
     ParameterFilterBySourceTypePipe,
-    AddModuleWindowComponent,
-    JustTestComponent,
-    JustTest2Component,
-    Modul_filterPipe
+    SectionFilterPipe,
+    DataTypeFilterPipe,
+
+
+    Modul_filterPipe,
+
+    Step2Component,
+
+    FirstStepComponent,
+
+    Step3Component,
+    Modul_version_filterPipe
+
   ],
   imports: [
     InterceptorModule,
@@ -84,7 +99,7 @@ import {Modul_filterPipe} from './Filters/modul_filter.pipe';
       {path: 'table-configs', component: TableConfigsComponent},
       {path: 'details', component: DetailsComponent},
       {path: 'add_param', component: AddparamwindowComponent}
-    ]), ReactiveFormsModule, MatStepperModule, MatCheckboxModule, MatListModule, MatSelectModule, MatAutocompleteModule, MatButtonToggleModule
+    ]), ReactiveFormsModule, MatStepperModule, MatCheckboxModule, MatListModule, MatSelectModule, MatAutocompleteModule, MatButtonToggleModule, MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

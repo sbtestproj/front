@@ -6,7 +6,6 @@ import { ServiceHttpService } from '../Service/service-http.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AddparamwindowComponent} from '../addparamwindow/addparamwindow.component';
 import { TableConfigsComponent } from '../table-configs/table-configs.component';
-import {AddModuleWindowComponent} from '../add-module-window/add-module-window.component';
 // *******************************************************
 
 @Component({
@@ -30,18 +29,6 @@ export class HeaderComponent implements OnInit {
       height: '500px',
       // this.name = 'test';
       // data: {simplestring: this.startPage }
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      this.color = res;
-    });
-  }
-  openDialog2() {
-    const dialogRef = this.dialog.open(AddModuleWindowComponent, {
-      width: '1000px',
-      height: '500px',
-      // this.name = 'test';
-      // data: {simplestring: this.startPage2 }
     });
 
     dialogRef.afterClosed().subscribe(res => {

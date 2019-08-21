@@ -5,8 +5,8 @@ import { HttpData } from '../OutData';
 import {moduleVersionsEntity} from '../Models/moduleVersionsEntity';
 import {moduleEntity} from '../Models/moduleEntity';
 import {MessagesService} from './messages.service';
-
-
+import { data_types } from '../Models/Entities/data_types';
+import { ConfigItemType} from '../Models/Entities/ConfigItemType';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +16,16 @@ export class ServiceHttpService {
   constructor(public httpClient: HttpClient, public ResultMessages: MessagesService) {
   }
 
-// variables
+// *********************************************************************variables********************************************************
+  ConfigItemsData;
+  baseUrl = 'http://192.168.137.13:8080/hiberProject/';
+
+  latestVersion: string; // to get latest version of selected module
+
+// ***************************************************************************************************************************************
   outData: any;
   httpData: any;
+
   data1: moduleEntity[];
   moduleVersions: moduleVersionsEntity[];
 
@@ -41,6 +48,56 @@ export class ServiceHttpService {
 
   stringUrl: string;
   postUrl: string;
+
+  // ****************************************************************************funcions*******************************************************
+  getConfigItems(param: string): void {
+    //  this.stringUrl = 'http://192.168.137.13:8080/hiberProject/data_types'
+    console.log('url = ' + this.baseUrl + '/config_items' +  param );
+    this.httpClient.get(this.baseUrl + '/config_items' +  param)
+      .subscribe((data: ConfigItemType[] ) => {
+          this.ConfigItemsData = data;
+          console.log(data + ' lenght: ' + (data).length
+            + this.ConfigItemsData[0].config_item_name );
+        }
+      );
+  }
+
+  // ***********************copied 210819****************
+  getModules(): void {
+    this.stringUrl = 'http://192.168.137.13:8080/hiberProject/modules';
+    // this.stringUrl = this.stringUrl;
+    console.log('stringUrl = ' + this.stringUrl);
+    this.httpClient.get(this.stringUrl)
+      .subscribe((data: moduleEntity[]) => {
+        this.data1 = data;
+        console.log(data + ' lenght: ' + (data).length);
+        // console.log('verif : ' + data[0]);
+        if ((data).length === 0) {
+          this.ResultMessages.add(' SearchResult: 0');
+          this.data1 = null;
+        } else {
+          this.ResultMessages.add('SearchResult :' + (data).length);
+        }
+      });
+  }
+
+  getModuleVersionsByModuleId(stringdata: string): void {
+    this.stringUrl = 'http://192.168.137.13:8080/hiberProject/module_versions?modules_id=';
+    this.stringUrl = this.stringUrl + stringdata;
+
+    console.log('stringUrl: ' + this.stringUrl);
+    this.httpClient.get(this.stringUrl)
+      .subscribe((data: moduleVersionsEntity[]) => {
+        console.log(data + ' lenght: ' + (data).length);
+        this.moduleVersions = data; /* console.log('verif : ' + data[0].verif); */
+        this.latestVersion = data[data.length - 1].version_number;
+      });
+  }
+  // *****************************************************
+  // *********************************************************************************************************************************************
+
+
+
 
   getDataTable(stringdata: string): Observable<HttpData[]> {
 
@@ -78,41 +135,26 @@ export class ServiceHttpService {
   }
 
 
-  getModules(): void {
-    this.stringUrl = 'http://192.168.137.13:8080/hiberProject/modules';
-    // this.stringUrl = this.stringUrl;
-    console.log('stringUrl = ' + this.stringUrl);
-    this.httpClient.get(this.stringUrl)
-      .subscribe((data: moduleEntity[]) => {
-        this.data1 = data;
-        console.log(data + ' lenght: ' + (data).length);
-        // console.log('verif : ' + data[0]);
-        if ((data).length === 0) {
-          this.ResultMessages.add(' SearchResult: 0');
-          this.data1 = null;
-        } else {
-          this.ResultMessages.add('SearchResult :' + (data).length);
-        }
-      });
+  getDataByUrl(path: string): any {
+  //  this.stringUrl = 'http://192.168.137.13:8080/hiberProject/data_types';
+    path = this.baseUrl + path;
+    console.log('url = ' + path);
+    this.httpClient.get(path)
+      .subscribe((data: any ) => {
+         this.outData = data;
+         console.log(data + ' lenght: ' + (data).length
+       + this.outData[0].data_types_name );
+      }
+      );
   }
 
-  getModuleVersionsByModuleId(stringdata: string): void {
-    this.stringUrl = 'http://192.168.137.13:8080/hiberProject/module_versions?modules_id=';
-    this.stringUrl = this.stringUrl + stringdata;
 
-    console.log('stringUrl: ' + this.stringUrl);
-    this.httpClient.get(this.stringUrl)
-      .subscribe((data: moduleVersionsEntity[]) => {
-        console.log(data + ' lenght: ' + (data).length);
-        this.moduleVersions = data; /* console.log('verif : ' + data[0].verif); */
-        if ((data).length === 0) {
-          this.ResultMessages.add(' SearchResult: 0');
-          this.httpData = [];
-        } else {
-          this.ResultMessages.add('SearchResult :' + (data).length);
-        }
-      });
-  }
+
+
+
+
+
+
 
   getDataTableNew(stringdata: string): void {
 
