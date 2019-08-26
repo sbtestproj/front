@@ -9,6 +9,8 @@ import {HttpClient} from '@angular/common/http';
 import {MessagesService} from '../Service/messages.service';
 import { ConfigItemType} from '../Models/Entities/ConfigItemType';
 import { InterfaceToSave} from './InterfaceToSave';
+import {ThirdStepComponent} from './step3/third-step.component';
+import {HeaderComponent} from '../header/header.component';
 
 export interface Modules {
   name: string;
@@ -47,7 +49,8 @@ export class AddparamwindowComponent implements OnInit {
   fifthFormGroup: FormGroup;
   filteredOptions: Observable<moduleEntity[]>;
   myControl = new FormControl();
-  constructor(private formBuilder: FormBuilder, public httpClient: HttpClient, public ResultMessages: MessagesService,  public service: ServiceHttpService) {
+  constructor(private formBuilder: FormBuilder, public httpClient: HttpClient,
+              public ResultMessages: MessagesService,  public service: ServiceHttpService) {
   }
 
 
@@ -80,13 +83,8 @@ export class AddparamwindowComponent implements OnInit {
     });
   }
 
-
-
-  displayFn(user?: moduleEntity): string | undefined {
-    return user ? user.module_name : undefined;
-  }
-  displayFn2(user?: moduleVersionsEntity): string | undefined {
-    return user ? user.version_number : undefined;
+  saveAndPost() {
+    console.log('saved and posted');
   }
 
 

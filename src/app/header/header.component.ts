@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import { ServiceHttpService } from '../Service/service-http.service';
 
 import { ConfigItemOut } from '../Models/config_item_out';
-import { tempConfigItems} from '../TempFakeData';
+// import { tempConfigItems} from '../TempFakeData';
 
 
 /*                  meterial                         */
@@ -16,7 +16,9 @@ import { TableConfigsComponent } from '../table-configs/table-configs.component'
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-
+@Injectable({
+  providedIn: 'root'
+})
 export class HeaderComponent implements OnInit {
 
   constructor(public  dialog: MatDialog , public httpService: ServiceHttpService ) {}
@@ -24,7 +26,7 @@ export class HeaderComponent implements OnInit {
 
   MyConfigItem: ConfigItemOut[] ;
 
-   TestConfigItems = tempConfigItems;
+   // TestConfigItems = tempConfigItems;
 
 
   startPage = 'Adding new params';
@@ -50,7 +52,7 @@ export class HeaderComponent implements OnInit {
   }
   // *************************************
   ngOnInit() {
-    console.log('name :'  + this.TestConfigItems[0].configItemName);
+    // console.log('name :'  + this.TestConfigItems[0].configItemName);
   }
 
 }

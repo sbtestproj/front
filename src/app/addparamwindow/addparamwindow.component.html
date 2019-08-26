@@ -23,7 +23,10 @@
 
 
     <mat-step [stepControl]="fourthFormGroup">
-      <app-step4 [ForTest]="testate" ></app-step4>
+      <form [formGroup]="fourthFormGroup">
+        <ng-template matStepLabel>Descriptions</ng-template>
+        <app-step4></app-step4>
+      </form>
     </mat-step>
 
 

@@ -1,7 +1,7 @@
 <form [formGroup]="firstStepFormGroup">
   <mat-form-field>
     <div>
-      <input #in type="text" placeholder="Module Name" aria-label="Assignee" matInput
+      <input #in type="text" placeholder="Module Name" matInput
              formControlName="firstCtrl" [matAutocomplete]="auto" required >
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
         <mat-option *ngFor="let option of service.data1 | modul_filter:in.value.toString() " [value]="option" (click)="service.getModuleVersionsByModuleId(option.modules_id.toString())">
@@ -13,7 +13,7 @@
   <mat-divider></mat-divider>
   <mat-form-field style="float: bottom">
     <div>
-      <input #in2 type="text" placeholder="Module Version" aria-label="Assignee" matInput
+      <input #in2 type="text" placeholder="Module Version" matInput
              formControlName="firstCtrl" [matAutocomplete]="auto2" required [value]="service.latestVersion" >
       <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn2">
         <mat-option *ngFor="let option of service.moduleVersions | modul_version_filter: in2.value.toString()  " [value]="option">
@@ -28,4 +28,5 @@
   </div>
 </form>
 {{firstStepFormGroup.status}}
+{{firstStepFormGroup.value | json}}
 

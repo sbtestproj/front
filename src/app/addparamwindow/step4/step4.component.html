@@ -1,16 +1,13 @@
 <form [formGroup]="fourthFormGroup">
-  <ng-template matStepLabel>Descriptions</ng-template>
-  <div class="textArea">
-    <textarea  matInput #description formControlName="fourhtCtrl"> {{this.ForTest.configitemname}} </textarea>
-
-
-
-
+  <div>
+    <textarea #description formControlName="fourthCtrl" style="height: 300px; width: 850px; background-color: wheat;" required></textarea>
   </div>
-  <div id="buttonsExit">
-    <button mat-button  mat-dialog-close style="margin: 5px ; background: #dfdfdf">Close</button>
-    <button mat-button matStepperPrevious style=" ; background: #dfdfdf" >back</button>
-    <button mat-button matStepperNext style="margin: 5px; background: #dfdfdf" >Next</button>
+  <div style="right: 500px ">
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-button matDialogClose="" [disabled]="!fourthFormGroup.valid" (click)="ca.checked ? (head.openDialog()) : false ; saveAndPost()" >Create</button>
+    <mat-checkbox style="padding-left: 10px; padding-right: 10px" #ca>Create Another</mat-checkbox>
+    <button mat-button matDialogClose="">Close</button>
   </div>
-
+  {{fourthFormGroup.status}}
+  {{fourthFormGroup.value | json}}
 </form>

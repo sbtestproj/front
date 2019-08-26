@@ -1,4 +1,4 @@
-export interface InterfaceToSave {
+export interface InterfaceToSave2 {
  congigitemtypeid: number;
  configsourcesid: number;
  datatypesid: number;
@@ -18,5 +18,6 @@ export interface InterfaceToSave {
  isnullbale: boolean;
  isprimarykey: boolean;
  isforeignkey: boolean;
+
 
 }

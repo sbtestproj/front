@@ -1,7 +1,8 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 import {possible} from '../../Models/Entities/possibleValues';
-import {AddparamwindowComponent} from '../../addparamwindow/addparamwindow.component';
+import {AddparamwindowComponent} from '../addparamwindow.component';
+
 
 @Component({
   selector: 'app-third-step',
@@ -35,8 +36,7 @@ export class ThirdStepComponent implements OnInit {
   get possibleValues() {
     return this.registrationForm.get('possibleValues') as FormArray;
   }
-  deleteAllPossibleValues()
-  {
+  deleteAllPossibleValues() {
     if (this.possibleValues !== null) {
       for (let i = 0; i <= this.possibleValues.length; i++) {
         this.possibleValues.removeAt(i);

@@ -1,9 +1,10 @@
 import {Component, Injectable, Input, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Step2Component} from '../step2/step2.component';
 import { ConfigItemType } from '../../Models/Entities/ConfigItemType';
 import { InterfaceToSave } from '../InterfaceToSave';
 import {AddparamwindowComponent} from '../addparamwindow.component';
+import {HeaderComponent} from '../../header/header.component';
 
 @Component({
   selector: 'app-step4',
@@ -22,10 +23,10 @@ export class Step4Component implements OnInit {
   // ********* getting data from stemp2 **********
 
 
- @Input() public  ForTest: InterfaceToSave;
-  // out: InterfaceToSave = {
-  //   configitemname: 'default'
-  // };
+ // @Input() public  ForTest: InterfaceToSave;
+ //  // out: InterfaceToSave = {
+ //  //   configitemname: 'default'
+ //  // };
 
 
 
@@ -36,13 +37,19 @@ export class Step4Component implements OnInit {
 
 
 
-  constructor() {}
+  constructor(private fb: FormBuilder, public head: HeaderComponent) {}
 
   ngOnInit() {
+    this.fourthFormGroup = this.fb.group({
+      fourthCtrl: ['', Validators.required]
+    });
     // this.ForTest = new class implements InterfaceToSave {
     //   configitemname: string;
     }
     // this.ForTest = this.main.testate;
 
 
+  saveAndPost() {
+    console.log('saved and posted');
+  }
 }
