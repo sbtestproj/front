@@ -1,4 +1,4 @@
-<form [formGroup]="firstFormGroup">
+<form [formGroup]="firstStepFormGroup">
   <mat-form-field>
     <div>
       <input #in type="text" placeholder="Module Name" aria-label="Assignee" matInput
@@ -27,3 +27,5 @@
     <button mat-button matStepperNext [disabled]="((in.value == '') || (in2.value == ''))" (click)="show(in.value, in2.value)">Next</button>
   </div>
 </form>
+{{firstStepFormGroup.status}}
+

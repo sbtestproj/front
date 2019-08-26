@@ -1,0 +1,16 @@
+<form [formGroup]="fourthFormGroup">
+  <ng-template matStepLabel>Descriptions</ng-template>
+  <div class="textArea">
+    <textarea  matInput #description formControlName="fourhtCtrl"> {{this.ForTest.configitemname}} </textarea>
+
+
+
+
+  </div>
+  <div id="buttonsExit">
+    <button mat-button  mat-dialog-close style="margin: 5px ; background: #dfdfdf">Close</button>
+    <button mat-button matStepperPrevious style=" ; background: #dfdfdf" >back</button>
+    <button mat-button matStepperNext style="margin: 5px; background: #dfdfdf" >Next</button>
+  </div>
+
+</form>

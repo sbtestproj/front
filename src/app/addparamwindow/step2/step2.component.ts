@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import {FormControl} from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { ServiceHttpService} from '../../Service/service-http.service';
 import {data_types} from '../../Models/Entities/data_types';
 import { ConfigItemType} from '../../Models/Entities/ConfigItemType';
 import { AddparamwindowComponent } from '../addparamwindow.component';
+import { Step4Component} from '../step4/step4.component';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { InterfaceToSave} from '../InterfaceToSave';
 
-export interface User {
+interface User {
   name: string;
 }
+
 
 @Component({
   selector: 'app-step2',
@@ -20,12 +21,31 @@ export interface User {
 
 
 export class Step2Component implements OnInit {
-
-  constructor( public httpService: ServiceHttpService, public paramWindow: AddparamwindowComponent) {
+  constructor( public httpService: ServiceHttpService, private fb: FormBuilder,
+               public paramWindow: AddparamwindowComponent,
+               public step4: Step4Component,
+  ) {
   }
+
+  // event to parent
+  @Output() public outToParent = new EventEmitter(); // СОБЫТИЕ ДЛЯ ПОСЫЛКИ ДАННЫХ  look for the function   sendToParent()
+  DataToSend: InterfaceToSave = {
+    configitemname: ''
+  };
+
+
+
+
+  // form groups  see on init iether
+  step2FormGroup: FormGroup;
+
+  // for test ngModel
+  ConfName: string;
 
   outdata: string;
   Arr: data_types;
+
+
 
 // ************* SelectsData ****************
   SectionName; SectionObject: ConfigItemType;
@@ -33,6 +53,7 @@ export class Step2Component implements OnInit {
 // *******************************************
 
   // *************** Data to Out *********************
+  configitemtype: string;
   configitemname: string ;
   defaultvalue ;
   minvalue ;
@@ -44,6 +65,9 @@ export class Step2Component implements OnInit {
   configitemtypesid ;
  // ******************************************************
 
+// **************************************************************************** functions ************************************************
+
+// *******************************************************
   onSelect2(data: User): void {
     this.outdata = data.name;
   }
@@ -55,10 +79,9 @@ export class Step2Component implements OnInit {
   SaveDataTypeOject( arr): void {this.DataTypeObject = arr; }
   SaveDataTypeName(data): void {this.DataTypeName = data; }
 
-  saveOthers(paramname: string, defaultval, minvalue, maxvalue, checkboxDinamicFlag , checkboxReadOnly  )
-  {
+  saveOthers(paramname: string, defaultval, minvalue, maxvalue, checkboxDinamicFlag , checkboxReadOnly  ) {
     // console.log(paramname + '\n' + defaultval + '\n' + minvalue + '\n' + maxvalue + '\n' + checkboxDinamicFlag + '\n' + checkboxReadOnly);
-
+   // this.step4.ForTest.configitemname = paramname; //
     this.configitemname = paramname;
     this.defaultvalue = defaultval;
     this.minvalue = minvalue;
@@ -68,8 +91,14 @@ export class Step2Component implements OnInit {
     // ******************* Other Params ****************
     this.configitemtypesid = this.DataTypeObject.data_types_id;
 
+   // not working this.DataToSend.name = paramname;
+   // this.DataToSend = {name: paramname};
+    this.DataToSend.configitemname = paramname;
+
+    this.sendToParent( this.DataToSend);
+
     console.log(
-      this.configitemname + '\n' +
+      'for test: ' + this.step4.ForTest + ' ' + this.configitemname + '\n' +
     this.defaultvalue + '\n' +
     this.minvalue + '\n' +
     this.maxvalue + '\n' +
@@ -92,15 +121,33 @@ export class Step2Component implements OnInit {
     return  temp ? temp.config_item_name : undefined;
   }
    // ****************************************************************************
+  // ******************************** set configItemType
+  SetConfigItemTypes(type: string) {
+    this.configitemtype = '' + 1; // here sould be search for id of confiitemtypeid by name
+  }
+
+
   // ************************ Dialog Actions **********************************
   onCloseClick() {
 
+  }
 
+  sendToParent( outdata ) {
+    this.outToParent.emit( outdata );
   }
 
 
   ngOnInit() {
+    this.step2FormGroup = this.fb.group({
+      step2Ctrl: ['', Validators.required],
+      step2input1: ['', Validators.required],
+      step2input2: ['', Validators.required],
 
-  }
+
+    });
+     // sign child group of controls to parent in order to check if it is valid or not
+    this.step2FormGroup.statusChanges.subscribe(st => {this.paramWindow.secondFormGroup = this.step2FormGroup; });
+
+    }
 }
 

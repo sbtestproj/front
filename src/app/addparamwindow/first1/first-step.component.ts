@@ -5,6 +5,7 @@ import {moduleVersionsEntity} from '../../Models/Entities/moduleVersions';
 import {moduleEntity} from '../../Models/Entities/moduleEntity';
 import {ServiceHttpService} from '../../Service/service-http.service';
 import {HttpClient} from '@angular/common/http';
+import {AddparamwindowComponent} from '../addparamwindow.component';
 
 @Component({
   selector: 'app-first-step',
@@ -14,20 +15,15 @@ import {HttpClient} from '@angular/common/http';
 export class FirstStepComponent implements OnInit {
   inn: string;
   inn2: string;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  myControl = new FormControl();
-  myControl2 = new FormControl();
+  firstStepFormGroup: FormGroup;
   constructor(private formBuilder: FormBuilder, public httpClient: HttpClient,
-              public service: ServiceHttpService) {}
+              public service: ServiceHttpService, public paramWindow: AddparamwindowComponent) {}
               ngOnInit() {
     this.service.getModules();
-    this.firstFormGroup = this.formBuilder.group({
+    this.firstStepFormGroup = this.formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
+    this.firstStepFormGroup.statusChanges.subscribe(st => {this.paramWindow.firstFormGroup = this.firstStepFormGroup; });
   }
   show(a, b) {
     this.inn = a;

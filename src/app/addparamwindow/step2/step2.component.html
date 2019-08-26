@@ -1,22 +1,27 @@
 <!--<form [formGroup]="firstFormGroup">-->
 <ng-template matStepLabel>Source</ng-template>
-
+<form [formGroup]="step2FormGroup">
 <mat-tab-group>
   <mat-tab label="INI">
 
     <div class="Inputs">
+
+       <!--    ********************  paramerename *********************** -->
         <div>
         <mat-form-field class="">
-        <input #parameterName matInput placeholder="Parameter name" value="">
+        <input #parameterName matInput formControlName="step2Ctrl" placeholder="Parameter name" value="" required>
       </mat-form-field>
+          <!--    ********************  defaultvalue *********************** -->
         </div>
         <mat-form-field class="">
           <input #defaultValue matInput placeholder="Default value" value="">
         </mat-form-field>
+      <!--    ********************  minvalue *********************** -->
         <div>
         <mat-form-field class="">
           <input #minValue type="number" matInput placeholder="Min value" value="">
         </mat-form-field>
+          <!--    ********************  maxvalue *********************** -->
         </div>
           <div>
             <mat-form-field class="">
@@ -25,16 +30,15 @@
           </div>
 
     </div>
-
+    <!--    ********************  next column *********************** -->
     <div style="position: relative; width: 300px; float: right; right: 70px">
 
-
-<!--<div>-->
-            <form class="example-form">
+      <!--    ********************  DataType *********************** -->
               <mat-form-field class="example-full-width">
-                <input #input1 type="text" placeholder="Datatype" aria-label="Number" matInput  [matAutocomplete]="auto1"
-                 (change) =" SaveDataTypeName(input1.value)"  (click)="this.httpService.getDataByUrl('/data_types')">
-<!--                       (keyup.enter)="SaveDataTypeOject(input1.value)"-->
+
+                <input #input1 type="text" placeholder="Datatype" aria-label="Number" matInput required  [matAutocomplete]="auto1"
+                 (change) =" SaveDataTypeName(input1.value)"  (click)="this.httpService.getDataByUrl('/data_types')"
+                       formControlName="step2input1">
 
                 <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete" [displayWith]="displayFn">
                   <mat-option
@@ -44,26 +48,24 @@
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>
-            </form>
+      <!--    ********************  end DataType *********************** -->
 
-
-      <form class="example-form">
+      <!--    ********************  Sections *********************** -->
         <mat-form-field class="example-full-width">
-          <input #input2 type="text" placeholder="Section" aria-label="Number" matInput  [matAutocomplete]="auto2"
+          <input #input2 type="text" placeholder="Section" aria-label="Number" matInput  required [matAutocomplete]="auto2"
                  (change) =" SaveSectionName(input1.value)"
                  (click)="this.httpService.getConfigItems('?config_item_types_id=1')"
-          >
+                 formControlName="step2input2">
+
           <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" [displayWith]="displaySections">
             <mat-option
               *ngFor="let ok of httpService.ConfigItemsData | sectionfilter: input2.value " [value]="ok"
-              (onSelectionChange)="SaveSectionObject(ok)"
-            >
+              (onSelectionChange)="SaveSectionObject(ok)">
               {{ok.config_item_name}}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-      </form>
-
+      <!--    ********************  end Section *********************** -->
 
       <div>
       <mat-checkbox #checkboxDinamicFlag >dinamic flag </mat-checkbox>
@@ -102,45 +104,98 @@
 
   </mat-tab>
 
-  <mat-tab label="PROPERTY"> Content 2 </mat-tab>
+
+  <!--************************************************************************************************************************************-->
+  <!--************************************************************************************************************************************-->
+  <!--************************************************ * * * * * * ***********************************************************************-->
+  <!--**************************************** ** *  *  Properties  * * * * *************************************************************-->
+  <!--************************************************* * * * * * * **********************************************************************-->
+  <!--************************************************************************************************************************************-->
+  <!--************************************************************************************************************************************-->
+  <!--************************************************************************************************************************************-->
+  <mat-tab label="PROPERTY" (click)="SetConfigItemTypes('Property')">
+    <div class="Inputs">
+
+      <!--    ********************  paramerename *********************** -->
+      <div>
+        <mat-form-field class="">
+          <input #parameterName matInput formControlName="step2Ctrl" placeholder="Parameter name" value="" required>
+        </mat-form-field>
+        <!--    ********************  defaultvalue *********************** -->
+      </div>
+      <mat-form-field class="">
+        <input #defaultValue matInput placeholder="Default value" value="">
+      </mat-form-field>
+      <!--    ********************  minvalue *********************** -->
+      <div>
+        <mat-form-field class="">
+          <input #minValue type="number" matInput placeholder="Min value" value="">
+        </mat-form-field>
+        <!--    ********************  maxvalue *********************** -->
+      </div>
+      <div>
+        <mat-form-field class="">
+          <input #maxValue type="number" matInput placeholder="Max value" value="">
+        </mat-form-field>
+      </div>
+
+    </div>
+    <!--    ********************  next column *********************** -->
+    <div style="position: relative; width: 300px; float: right; right: 70px">
+
+      <!--    ********************  DataType *********************** -->
+      <mat-form-field class="example-full-width">
+
+        <input #input1 type="text" placeholder="Datatype" aria-label="Number" matInput required  [matAutocomplete]="auto1"
+               (change) =" SaveDataTypeName(input1.value)"  (click)="this.httpService.getDataByUrl('/data_types')"
+               formControlName="step2input1">
+
+        <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete" [displayWith]="displayFn">
+          <mat-option
+            *ngFor="let o of httpService.outData | datatypefilter: input1.value " [value]="o"
+            (onSelectionChange)="SaveDataTypeOject(o)" >
+            {{o.data_types_name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <!--    ********************  end DataType *********************** -->
+
+
+      <div>
+        <mat-checkbox #checkboxDinamicFlag >dinamic flag </mat-checkbox>
+      </div>
+      <div>
+        <mat-checkbox #checkboxReadOnly>read only</mat-checkbox>
+      </div>
+
+      <div mat-dialog-actions >
+
+        <!--        <button mat-button mat-dialog-close>Close</button>-->
+        <button mat-button  mat-dialog-close style="alignment: right ; background: #dfdfdf">Close</button>
+        <button mat-button matStepperPrevious style="alignment: right ; background: #dfdfdf" >back</button>
+        <button mat-button matStepperNext style="alignment: right ; background: #dfdfdf"
+                (click)="saveOthers( parameterName.value, defaultValue.value,minValue.value,maxValue.value,
+                checkboxDinamicFlag.checked,checkboxReadOnly.checked)">
+          <!--       получаем значение чекбокс   checkbox1.checked-->
+          next
+        </button>
+        <!--    <button mat-button [mat-dialog-close]="data.color" cdkFocusInitial>Ok</button>-->
+      </div>
+    </div>
+  </mat-tab>
+  <!--************************************************************************************************************************************-->
+  <!--************************************************************************************************************************************-->
+  <!--************************************************ * * * * * * ***********************************************************************-->
+  <!--**************************************** ** *  *  xml         * * * * *************************************************************-->
+  <!--************************************************* * * * * * * **********************************************************************-->
+  <!--************************************************************************************************************************************-->
+  <!--************************************************************************************************************************************-->
+  <!--************************************************************************************************************************************-->
+
+
+
   <mat-tab label="XML"> Content 3 </mat-tab>
-
-<!--</mat-tab-group>-->
-<!--  <mat-form-field>-->
-<!--    <input matInput type="text" name="configSourceName" placeholder="Source Name" formControlName="firstCtrl" required #configSourceName>-->
-<!--  </mat-form-field>-->
-<!--  <div>-->
-<!--    <mat-form-field>-->
-<!--      <input matInput type="text" name="configSourceType" placeholder="Source Type Name" formControlName="firstCtrl" required #configSourceType>-->
-<!--    </mat-form-field>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--    <mat-checkbox name="verifiedByExpert" formControlName="firstCtrl" required #verifiedByExpert>verifiedByExpert</mat-checkbox>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--    <mat-checkbox name="dynamicFlag" formControlName="firstCtrl" required #dynamicFlag>dynamicFlag</mat-checkbox>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--    <mat-checkbox name="ignoreFlag" formControlName="firstCtrl" required #ignoreFlag>ignoreFlag</mat-checkbox>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--    <button mat-button matStepperNext>Next</button>-->
-<!--  </div>-->
-<!--</form>-->
-
-
-
-  <!--      <form class="example-form">-->
-  <!--        <mat-form-field class="example-full-width">-->
-  <!--          <input #input1 type="text" placeholder="Datatype" aria-label="Number" matInput  [matAutocomplete]="auto2"-->
-  <!--           (change) =" Save(input1.value)"  (click)="this.httpService.getDataByUrl('/data_types')"-->
-  <!--          >-->
-  <!--          <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" [displayWith]="displayFn">-->
-  <!--&lt;!&ndash;            <mat-option  *ngFor="let o of httpService.getDataTypes() | sectionfilter: input1.value " [value]="o"  >&ndash;&gt;-->
-  <!--            <mat-option  *ngFor="let o of httpService.outData | sectionfilter: input1.value " [value]="o" (click)="Save(input1.value)"  >-->
-  <!--              {{o.data_types_name}}-->
-  <!--            </mat-option>-->
-  <!--          </mat-autocomplete>-->
-  <!--        </mat-form-field>-->
-  <!--      </form>-->
+</mat-tab-group>
+</form>
+{{step2FormGroup.status | json}}
 

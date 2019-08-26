@@ -18,7 +18,7 @@ export class ServiceHttpService {
 
 // *********************************************************************variables********************************************************
   ConfigItemsData;
-  baseUrl = 'http://192.168.137.13:8080/hiberProject/';
+  baseUrl = 'http://127.0.0.1:8080/hiberProject/';
 
   latestVersion: string; // to get latest version of selected module
 
@@ -64,7 +64,7 @@ export class ServiceHttpService {
 
   // ***********************copied 210819****************
   getModules(): void {
-    this.stringUrl = 'http://192.168.137.13:8080/hiberProject/modules';
+    this.stringUrl = 'http://localhost:8080/hiberProject/modules';
     // this.stringUrl = this.stringUrl;
     console.log('stringUrl = ' + this.stringUrl);
     this.httpClient.get(this.stringUrl)
@@ -82,7 +82,7 @@ export class ServiceHttpService {
   }
 
   getModuleVersionsByModuleId(stringdata: string): void {
-    this.stringUrl = 'http://192.168.137.13:8080/hiberProject/module_versions?modules_id=';
+    this.stringUrl = 'http://localhost:8080/hiberProject/module_versions?modules_id=';
     this.stringUrl = this.stringUrl + stringdata;
 
     console.log('stringUrl: ' + this.stringUrl);

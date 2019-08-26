@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import {
   MatAutocompleteModule, MatButtonToggleModule,
-  MatCheckboxModule,
+  MatCheckboxModule, MatIconModule,
   MatInputModule,
-  MatListModule,
+  MatListModule, MatRadioModule,
   MatSelectModule,
   MatStepperModule,
   MatTableModule, MatTabsModule,
@@ -48,8 +48,10 @@ import { Step2Component } from './addparamwindow/step2/step2.component';
 import {SectionFilterPipe} from './Filters/section-filter.pipe';
 import {DataTypeFilterPipe} from './Filters/data-type-filter.pipe';
 import {FirstStepComponent} from './addparamwindow/first1/first-step.component';
-import { Step3Component } from './addparamwindow/step3/step3.component';
+
 import {Modul_version_filterPipe} from './Filters/modul_version_filter.pipe';
+import { Step4Component } from './addparamwindow/step4/step4.component';
+import {ThirdStepComponent} from './addparamwindow/step3/third-step.component';
 
 /*  end material */
 
@@ -80,8 +82,9 @@ import {Modul_version_filterPipe} from './Filters/modul_version_filter.pipe';
 
     FirstStepComponent,
 
-    Step3Component,
-    Modul_version_filterPipe
+    ThirdStepComponent,
+    Modul_version_filterPipe,
+    Step4Component
 
   ],
   imports: [
@@ -99,7 +102,7 @@ import {Modul_version_filterPipe} from './Filters/modul_version_filter.pipe';
       {path: 'table-configs', component: TableConfigsComponent},
       {path: 'details', component: DetailsComponent},
       {path: 'add_param', component: AddparamwindowComponent}
-    ]), ReactiveFormsModule, MatStepperModule, MatCheckboxModule, MatListModule, MatSelectModule, MatAutocompleteModule, MatButtonToggleModule, MatTabsModule
+    ]), ReactiveFormsModule, MatStepperModule, MatCheckboxModule, MatListModule, MatSelectModule, MatAutocompleteModule, MatButtonToggleModule, MatTabsModule, MatRadioModule, MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent],

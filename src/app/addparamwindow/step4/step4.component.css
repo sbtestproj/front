@@ -1,0 +1,13 @@
+.textArea{
+  position: relative;
+  top: 20px;
+  height: 250px;
+  width: 350px;
+  border: #cccccc double 2px;
+}
+
+#buttonsExit{
+  top: 30px;
+  float: right;
+  position: relative;
+}

@@ -8,11 +8,17 @@ import {ServiceHttpService} from '../Service/service-http.service';
 import {HttpClient} from '@angular/common/http';
 import {MessagesService} from '../Service/messages.service';
 import { ConfigItemType} from '../Models/Entities/ConfigItemType';
+import { InterfaceToSave} from './InterfaceToSave';
 
 export interface Modules {
   name: string;
   versionNumber: any;
 }
+
+export interface User {
+  name: string;
+}
+
 
 @Component({
   selector: 'app-addparamwindow',
@@ -22,10 +28,18 @@ export interface Modules {
 
 export class AddparamwindowComponent implements OnInit {
 
+  // for messaging here is another func recieve
+  fromchild;
+  testate: InterfaceToSave = {
+    configitemname: ''
+  };
 
-  isLinear: boolean;
-  modul: moduleEntity[];
-  moduleVersions: Modules[] = [{name: 'blue', versionNumber: 56}];
+
+ // ******************************************
+
+
+    isLinear: boolean;
+
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
@@ -37,9 +51,18 @@ export class AddparamwindowComponent implements OnInit {
   }
 
 
+
+  // ********************************************************** functions ****************************************************
+  // recieving data from child
+
+  receiveFromChild(event) {
+   // console.log('event: ' + event.configitemname);
+    this.testate = event;
+  }
+
+
+
   ngOnInit() {
-
-
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
