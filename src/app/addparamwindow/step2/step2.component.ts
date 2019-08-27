@@ -6,6 +6,7 @@ import { AddparamwindowComponent } from '../addparamwindow.component';
 import { Step4Component} from '../step4/step4.component';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { InterfaceToSave} from '../InterfaceToSave';
+import { ParamService} from '../Service/param.service';
 
 interface User {
   name: string;
@@ -23,9 +24,11 @@ interface User {
 export class Step2Component implements OnInit {
   constructor( public httpService: ServiceHttpService, private fb: FormBuilder,
                public paramWindow: AddparamwindowComponent,
-               public step4: Step4Component,
+               public step4: Step4Component, public paramService: ParamService
   ) {
   }
+
+
 
   // event to parent
   @Output() public outToParent = new EventEmitter(); // СОБЫТИЕ ДЛЯ ПОСЫЛКИ ДАННЫХ  look for the function   sendToParent()
@@ -37,7 +40,9 @@ export class Step2Component implements OnInit {
 
 
   // form groups  see on init iether
-  step2FormGroup: FormGroup;
+ public step2FormGroup: FormGroup;
+ test = 'test'; // data_types = { data_types_id: null, data_types_name: 'Int'};
+
 
   // for test ngModel
   ConfName: string;
@@ -154,7 +159,7 @@ export class Step2Component implements OnInit {
       step2input1: ['', Validators.required],
       step2input2: ['', Validators.required],
       step2Def: ['', Validators.required],
-      step2Max: ['', Validators.required],
+      step2Max: ['', Validators.compose([Validators.required, Validators.min(30)])],
       step2Min: ['', Validators.required],
 
     });

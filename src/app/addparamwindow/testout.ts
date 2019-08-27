@@ -1,3 +1,5 @@
+import { data_types } from '../Models/Entities/data_types';
+
 export interface InterfaceToSave2 {
  congigitemtypeid: number;
  configsourcesid: number;
@@ -19,5 +21,5 @@ export interface InterfaceToSave2 {
  isprimarykey: boolean;
  isforeignkey: boolean;
 
-
+ dataType: data_types;
 }

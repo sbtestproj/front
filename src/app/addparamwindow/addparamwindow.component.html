@@ -4,7 +4,7 @@
   <form>
 <!--     if  linear is false - every step of step available to edit
          if linear is true - each step must have validation.require is valid -->
-  <mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-horizontal-stepper [linear]="false" #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Module</ng-template>
      <app-first-step></app-first-step>

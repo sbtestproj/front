@@ -2,7 +2,7 @@ import {Component, Injectable, OnInit} from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 import {possible} from '../../Models/Entities/possibleValues';
 import {AddparamwindowComponent} from '../addparamwindow.component';
-
+import { ParamService} from '../Service/param.service';
 
 @Component({
   selector: 'app-third-step',
@@ -17,7 +17,8 @@ export class ThirdStepComponent implements OnInit {
   public testResult: possible;
   constructor(
     private fb: FormBuilder,
-    public main: AddparamwindowComponent
+    public main: AddparamwindowComponent,
+    public paramService: ParamService
   ) {
   }
 

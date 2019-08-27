@@ -19,7 +19,7 @@ export class ServiceHttpService {
 // *********************************************************************variables********************************************************
   ConfigItemsData;
   // baseUrl = 'http://127.0.0.1:8080/hiberProject/';
-  baseUrl = 'http://127.0.0.1:8181/hiberProject/';
+  baseUrl = 'http://127.0.0.1:8080/hiberProject/';
 
   latestVersion: string; // to get latest version of selected module
 
@@ -53,8 +53,8 @@ export class ServiceHttpService {
   // ****************************************************************************funcions*******************************************************
   getConfigItems(param: string): void {
     //  this.stringUrl = 'http://192.168.137.13:8080/hiberProject/data_types'
-    console.log('url = ' + this.baseUrl + '/config_items' +  param );
-    this.httpClient.get(this.baseUrl + '/config_items' +  param)
+    console.log('url = ' + this.baseUrl + 'config_items' +  param );
+    this.httpClient.get(this.baseUrl + 'config_items' +  param)
       .subscribe((data: ConfigItemType[] ) => {
           this.ConfigItemsData = data;
           console.log(data + ' lenght: ' + (data).length
@@ -65,7 +65,7 @@ export class ServiceHttpService {
 
   // ***********************copied 210819****************
   getModules(): void {
-    this.stringUrl = 'http://localhost:8181/hiberProject/modules';
+    this.stringUrl = this.baseUrl + 'modules';
     // this.stringUrl = 'http://localhost:8080/hiberProject/modules';
     // this.stringUrl = this.stringUrl;
     console.log('stringUrl = ' + this.stringUrl);
@@ -85,7 +85,7 @@ export class ServiceHttpService {
 
   getModuleVersionsByModuleId(stringdata: string): void {
     // this.stringUrl = 'http://localhost:8080/hiberProject/module_versions?modules_id=';
-    this.stringUrl = 'http://localhost:8181/hiberProject/module_versions?modules_id=';
+    this.stringUrl = this.baseUrl + 'module_versions?modules_id=';
     this.stringUrl = this.stringUrl + stringdata;
 
     console.log('stringUrl: ' + this.stringUrl);
@@ -105,7 +105,7 @@ export class ServiceHttpService {
   getDataTable(stringdata: string): Observable<HttpData[]> {
 
    // this.stringUrl = 'http://localhost:8080/hiberProject/test?name=';
-    this.stringUrl = 'http://localhost:8181/hiberProject/test?name=';
+    this.stringUrl = this.baseUrl + 'test?name=';
     this.stringUrl = this.stringUrl + stringdata;
     //  this.stringUrl = 'http://localhost:8080/hiberProject/test?name=a';
     console.log('stringUrl: ' + this.stringUrl);
@@ -123,7 +123,7 @@ export class ServiceHttpService {
     console.log('postrequest');
     // const headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
     // const options = new RequestOptions({ headers: headers });
-    this.postUrl = 'http://localhost:8080/hiberProject/test';
+    this.postUrl = this.baseUrl + 'test';
     //  const body = {data};
     this.httpClient.post(this.postUrl, 'text',
       //  { headers:{'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } }
@@ -141,7 +141,7 @@ export class ServiceHttpService {
 
   getDataByUrl(path: string): any {
   //  this.stringUrl = 'http://192.168.137.13:8080/hiberProject/data_types';
-    this.stringUrl = 'http://localhost:8181/hiberProject/data_types';
+    this.stringUrl = this.baseUrl + 'data_types';
     path = this.baseUrl + path;
     console.log('url = ' + path);
     this.httpClient.get(path)
@@ -164,7 +164,7 @@ export class ServiceHttpService {
   getDataTableNew(stringdata: string): void {
 
     // this.stringUrl = 'http://192.168.137.13:8080/hiberProject/test?name=';
-    this.stringUrl = 'http://localhost:8181/hiberProject/test?name=';
+    this.stringUrl = this.baseUrl + 'test?name=';
     this.stringUrl = this.stringUrl + stringdata;
 
     console.log('stringUrl: ' + this.stringUrl);

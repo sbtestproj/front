@@ -5,3 +5,11 @@
   float: left;
 }
 
+.alert{
+  background: #f2edda;
+padding: 7px;
+  font-size: .9em;
+margin-bottom: 20px;
+  display: inline-block;
+
+}

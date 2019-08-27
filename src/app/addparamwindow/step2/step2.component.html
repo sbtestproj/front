@@ -9,26 +9,32 @@
        <!--    ********************  paramerename *********************** -->
         <div>
         <mat-form-field>
-        <input #parameterName matInput formControlName="step2Ctrl" placeholder="Parameter name" required>
+        <input autocomplete = "off"  #parameterName matInput formControlName="step2Ctrl" placeholder="Parameter name" required
+                [(ngModel)]="this.paramService.FullData.configitemname">
       </mat-form-field>
+<!--{{test}}-->
           <!--    ********************  defaultvalue *********************** -->
         </div>
         <mat-form-field>
-          <input #defaultValue formControlName="step2Def" matInput placeholder="Default value">
+          <input autocomplete = "off" #defaultValue formControlName="step2Def" matInput placeholder="Default value">
         </mat-form-field>
       <!--    ********************  minvalue *********************** -->
         <div>
         <mat-form-field>
-          <input #minValue formControlName="step2Min" type="number" matInput placeholder="Min value">
+          <input autocomplete = "off" #minValue formControlName="step2Min" type="number" matInput placeholder="Min value"
+                 [(ngModel)]="this.paramService.FullData.minvalue" >
         </mat-form-field>
           <!--    ********************  maxvalue *********************** -->
         </div>
           <div>
             <mat-form-field>
-              <input #maxValue formControlName="step2Max" type="number" matInput placeholder="Max value" (change)="SaveMax(maxValue.valueAsNumber)">
+              <input  autocomplete = "off"  #maxValue formControlName="step2Max" type="number" matInput placeholder="Max value"
+                     [(ngModel)]="this.paramService.FullData.maxvalue">
              </mat-form-field>
           </div>
-
+      <div class="alert" *ngIf="!step2FormGroup.controls['step2Max'].valid && step2FormGroup.controls['step2Max'].touched">
+        <span style="color: cornflowerblue">value must be more 30 </span>
+      </div>
     </div>
     <!--    ********************  next column *********************** -->
     <div style="position: relative; width: 300px; float: right; right: 70px">
@@ -37,6 +43,7 @@
               <mat-form-field class="example-full-width">
 
                 <input #input1 type="text" placeholder="Datatype" aria-label="Number" matInput required  [matAutocomplete]="auto1"
+                       [(ngModel)]="paramService.FullData.dataType"
                  (change) =" SaveDataTypeName(input1.value)"  (click)="this.httpService.getDataByUrl('/data_types')"
                        formControlName="step2input1">
 
@@ -48,6 +55,8 @@
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>
+
+
       <!--    ********************  end DataType *********************** -->
 
       <!--    ********************  Sections *********************** -->

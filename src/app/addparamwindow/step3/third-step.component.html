@@ -1,3 +1,8 @@
+min: {{this.paramService.FullData.minvalue}}
+max: {{this.paramService.FullData.maxvalue}}
+data Type: {{this.paramService.FullData.dataType.data_types_name}}
+
+
 <div class="container-fluid">
   <form [formGroup]="registrationForm">
     <div>
@@ -38,5 +43,6 @@
   </form>
   {{registrationForm.status | json}}
   {{registrationForm.value | json}}
+
 </div>
 
