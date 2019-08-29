@@ -28,7 +28,6 @@ export class ThirdStepComponent implements OnInit {
   ngOnInit() {
     this.registrationForm = this.fb.group({
       possibleValues: this.fb.array([
-        this.getUnit()
       ])
     });
     this.main.secondFormGroup = this.registrationForm ;
@@ -58,7 +57,8 @@ export class ThirdStepComponent implements OnInit {
   }
   private getUnit() {
     return this.fb.group({
-      newValue: ['', Validators.required],
+      newValue: ['', Validators.compose([Validators.required, Validators.min(this.paramService.FullData.minvalue),
+      Validators.max(this.paramService.FullData.maxvalue)])],
       newDescription: ['', Validators.required],
     });
   }

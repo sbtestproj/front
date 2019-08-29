@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, Injectable, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {Observable} from 'rxjs';
@@ -27,14 +27,16 @@ export interface User {
   templateUrl: './addparamwindow.component.html',
   styleUrls: ['./addparamwindow.component.css']
 })
-
+@Injectable({
+  providedIn: 'root'
+})
 export class AddparamwindowComponent implements OnInit {
 
   // for messaging here is another func recieve
   fromchild;
-  testate: InterfaceToSave = {
-    configitemname: ''
-  };
+  // testate: InterfaceToSave = {
+  //   configitemname: ''
+  // };
 
 
  // ******************************************
@@ -57,11 +59,11 @@ export class AddparamwindowComponent implements OnInit {
 
   // ********************************************************** functions ****************************************************
   // recieving data from child
-
-  receiveFromChild(event) {
-   // console.log('event: ' + event.configitemname);
-    this.testate = event;
-  }
+  //
+  // receiveFromChild(event) {
+  //  // console.log('event: ' + event.configitemname);
+  //   this.testate = event;
+  // }
 
 
 

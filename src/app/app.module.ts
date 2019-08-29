@@ -52,6 +52,7 @@ import {FirstStepComponent} from './addparamwindow/first1/first-step.component';
 import {Modul_version_filterPipe} from './Filters/modul_version_filter.pipe';
 import { Step4Component } from './addparamwindow/step4/step4.component';
 import {ThirdStepComponent} from './addparamwindow/step3/third-step.component';
+import {CdkTableModule} from '@angular/cdk/table';
 
 /*  end material */
 
@@ -102,7 +103,7 @@ import {ThirdStepComponent} from './addparamwindow/step3/third-step.component';
       {path: 'table-configs', component: TableConfigsComponent},
       {path: 'details', component: DetailsComponent},
       {path: 'add_param', component: AddparamwindowComponent}
-    ]), ReactiveFormsModule, MatStepperModule, MatCheckboxModule, MatListModule, MatSelectModule, MatAutocompleteModule, MatButtonToggleModule, MatTabsModule, MatRadioModule, MatIconModule
+    ]), ReactiveFormsModule, MatStepperModule, MatCheckboxModule, MatListModule, MatSelectModule, MatAutocompleteModule, MatButtonToggleModule, MatTabsModule, MatRadioModule, MatIconModule, CdkTableModule
   ],
   providers: [],
   bootstrap: [AppComponent],

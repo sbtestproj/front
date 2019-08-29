@@ -9,31 +9,54 @@
        <!--    ********************  paramerename *********************** -->
         <div>
         <mat-form-field>
-        <input autocomplete = "off"  #parameterName matInput formControlName="step2Ctrl" placeholder="Parameter name" required
-                [(ngModel)]="this.paramService.FullData.configitemname">
+        <input autocomplete = "off" #parameterName matInput formControlName="step2Ctrl" placeholder="Parameter name" required
+                [(ngModel)]="this.paramService.FullData.configItemName">
       </mat-form-field>
 <!--{{test}}-->
-          <!--    ********************  defaultvalue *********************** -->
         </div>
+      <!--    ********************  defaultvalue if datatype is boolean *********************** -->
+      <div *ngIf="this.paramService.isBoolean">
         <mat-form-field>
-          <input autocomplete = "off" #defaultValue formControlName="step2Def" matInput placeholder="Default value">
+        <mat-select [(value)]="selected" >
+          <mat-option value="True" >True</mat-option>
+          <mat-option value="False" >False</mat-option>
+          <mat-option value="" >None</mat-option>
+        </mat-select>
         </mat-form-field>
+<!--        to see what value we get from selection-->
+        <p>----{{selected}}----</p>
+      </div>
+      <!--    ********************  defaultvalue *********************** -->
+        <div *ngIf="!this.paramService.isBoolean">
+        <mat-form-field>
+          <input autocomplete = "off" #defaultValue formControlName="step2Def" matInput placeholder="Default value"
+            [(ngModel)]="this.paramService.FullData.defaultvalue" >
+        </mat-form-field>
+      <div class="alert" *ngIf="!step2FormGroup.controls['step2Def'].valid && step2FormGroup.controls['step2Def'].touched && !step2FormGroup.controls['step2Def'].disabled">
+        <span style="color: cornflowerblue">value must be between min value : {{this.paramService.FullData.minvalue}} and max value : {{this.paramService.FullData.maxvalue}} </span>
+      </div>
+        </div>
       <!--    ********************  minvalue *********************** -->
-        <div>
+        <div *ngIf="!this.paramService.isBoolean">
         <mat-form-field>
           <input autocomplete = "off" #minValue formControlName="step2Min" type="number" matInput placeholder="Min value"
                  [(ngModel)]="this.paramService.FullData.minvalue" >
         </mat-form-field>
+          <h6>{{this.DataTypeName}}</h6>
+          <h6>{{this.step2FormGroup.controls['step2Min'].status}}</h6>
+          <div class="alert" *ngIf="!step2FormGroup.controls['step2Min'] && step2FormGroup.controls['step2Min'].touched && !step2FormGroup.controls['step2Min'].disabled">
+            <span style="color: cornflowerblue">value must be less than max value : {{this.paramService.FullData.maxvalue}} </span>
+          </div>
           <!--    ********************  maxvalue *********************** -->
         </div>
-          <div>
+          <div *ngIf="!this.paramService.isBoolean">
             <mat-form-field>
-              <input  autocomplete = "off"  #maxValue formControlName="step2Max" type="number" matInput placeholder="Max value"
+              <input autocomplete = "off"  #maxValue formControlName="step2Max" type="number" matInput placeholder="Max value"
                      [(ngModel)]="this.paramService.FullData.maxvalue">
              </mat-form-field>
           </div>
-      <div class="alert" *ngIf="!step2FormGroup.controls['step2Max'].valid && step2FormGroup.controls['step2Max'].touched">
-        <span style="color: cornflowerblue">value must be more 30 </span>
+      <div class="alert" *ngIf="!step2FormGroup.controls['step2Max'].valid && step2FormGroup.controls['step2Max'].touched && !step2FormGroup.controls['step2Max'].disabled">
+        <span style="color: cornflowerblue">value must be more than min value : {{this.paramService.FullData.minvalue}} </span>
       </div>
     </div>
     <!--    ********************  next column *********************** -->
@@ -43,14 +66,13 @@
               <mat-form-field class="example-full-width">
 
                 <input #input1 type="text" placeholder="Datatype" aria-label="Number" matInput required  [matAutocomplete]="auto1"
-                       [(ngModel)]="paramService.FullData.dataType"
-                 (change) =" SaveDataTypeName(input1.value)"  (click)="this.httpService.getDataByUrl('/data_types')"
+                 (click)="this.httpService.getDataByUrl('/data_types')"
                        formControlName="step2input1">
 
-                <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete" [displayWith]="displayFn">
+                <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
                   <mat-option
                     *ngFor="let o of httpService.outData | datatypefilter: input1.value " [value]="o"
-                    (onSelectionChange)="SaveDataTypeOject(o)" >
+                    (onSelectionChange)="SaveDataTypeOject(o); SaveDataTypeName(o.data_types_name)">
                     {{o.data_types_name}}
                   </mat-option>
                 </mat-autocomplete>
@@ -61,15 +83,14 @@
 
       <!--    ********************  Sections *********************** -->
         <mat-form-field class="example-full-width">
-          <input #input2 type="text" placeholder="Section" aria-label="Number" matInput  required [matAutocomplete]="auto2"
-                 (change) =" SaveSectionName(input1.value)"
+            <input #input2 type="text" placeholder="Section" aria-label="Number" matInput  required [matAutocomplete]="auto2"
                  (click)="this.httpService.getConfigItems('?config_item_types_id=1')"
-                 formControlName="step2input2">
+                 formControlName="step2input2" >
 
-          <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" [displayWith]="displaySections">
+            <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displaySections">
             <mat-option
               *ngFor="let ok of httpService.ConfigItemsData | sectionfilter: input2.value " [value]="ok"
-              (onSelectionChange)="SaveSectionObject(ok)">
+              (onSelectionChange)="SaveSectionObject(ok); SaveSectionName(ok.config_item_name)">
               {{ok.config_item_name}}
             </mat-option>
           </mat-autocomplete>
@@ -83,33 +104,20 @@
       <mat-checkbox #checkboxReadOnly>read only</mat-checkbox>
       </div>
 
-<!--    for test   -->
-<!--      <li *ngIf="SectionObject">-->
-<!--    id num {{SectionObject.config_item_name}}-->
-<!--      </li>-->
-<!--</div>-->
 
       <div mat-dialog-actions >
 
-<!--        <button mat-button mat-dialog-close>Close</button>-->
         <button mat-button  mat-dialog-close style="alignment: right ; background: #dfdfdf">Close</button>
         <button mat-button matStepperPrevious style="alignment: right ; background: #dfdfdf" >back</button>
         <button mat-button matStepperNext style="alignment: right ; background: #dfdfdf"
-                (click)="saveOthers( parameterName.value, defaultValue.value,minValue.value,maxValue.value,
-                checkboxDinamicFlag.checked,checkboxReadOnly.checked)">
+                (click)="saveOthers( parameterName.value,
+                checkboxDinamicFlag.checked,checkboxReadOnly.checked)" [disabled]="this.step2FormGroup.invalid">
 <!--       получаем значение чекбокс   checkbox1.checked-->
           next
         </button>
         <!--    <button mat-button [mat-dialog-close]="data.color" cdkFocusInitial>Ok</button>-->
       </div>
-
-
-
-
-
     </div>
-
-
 </form>
   </mat-tab>
 

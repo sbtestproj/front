@@ -20,6 +20,5 @@ export interface InterfaceToSave2 {
  isnullbale: boolean;
  isprimarykey: boolean;
  isforeignkey: boolean;
-
  dataType: data_types;
 }

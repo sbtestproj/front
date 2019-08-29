@@ -5,10 +5,6 @@ import {Parameter} from '../Models/parameter';
 import {HttpData} from '../OutData';
 import {data_types} from '../Models/Entities/data_types';
 
-export interface User {
-  name: string;
-}
-
 @Pipe({
   name: 'datatypefilter'
 })

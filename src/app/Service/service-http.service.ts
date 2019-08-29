@@ -19,14 +19,13 @@ export class ServiceHttpService {
 // *********************************************************************variables********************************************************
   ConfigItemsData;
   // baseUrl = 'http://127.0.0.1:8080/hiberProject/';
-  baseUrl = 'http://127.0.0.1:8080/hiberProject/';
+  baseUrl = 'http://127.0.0.1:8181/hiberProject/';
 
   latestVersion: string; // to get latest version of selected module
 
 // ***************************************************************************************************************************************
-  outData: any;
+  outData;
   httpData: any;
-
   data1: moduleEntity[];
   moduleVersions: moduleVersionsEntity[];
 
@@ -102,21 +101,21 @@ export class ServiceHttpService {
 
 
 
-  getDataTable(stringdata: string): Observable<HttpData[]> {
-
-   // this.stringUrl = 'http://localhost:8080/hiberProject/test?name=';
-    this.stringUrl = this.baseUrl + 'test?name=';
-    this.stringUrl = this.stringUrl + stringdata;
-    //  this.stringUrl = 'http://localhost:8080/hiberProject/test?name=a';
-    console.log('stringUrl: ' + this.stringUrl);
-    this.httpClient.get(this.stringUrl)
-      .subscribe((data: any) => {
-        console.log(data);
-        console.log('verif : ' + data[0].verif);
-        this.outData = data;
-      });
-    return this.outData;
-  }
+  // getDataTable(stringdata: string): Observable<HttpData[]> {
+  //
+  //  // this.stringUrl = 'http://localhost:8080/hiberProject/test?name=';
+  //   this.stringUrl = this.baseUrl + 'test?name=';
+  //   this.stringUrl = this.stringUrl + stringdata;
+  //   //  this.stringUrl = 'http://localhost:8080/hiberProject/test?name=a';
+  //   console.log('stringUrl: ' + this.stringUrl);
+  //   this.httpClient.get(this.stringUrl)
+  //     .subscribe((data: any) => {
+  //       console.log(data);
+  //       console.log('verif : ' + data[0].verif);
+  //       this.outData = data;
+  //     });
+  //   return this.outData;
+  // }
 
 
   postData(data: any) {

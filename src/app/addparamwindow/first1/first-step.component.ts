@@ -6,6 +6,7 @@ import {moduleEntity} from '../../Models/Entities/moduleEntity';
 import {ServiceHttpService} from '../../Service/service-http.service';
 import {HttpClient} from '@angular/common/http';
 import {AddparamwindowComponent} from '../addparamwindow.component';
+import {ParamService} from '../Service/param.service';
 
 @Component({
   selector: 'app-first-step',
@@ -17,7 +18,8 @@ export class FirstStepComponent implements OnInit {
   inn2: string;
   firstStepFormGroup: FormGroup;
   constructor(private formBuilder: FormBuilder, public httpClient: HttpClient,
-              public service: ServiceHttpService, public paramWindow: AddparamwindowComponent) {}
+              public service: ServiceHttpService, public paramWindow: AddparamwindowComponent,
+              public paramService: ParamService) {}
               ngOnInit() {
     this.service.getModules();
     this.firstStepFormGroup = this.formBuilder.group({
@@ -25,11 +27,15 @@ export class FirstStepComponent implements OnInit {
     });
     this.firstStepFormGroup.statusChanges.subscribe(st => {this.paramWindow.firstFormGroup = this.firstStepFormGroup; });
   }
-  show(a, b) {
-    this.inn = a;
-    this.inn2 = b;
-    console.log('inn:' + this.inn + '*******' + 'inn2:' + this.inn2);
-    console.log(' a : ' + a + 'b:' + b);
+  show(moduleName, moduleVersion) {
+    this.inn = moduleName;
+    this.inn2 = moduleVersion;
+    console.log('moduleName:' + this.inn + '*******' + 'moduleVersion:' + this.inn2);
+    console.log(' a : ' + moduleName + 'b:' + moduleVersion);
+    this.paramService.FullData.moduleNameVersion.module_name = moduleName;
+    this.paramService.FullData.moduleNameVersion.version_number = moduleVersion;
+    console.log(' servName : ' + this.paramService.FullData.moduleNameVersion.module_name +
+      'servVers:' + this.paramService.FullData.moduleNameVersion.version_number);
   }
   displayFn(user?: moduleEntity): string | undefined {
     return user ? (user.module_name) : undefined;

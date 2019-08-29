@@ -1,7 +1,6 @@
-
-
 <!-- <h1 *ngIf="testate">Name {{testate.configitemname}} </h1>-->
-  <form>
+
+<form>
 <!--     if  linear is false - every step of step available to edit
          if linear is true - each step must have validation.require is valid -->
   <mat-horizontal-stepper [linear]="false" #stepper>
@@ -12,8 +11,8 @@
 
     <mat-step [stepControl]="secondFormGroup" >
       <ng-template matStepLabel>Config Item Details</ng-template>
-      <app-step2 (outToParent)='receiveFromChild($event)' ></app-step2>
-<!--      <app-step2></app-step2>-->
+<!--      <app-step2 (outToParent)='receiveFromChild($event)' ></app-step2>-->
+      <app-step2></app-step2>
     </mat-step>
 
     <mat-step [stepControl]="thirdFormGroup" >

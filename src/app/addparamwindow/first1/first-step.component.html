@@ -1,10 +1,10 @@
 <form [formGroup]="firstStepFormGroup">
   <mat-form-field>
     <div>
-      <input #in type="text" placeholder="Module Name" matInput
+      <input #moduleName type="text" placeholder="Module Name" matInput
              formControlName="firstCtrl" [matAutocomplete]="auto" required >
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-        <mat-option *ngFor="let option of service.data1 | modul_filter:in.value.toString() " [value]="option" (click)="service.getModuleVersionsByModuleId(option.modules_id.toString())">
+        <mat-option *ngFor="let option of service.data1 | modul_filter:moduleName.value.toString() " [value]="option" (click)="service.getModuleVersionsByModuleId(option.modules_id.toString())">
           {{option.module_name}}
         </mat-option>
       </mat-autocomplete>
@@ -13,10 +13,10 @@
   <mat-divider></mat-divider>
   <mat-form-field style="float: bottom">
     <div>
-      <input #in2 type="text" placeholder="Module Version" matInput
+      <input #moduleVersion type="text" placeholder="Module Version" matInput
              formControlName="firstCtrl" [matAutocomplete]="auto2" required [value]="service.latestVersion" >
       <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn2">
-        <mat-option *ngFor="let option of service.moduleVersions | modul_version_filter: in2.value.toString()  " [value]="option">
+        <mat-option *ngFor="let option of service.moduleVersions | modul_version_filter: moduleVersion.value.toString()  " [value]="option">
           {{option.version_number}}
         </mat-option>
       </mat-autocomplete>
@@ -24,7 +24,8 @@
   </mat-form-field>
   <div>
     <button mat-button matDialogClose >Close</button>
-    <button mat-button matStepperNext [disabled]="((in.value == '') || (in2.value == ''))" (click)="show(in.value, in2.value)">Next</button>
+    <button mat-button matStepperNext [disabled]="((moduleName.value == '') || (moduleVersion.value == ''))"
+            (click)="show(moduleName.value, moduleVersion.value)">Next</button>
   </div>
 </form>
 {{firstStepFormGroup.status}}
