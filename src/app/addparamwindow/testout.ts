@@ -1,4 +1,14 @@
 import { data_types } from '../Models/Entities/data_types';
+import { moduleEntity} from '../Models/Entities/moduleEntity';
+import { moduleVersionsEntity} from '../Models/Entities/moduleVersionsEntity';
+import { ConfigitemSections} from '../Models/Entities/configitemSections';
+
+
+export interface modules_to_save {
+module_name: string;
+}
+
+
 
 export interface InterfaceToSave2 {
  congigitemtypeid: number;
@@ -13,13 +23,18 @@ export interface InterfaceToSave2 {
  configitemdescription: string;
  referencedescription: number;
  verifiedbyexpert: boolean;
- divamicflag: boolean;
+ dynamicflag: boolean;
  ignoreflag: boolean;
  readonlyflag: boolean;
  originalposition: number;
  isnullbale: boolean;
  isprimarykey: boolean;
  isforeignkey: boolean;
+ configitemsectionsid: number;
 
+ moduleversions: moduleVersionsEntity;
+ modules: moduleEntity;
  dataType: data_types;
+ configItemSections: ConfigitemSections;
+
 }

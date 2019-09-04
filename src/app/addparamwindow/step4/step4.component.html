@@ -1,4 +1,14 @@
-{{paramService.FullData.configitemname}}
+ConfigItemname: {{paramService.FullData.configitemname}} <br>
+Module name:  {{paramService.FullData.modules.module_name}} <br>
+DataType: {{paramService.FullData.dataType.data_types_name}}<br>
+<li *ngIf="paramService.FullData.dynamicflag" >Dynamic true </li>
+<li *ngIf="!paramService.FullData.dynamicflag" >Dynamic false </li>
+<li *ngIf="paramService.FullData.readonlyflag" >Read true </li>
+<li *ngIf="!paramService.FullData.readonlyflag" >Read false </li>
+Section: {{this.paramService.FullData.configItemSections.config_item_section_name}}
+
+<!--<button type="button" (click)="this.paramService.postData()">SendData</button>-->
+<button type="button" (click)="this.paramService.postData()">SendData</button>
 <form [formGroup]="fourthFormGroup">
   <div>
     <textarea #description formControlName="fourthCtrl" style="height: 300px; width: 850px; background-color: wheat;" required>

@@ -2,8 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {moduleVersionsEntity} from '../Models/moduleVersionsEntity';
-import {moduleEntity} from '../Models/moduleEntity';
+import {moduleVersionsEntity} from '../Models/Entities/moduleVersionsEntity';
+import {moduleEntity_bak} from '../Models/moduleEntity_bak';
 import {ServiceHttpService} from '../Service/service-http.service';
 import {HttpClient} from '@angular/common/http';
 import {MessagesService} from '../Service/messages.service';
@@ -47,7 +47,7 @@ export class AddparamwindowComponent implements OnInit {
   thirdFormGroup: FormGroup;
   fourthFormGroup: FormGroup;
   fifthFormGroup: FormGroup;
-  filteredOptions: Observable<moduleEntity[]>;
+  filteredOptions: Observable<moduleEntity_bak[]>;
   myControl = new FormControl();
   constructor(private formBuilder: FormBuilder, public httpClient: HttpClient,
               public ResultMessages: MessagesService,  public service: ServiceHttpService) {

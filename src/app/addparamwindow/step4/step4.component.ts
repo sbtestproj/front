@@ -2,6 +2,8 @@ import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HeaderComponent} from '../../header/header.component';
 import { ParamService } from '../Service/param.service';
+import {InterfaceToSave2, modules_to_save} from '../testout';
+
 
 @Component({
   selector: 'app-step4',
@@ -14,19 +16,15 @@ import { ParamService } from '../Service/param.service';
 
 
 export class Step4Component implements OnInit {
- public fourthFormGroup: FormGroup;
+
+
+  constructor( private fb: FormBuilder, public head: HeaderComponent, public paramService: ParamService ) {}
   // variables
-  // ********* getting data from stemp2 **********
 
 
-
-// ***************************************  functions ***************************************************
-  // ******** Saving Data For Config Item Table *****************
+  public fourthFormGroup: FormGroup;
 
 
-
-
-  constructor(private fb: FormBuilder, public head: HeaderComponent, public paramService: ParamService) {}
 
   ngOnInit() {
     this.fourthFormGroup = this.fb.group({

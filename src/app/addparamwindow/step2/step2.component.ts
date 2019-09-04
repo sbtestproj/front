@@ -1,9 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { ServiceHttpService} from '../../Service/service-http.service';
 import {data_types} from '../../Models/Entities/data_types';
 import { ConfigItemType} from '../../Models/Entities/ConfigItemType';
 import { AddparamwindowComponent } from '../addparamwindow.component';
-import { Step4Component} from '../step4/step4.component';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { InterfaceToSave} from '../InterfaceToSave';
 import { ParamService} from '../Service/param.service';
@@ -22,14 +21,15 @@ interface User {
 
 
 export class Step2Component implements OnInit {
-  constructor( public httpService: ServiceHttpService, private fb: FormBuilder,
-               public paramWindow: AddparamwindowComponent,
-               public step4: Step4Component, public paramService: ParamService
+  constructor(public httpService: ServiceHttpService, private fb: FormBuilder,
+              public paramWindow: AddparamwindowComponent,
+              public paramService: ParamService
   ) {
   }
 
 
-
+  flag: boolean;
+  // for test ngModel
   // event to parent
   @Output() public outToParent = new EventEmitter(); // СОБЫТИЕ ДЛЯ ПОСЫЛКИ ДАННЫХ  look for the function   sendToParent()
   DataToSend: InterfaceToSave = {
@@ -37,93 +37,200 @@ export class Step2Component implements OnInit {
   };
 
 
-
-
   // form groups  see on init iether
- public step2FormGroup: FormGroup;
- test = 'test'; // data_types = { data_types_id: null, data_types_name: 'Int'};
+  public step2FormGroup: FormGroup;
+  test = 'test'; // data_types = { data_types_id: null, data_types_name: 'Int'};
 
 
   // for test ngModel
   ConfName: string;
-
+  type = 'number';
   outdata: string;
   Arr: data_types;
 
 
-
 // ************* SelectsData ****************
-  SectionName; SectionObject: ConfigItemType;
-  DataTypeName; DataTypeObject: data_types;
+  SectionName;
+  SectionObject: ConfigItemType;
+  DataTypeName;
+  DataTypeObject: data_types;
 // *******************************************
 
   // *************** Data to Out *********************
-  configitemtype: string;
-  configitemname: string ;
-  defaultvalue ;
-  minvalue ;
-  maxvalue ;
-  dinamicflag ;
-  readonlyflag ;
-  configitemtype2: string;
-  configitemname2: string ;
-  defaultvalue2: string ;
-  minvalue2: string ;
-  maxvalue2: string ;
-  dinamicflag2 ;
-  readonlyflag2 ;
-  // ******************* Other Params ****************
-  configitemtypesid ;
- // ******************************************************
+  configitemname: string;
+  dinamicflag;
+  readonlyflag;
+
+  // ******************************************************
 
 // **************************************************************************** functions ************************************************
+// ***************** 03.09.2019 ***********************
+  // *************************************************************************  getting controlPraramname
+  controlParamnameChanged() {
+    this.paramService.FullData.configitemname = this.step2FormGroup.get('ctrl_ParamName').value;  // ControlParamName
+  }
 
+  //// *************************************************************************  getting Section ?????????????????????????????
+  ctrl_ConfigItemsSectionsClick(configitemsectionname: string) {
+    this.paramService.FullData.configItemSections.config_item_section_name = configitemsectionname;
+  }
+
+  ctrl_ConfigItemsSectionsChanged() {
+    this.paramService.FullData.configItemSections.config_item_section_name = this.step2FormGroup.get('ctrl_ConfigItemsSections').value;
+  }
+
+
+  // *************************************************************************  getting DataType
+  ctrl_DataTypeChanged(object: data_types) {
+    this.paramService.FullData.dataType.data_types_name = object.data_types_name;
+    this.paramService.FullData.datatypesid = object.data_types_id;
+    if (object.data_types_name === 'Varchar') {
+      console.log('datatype:  varchar');
+      // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      this.step2FormGroup.get('ctrl_DefaultValue').enable();
+      this.step2FormGroup.get('ctrl_DefaultValue').enable();
+      this.step2FormGroup.get('ctrl_MaxValue').setValue('');
+      this.step2FormGroup.get('ctrl_MaxValue').disable();
+      this.paramService.FullData.maxvalue = null;
+      this.step2FormGroup.get('ctrl_MinValue').setValue('');
+      this.step2FormGroup.get('ctrl_MinValue').disable();
+      this.paramService.FullData.minvalue = null;
+      // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    }
+    if (object.data_types_name === 'Int') {
+      this.step2FormGroup.get('ctrl_MaxValue').enable();
+      this.step2FormGroup.get('ctrl_MinValue').enable();
+      this.step2FormGroup.get('ctrl_MaxValue').enable();
+      this.step2FormGroup.get('ctrl_MinValue').enable();
+      this.step2FormGroup.get('ctrl_DefaultValue').enable();
+      this.step2FormGroup.get('ctrl_DefaultValue').enable();
+    }
+    if (object.data_types_name === 'Boolean') {
+      this.step2FormGroup.get('ctrl_DefaultValue').enable();
+      this.step2FormGroup.get('ctrl_DefaultValue').enable();
+      this.step2FormGroup.get('ctrl_MaxValue').setValue('');
+      this.step2FormGroup.get('ctrl_MaxValue').disable();
+      this.paramService.FullData.maxvalue = null;
+      this.step2FormGroup.get('ctrl_MinValue').setValue('');
+      this.step2FormGroup.get('ctrl_MinValue').disable();
+      this.paramService.FullData.minvalue = null;
+    }
+
+  }
+
+  // ************************************************************************* getting DefaultValue
+  ctrl_DefaultValueChanged() {
+    this.paramService.FullData.defaultvalue = this.step2FormGroup.get('ctrl_DefaultValue').value;
+
+    if (this.step2FormGroup.get('ctrl_MaxValue').value >= this.step2FormGroup.get('ctrl_MinValue').value ) {
+      this.step2FormGroup.get('ctrl_MinValue').clearValidators();
+      this.step2FormGroup.get('ctrl_MinValue').updateValueAndValidity();
+      this.step2FormGroup.get('ctrl_MaxValue').clearValidators();
+      this.step2FormGroup.get('ctrl_MaxValue').updateValueAndValidity();
+    }
+
+    // getting data from max and min
+   // if(this.step2FormGroup.get('ctrl_DefaultValue').value)
+
+    if (this.paramService.FullData.dataType.data_types_name === 'Int') {
+      // set validation
+      if (this.paramService.FullData.maxvalue !== null) {
+        console.log('case1');
+        this.step2FormGroup.get('ctrl_DefaultValue').setValidators([Validators.max(this.paramService.FullData.maxvalue)]);
+      }
+      if (this.paramService.FullData.minvalue !== null) {
+        console.log('case2' + 'minval' + this.paramService.FullData.minvalue);
+        this.step2FormGroup.get('ctrl_DefaultValue').setValidators([Validators.min(this.paramService.FullData.minvalue)]);
+      }
+      if (this.paramService.FullData.minvalue !== null && this.paramService.FullData.maxvalue !== null) {
+        console.log('case 3');
+        this.step2FormGroup.get('ctrl_DefaultValue').setValidators([Validators.min(this.paramService.FullData.minvalue)
+          , Validators.max(this.paramService.FullData.maxvalue)]);
+      }
+    }
+
+  }
+
+// *********************************************************************************getting max value
+  ctrl_MaxValueChanged() {
+
+    this.paramService.FullData.maxvalue = this.step2FormGroup.get('ctrl_MaxValue').value;
+   // update validation
+    if (this.step2FormGroup.get('ctrl_DefaultValue').value >= this.step2FormGroup.get('ctrl_MinValue').value ) {
+      this.step2FormGroup.get('ctrl_DefaultValue').clearValidators();
+      this.step2FormGroup.get('ctrl_DefaultValue').updateValueAndValidity();
+      this.step2FormGroup.get('ctrl_MinValue').clearValidators();
+      this.step2FormGroup.get('ctrl_MinValue').updateValueAndValidity();
+    }
+    // validation
+    if (this.paramService.FullData.dataType.data_types_name === 'Int') {
+
+      if (this.paramService.FullData.defaultvalue !== null) {
+        console.log('max: ' + this.step2FormGroup.get('ctrl_DefaultValue').value);
+        this.step2FormGroup.get('ctrl_MaxValue')
+          .setValidators([Validators.min(this.step2FormGroup.get('ctrl_DefaultValue').value)]);
+      }
+
+      if (this.paramService.FullData.minvalue !== null) {
+        this.step2FormGroup.get('ctrl_MaxValue').setValidators([Validators.min(this.paramService.FullData.minvalue)]);
+      }
+
+      if (this.paramService.FullData.defaultvalue !== null && this.paramService.FullData.minvalue !== null) {
+        this.step2FormGroup.get('ctrl_MaxValue').setValidators([Validators.min(this.paramService.FullData.minvalue)
+          , Validators.min(this.step2FormGroup.get('ctrl_DefaultValue').value)]);
+      }
+
+    }
+  }
+
+  // *****************************************************************************************getting min value
+  ctrl_MinValueChanged() {
+
+    this.paramService.FullData.minvalue = this.step2FormGroup.get('ctrl_MinValue').value;
+    // update validators
+    if (this.step2FormGroup.get('ctrl_DefaultValue').value <= this.step2FormGroup.get('ctrl_MaxValue').value ) {
+      this.step2FormGroup.get('ctrl_DefaultValue').clearValidators();
+      this.step2FormGroup.get('ctrl_DefaultValue').updateValueAndValidity();
+      this.step2FormGroup.get('ctrl_MaxValue').clearValidators();
+      this.step2FormGroup.get('ctrl_MaxValue').updateValueAndValidity();
+    }
+
+    if (this.paramService.FullData.dataType.data_types_name === 'Int') {
+      if (this.paramService.FullData.defaultvalue !== null) {
+        this.step2FormGroup.get('ctrl_MinValue')
+          .setValidators([Validators.max(this.step2FormGroup.get('ctrl_DefaultValue').value)]);
+      }
+      if (this.paramService.FullData.maxvalue !== null) {
+        this.step2FormGroup.get('ctrl_MinValue')
+          .setValidators([Validators.max(this.step2FormGroup.get('ctrl_MaxValue').value)]);
+      }
+
+      if (this.paramService.FullData.defaultvalue !== null && this.paramService.FullData.maxvalue !== null) {
+        console.log('default: ' + this.step2FormGroup.get('ctrl_DefaultValue').value
+        + ' ' + this.step2FormGroup.get('ctrl_MinValue').value);
+        this.step2FormGroup.get('ctrl_MinValue')
+            .setValidators([Validators.max(this.step2FormGroup.get('ctrl_DefaultValue').value),
+              Validators.max(this.step2FormGroup.get('ctrl_MaxValue').value)
+            ]);
+      }
+    }
+  }
+  // ************************************************************************************************************* getDinamic flag
+  DynamicFlagChanged(Dflag) {
+  this.paramService.FullData.dynamicflag = Dflag;
+  }
+  // ************************************************************************************************************* getDinamic flag
+  ReadOnlyFlagChanged(Rflag) {
+    this.paramService.FullData.readonlyflag = Rflag;
+  }
+
+  // *************** end 03.09.2019 *******************
 // *******************************************************
-  onSelect2(data: User): void {
-    this.outdata = data.name;
-  }
-
-
-  // *********************** Save data Functions *****************************
-  SaveSectionObject( arr): void {this.SectionObject = arr; }
-   SaveSectionName(data): void {this.SectionName = data; }
-  SaveDataTypeOject( arr): void {this.DataTypeObject = arr; }
-  SaveDataTypeName(data): void {this.DataTypeName = data; }
-  SaveMax(data: string): void {
-    this.maxvalue2 = data;
-    console.log('max2 == ' + this.maxvalue2);
-  }
 
   saveOthers(paramname: string, defaultval, minvalue, maxvalue, checkboxDinamicFlag , checkboxReadOnly  ) {
-   // console.log(paramname + '\n' + defaultval + '\n' + minvalue + '\n' + maxvalue + '\n' + checkboxDinamicFlag + '\n' + checkboxReadOnly);
-   // this.step4.ForTest.configitemname = paramname; //
-    this.configitemname = paramname;
-    this.defaultvalue = defaultval;
-    this.minvalue = minvalue;
-    this.maxvalue = maxvalue;
-    this.dinamicflag = checkboxDinamicFlag;
+  //  this.dinamicflag = checkboxDinamicFlag;
     this.readonlyflag = checkboxReadOnly;
     // ******************* Other Params ****************
-    this.configitemtypesid = this.DataTypeObject.data_types_id;
-
-   // not working this.DataToSend.name = paramname;
-   // this.DataToSend = {name: paramname};
-    this.DataToSend.configitemname = paramname;
-
-    // this.sendToParent( this.DataToSend);
-
-    console.log(
-      'for test: ' + 'this.step4.ForTest' + ' ' + this.configitemname + '\n' +
-    this.defaultvalue + '\n' +
-    this.minvalue + '\n' +
-    this.maxvalue + '\n' +
-    this.dinamicflag + '\n' +
-    this.readonlyflag + '\n' +
-   'ConfItemId: ' + this.configitemtypesid + '\n' +
-    'Section : ' + this.SectionObject.config_items_id); // difficult question
-    // !!!!!!!!!we need to save section somewhere
-    console.log('def2====' + this.defaultvalue2 + 'min2====' + this.minvalue2 + 'max2===' + this.maxvalue2);
-
   }
 
   // ***************************************************************************
@@ -137,10 +244,6 @@ export class Step2Component implements OnInit {
     return  temp ? temp.config_item_name : undefined;
   }
    // ****************************************************************************
-  // ******************************** set configItemType
-  SetConfigItemTypes(type: string) {
-    this.configitemtype = '' + 1; // here sould be search for id of confiitemtypeid by name
-  }
 
 
   // ************************ Dialog Actions **********************************
@@ -155,16 +258,35 @@ export class Step2Component implements OnInit {
 
   ngOnInit() {
     this.step2FormGroup = this.fb.group({
-      step2Ctrl: ['', Validators.required],
-      step2input1: ['', Validators.required],
-      step2input2: ['', Validators.required],
+      ctrl_ParamName: ['', Validators.required],
+      ctrl_DataType: ['', Validators.required],
+      ctrl_ConfigItemsSections: ['', Validators.required],
       step2Def: ['', Validators.required],
-      step2Max: ['', Validators.compose([Validators.required, Validators.min(30)])],
-      step2Min: ['', Validators.required],
+      ctrl_MaxValue: null,
+//      ctrl_MinValue: [{value: '', disabled: true }, Validators.required],
+      ctrl_MinValue: null,
+      ctrl_DefaultValue: null,
 
     });
+
+    this.step2FormGroup.get('ctrl_MaxValue').disable();
+    this.step2FormGroup.get('ctrl_MinValue').disable();
+    this.step2FormGroup.get('ctrl_DefaultValue').disable();
+
      // sign child group of controls to parent in order to check if it is valid or not
-    this.step2FormGroup.statusChanges.subscribe(st => {this.paramWindow.secondFormGroup = this.step2FormGroup; });
-    }
+    this.step2FormGroup.statusChanges.subscribe(st => {this.paramWindow.secondFormGroup = this.step2FormGroup;});
+
+    // если изменилось минимальное значение то максимум не может быть меньше минимального значения
+    // this.step2FormGroup.get('ctrl_MinValue').valueChanges.subscribe
+    // ((minval) => { this.step2FormGroup.get('ctrl_MaxValue')
+    //   .setValidators(Validators.compose([Validators.required, Validators.min(minval)])); } );
+    //  // ********************************************************************************************
+
+  }
+  // ----------------------------------------------------------------------------------------------------------------------
+
+
+
+
 }
 

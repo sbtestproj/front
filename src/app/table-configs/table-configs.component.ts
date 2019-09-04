@@ -30,7 +30,7 @@ export class TableConfigsComponent implements OnInit {
   sourceType: string;
 
  // constructor( private  ServiceHttp: ServiceHttpService) { }
-  constructor(public ResultMessages: MessagesService, private  ServiceHttp: ServiceHttpService,
+  constructor(public ResultMessages: MessagesService, public  ServiceHttp: ServiceHttpService,
               public httpclient: HttpClient,
               /* for material */
               public  dialog: MatDialog, public service: ServiceHttpService) { }

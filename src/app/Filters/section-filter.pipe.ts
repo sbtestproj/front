@@ -4,6 +4,7 @@ import { mapTo, delay } from 'rxjs/operators';
 import {Parameter} from '../Models/parameter';
 import {HttpData} from '../OutData';
 import { ConfigItemType } from '../Models/Entities/ConfigItemType';
+import {ConfigitemSections} from '../Models/Entities/configitemSections';
 
 export interface User {
   name: string;
@@ -14,10 +15,10 @@ export interface User {
 })
 
 export class SectionFilterPipe implements PipeTransform {
-  transform(params: ConfigItemType[], searchTerm: string): ConfigItemType[] {
+  transform(params: ConfigitemSections[], searchTerm: string): ConfigitemSections[] {
     if (!searchTerm) {
       return params;
     }
-    return params.filter(param => ((param.config_item_name.toLowerCase().indexOf(searchTerm.toLowerCase()))) !== -1);
+    return params.filter(param => ((param.config_item_section_name.toLowerCase().indexOf(searchTerm.toLowerCase()))) !== -1);
   }
 }

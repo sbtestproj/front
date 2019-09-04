@@ -3,85 +3,112 @@
 
 <mat-tab-group>
   <mat-tab label="INI">
-    <form [formGroup]="step2FormGroup">
-    <div class="Inputs">
+    <form [formGroup]="step2FormGroup" style="height: 300px; ">
 
-       <!--    ********************  paramerename *********************** -->
-        <div>
-        <mat-form-field>
-        <input autocomplete = "off"  #parameterName matInput formControlName="step2Ctrl" placeholder="Parameter name" required
-                [(ngModel)]="this.paramService.FullData.configitemname">
-      </mat-form-field>
 <!--{{test}}-->
-          <!--    ********************  defaultvalue *********************** -->
-        </div>
-        <mat-form-field>
-          <input autocomplete = "off" #defaultValue formControlName="step2Def" matInput placeholder="Default value">
-        </mat-form-field>
-      <!--    ********************  minvalue *********************** -->
+      <div class="Inputs">
+
+        <!--    ********************  paramerename *********************** -->
         <div>
-        <mat-form-field>
-          <input autocomplete = "off" #minValue formControlName="step2Min" type="number" matInput placeholder="Min value"
-                 [(ngModel)]="this.paramService.FullData.minvalue" >
-        </mat-form-field>
-          <!--    ********************  maxvalue *********************** -->
+          <mat-form-field>
+            <input autocomplete = "off"  #parameterName matInput formControlName="ctrl_ParamName" placeholder="Parameter name" required
+                   (keyup)="controlParamnameChanged()">
+          </mat-form-field>
         </div>
-          <div>
-            <mat-form-field>
-              <input  autocomplete = "off"  #maxValue formControlName="step2Max" type="number" matInput placeholder="Max value"
-                     [(ngModel)]="this.paramService.FullData.maxvalue">
-             </mat-form-field>
-          </div>
-      <div class="alert" *ngIf="!step2FormGroup.controls['step2Max'].valid && step2FormGroup.controls['step2Max'].touched">
-        <span style="color: cornflowerblue">value must be more 30 </span>
-      </div>
-    </div>
-    <!--    ********************  next column *********************** -->
-    <div style="position: relative; width: 300px; float: right; right: 70px">
 
-      <!--    ********************  DataType *********************** -->
-              <mat-form-field class="example-full-width">
+        <!--    ********************  Sections ?????? *********************** -->
+        <div>
+          <mat-form-field class="example-full-width">
+            <input #input2 type="text" placeholder="Section" aria-label="Number" matInput  required [matAutocomplete]="auto2"
 
-                <input #input1 type="text" placeholder="Datatype" aria-label="Number" matInput required  [matAutocomplete]="auto1"
-                       [(ngModel)]="paramService.FullData.dataType"
-                 (change) =" SaveDataTypeName(input1.value)"  (click)="this.httpService.getDataByUrl('/data_types')"
-                       formControlName="step2input1">
+                   (click)="this.httpService.getConfigItemsSections()"
+                   (keyup)="ctrl_ConfigItemsSectionsChanged()"
+                   formControlName="ctrl_ConfigItemsSections">
+<!--                   formControlName="step2input2">-->
 
-                <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete" [displayWith]="displayFn">
-                  <mat-option
-                    *ngFor="let o of httpService.outData | datatypefilter: input1.value " [value]="o"
-                    (onSelectionChange)="SaveDataTypeOject(o)" >
-                    {{o.data_types_name}}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
+            <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" [displayWith]="displaySections">
+              <mat-option
+                *ngFor="let ok of httpService.ConfigItemSectionsData | sectionfilter: input2.value " [value]="ok"
+                (onSelectionChange)="ctrl_ConfigItemsSectionsClick(ok.config_item_section_name)">
 
+                {{ok.config_item_section_name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <!--    ********************  end Section *********************** -->
 
-      <!--    ********************  end DataType *********************** -->
-
-      <!--    ********************  Sections *********************** -->
+        <!--    ********************  DataType *********************** -->
         <mat-form-field class="example-full-width">
-          <input #input2 type="text" placeholder="Section" aria-label="Number" matInput  required [matAutocomplete]="auto2"
-                 (change) =" SaveSectionName(input1.value)"
-                 (click)="this.httpService.getConfigItems('?config_item_types_id=1')"
-                 formControlName="step2input2">
 
-          <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" [displayWith]="displaySections">
+          <input #input1 type="text" placeholder="Datatype" aria-label="Number" matInput required  [matAutocomplete]="auto1"
+                 (click)="this.httpService.getDataByUrl('/data_types')"
+                 formControlName="ctrl_DataType" >
+
+          <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
             <mat-option
-              *ngFor="let ok of httpService.ConfigItemsData | sectionfilter: input2.value " [value]="ok"
-              (onSelectionChange)="SaveSectionObject(ok)">
-              {{ok.config_item_name}}
+              *ngFor="let o of httpService.outData | datatypefilter: input1.value " [value]="o"
+              (onSelectionChange)="ctrl_DataTypeChanged(o)">
+              {{o.data_types_name}}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-      <!--    ********************  end Section *********************** -->
+          <!--    ********************  end DataType *********************** -->
+
+
+
+      </div>
+
+
+    <!--    ********************  next column *********************** -->
+    <div style="position: relative; width: 300px; float: right; right: 70px; ">
+
+
+      <!--    ********************  defaultvalue *********************** -->
+      <div>
+        <mat-form-field>
+          <input  disabled  autocomplete = "off"  #defaultValue formControlName="ctrl_DefaultValue" type="number" matInput placeholder="default value"
+          (keyup)="ctrl_DefaultValueChanged()" >
+        </mat-form-field>
+      </div>
+      <!--   ********************************************************     -->
+
+
+      <!--    ********************  maxvalue *********************** -->
 
       <div>
-      <mat-checkbox #checkboxDinamicFlag >dinamic flag </mat-checkbox>
+        <mat-form-field>
+          <input  disabled autocomplete = "off"  #maxValue formControlName="ctrl_MaxValue" type="number" matInput placeholder="Max value"
+                  (keyup)="ctrl_MaxValueChanged()" >
+        </mat-form-field>
       </div>
+      <!--*******************      messaging      *******************-->
+<!--      <div class="alert" *ngIf="!step2FormGroup.controls['step2Max'].valid && step2FormGroup.controls['step2Max'].touched">-->
+<!--        <p style="color: cornflowerblue">max value can't be less min value  </p>-->
+<!--      </div>-->
+      <!--   *********************************************************   -->
+
+      <!--    ********************  minvalue *********************** -->
       <div>
-      <mat-checkbox #checkboxReadOnly>read only</mat-checkbox>
+        <mat-form-field>
+          <input disabled autocomplete = "off" #minValue formControlName="ctrl_MinValue" type="number" matInput placeholder="Min value"
+                 (keyup)="ctrl_MinValueChanged()" >
+        </mat-form-field>
       </div>
+
+
+<!--      <div style="margin-left: auto; width: 300px;">-->
+      <div style=" float: left ; padding-right:  20px;">
+        <mat-checkbox  #checkboxDynamicFlag  (change)="DynamicFlagChanged(checkboxDynamicFlag.checked)">dynamic flag </mat-checkbox>
+      </div>
+      <div style="">
+        <mat-checkbox  #checkboxReadOnly (change)="ReadOnlyFlagChanged(checkboxReadOnly.checked)" >read only</mat-checkbox>
+      </div>
+
+
+
+
+
 
 <!--    for test   -->
 <!--      <li *ngIf="SectionObject">-->
@@ -89,25 +116,20 @@
 <!--      </li>-->
 <!--</div>-->
 
-      <div mat-dialog-actions >
+      <div mat-dialog-actions style=" position: relative ; " >
 
 <!--        <button mat-button mat-dialog-close>Close</button>-->
-        <button mat-button  mat-dialog-close style="alignment: right ; background: #dfdfdf">Close</button>
-        <button mat-button matStepperPrevious style="alignment: right ; background: #dfdfdf" >back</button>
-        <button mat-button matStepperNext style="alignment: right ; background: #dfdfdf"
-                (click)="saveOthers( parameterName.value, defaultValue.value,minValue.value,maxValue.value,
-                checkboxDinamicFlag.checked,checkboxReadOnly.checked)">
-<!--       получаем значение чекбокс   checkbox1.checked-->
-          next
-        </button>
+        <button mat-button  mat-dialog-close style="position: relative; background: #dfdfdf">Close</button>
+        <button mat-button matStepperPrevious style=" position: relative; background: #dfdfdf" >back</button>
+        <button mat-button matStepperNext style="position: relative; background: #dfdfdf">next</button>
         <!--    <button mat-button [mat-dialog-close]="data.color" cdkFocusInitial>Ok</button>-->
       </div>
-
-
-
-
-
     </div>
+
+
+
+
+
 
 
 </form>

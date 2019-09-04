@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { HttpData } from '../OutData';
-import {moduleVersionsEntity} from '../Models/moduleVersionsEntity';
-import {moduleEntity} from '../Models/moduleEntity';
+import {moduleVersionsEntity} from '../Models/Entities/moduleVersionsEntity';
+import {moduleEntity_bak} from '../Models/moduleEntity_bak';
 import {MessagesService} from './messages.service';
 import { data_types } from '../Models/Entities/data_types';
 import { ConfigItemType} from '../Models/Entities/ConfigItemType';
+import { ConfigitemSections } from '../Models/Entities/configitemSections';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,10 @@ export class ServiceHttpService {
 // ***************************************************************************************************************************************
   outData: any;
   httpData: any;
+  ConfigItemSectionsData;
 
-  data1: moduleEntity[];
+  data1: moduleEntity_bak[];
+  httpmodules: string[];
   moduleVersions: moduleVersionsEntity[];
 
   headers = new HttpHeaders()
@@ -63,6 +66,17 @@ export class ServiceHttpService {
       );
   }
 
+  // *********
+  getConfigItemsSections(): void {
+    console.log('url = ' + this.baseUrl + 'config_items_sections');
+    this.httpClient.get(this.baseUrl + 'config_items_sections')
+      .subscribe((data: ConfigitemSections[]  ) => {
+          this.ConfigItemSectionsData = data;
+          console.log(data + ' lenght of Sections: ' + (data).length );
+        }
+      );
+  }
+
   // ***********************copied 210819****************
   getModules(): void {
     this.stringUrl = this.baseUrl + 'modules';
@@ -70,16 +84,20 @@ export class ServiceHttpService {
     // this.stringUrl = this.stringUrl;
     console.log('stringUrl = ' + this.stringUrl);
     this.httpClient.get(this.stringUrl)
-      .subscribe((data: moduleEntity[]) => {
+      .subscribe((data: moduleEntity_bak[]) => {
+        // for(let i = 0; i < data.length; i ++ ) {
+        //    // this.httpmodules[i] = data[i].module_name;
+        //    console.log(data[i].module_name);
+        //  }
+
         this.data1 = data;
         console.log(data + ' lenght: ' + (data).length);
-        // console.log('verif : ' + data[0]);
-        if ((data).length === 0) {
-          this.ResultMessages.add(' SearchResult: 0');
-          this.data1 = null;
-        } else {
-          this.ResultMessages.add('SearchResult :' + (data).length);
-        }
+        // if ((data).length === 0) {
+        //   this.ResultMessages.add(' SearchResult: 0');
+        //   this.data1 = null;
+        // } else {
+        //   this.ResultMessages.add('SearchResult :' + (data).length);
+        // }
       });
   }
 
@@ -91,10 +109,13 @@ export class ServiceHttpService {
     console.log('stringUrl: ' + this.stringUrl);
     this.httpClient.get(this.stringUrl)
       .subscribe((data: moduleVersionsEntity[]) => {
-        console.log(data + ' lenght: ' + (data).length);
-        this.moduleVersions = data; /* console.log('verif : ' + data[0].verif); */
+        console.log(' lenght: ' + (data).length);
+        this.moduleVersions = data;
         this.latestVersion = data[data.length - 1].version_number;
-      });
+      },
+        error => {console.log('error in getVersions'); }
+
+      );
   }
   // *****************************************************
   // *********************************************************************************************************************************************

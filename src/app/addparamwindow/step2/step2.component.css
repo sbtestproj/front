@@ -6,10 +6,21 @@
 }
 
 .alert{
+  height: 20px;
   background: #f2edda;
-padding: 7px;
+padding: 1px;
   font-size: .9em;
-margin-bottom: 20px;
+margin-bottom: 1px;
   display: inline-block;
+  animation: 2s alertAnim forwards;
 
+}
+
+@keyframes alertAnim {
+  from{ opacity: 0;
+    transform: translateY(-20px);
+  } to{
+        opacity: 1;
+  transform: translateY(0);
+      }
 }
