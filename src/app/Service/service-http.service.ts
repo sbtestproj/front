@@ -68,8 +68,8 @@ export class ServiceHttpService {
 
   // *********
   getConfigItemsSections(): void {
-    console.log('url = ' + this.baseUrl + 'config_items_sections');
-    this.httpClient.get(this.baseUrl + 'config_items_sections')
+    console.log('url = ' + this.baseUrl + 'config_item_sections');
+    this.httpClient.get(this.baseUrl + 'config_item_sections')
       .subscribe((data: ConfigitemSections[]  ) => {
           this.ConfigItemSectionsData = data;
           console.log(data + ' lenght of Sections: ' + (data).length );

@@ -6,6 +6,7 @@ import { AddparamwindowComponent } from '../addparamwindow.component';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { InterfaceToSave} from '../InterfaceToSave';
 import { ParamService} from '../Service/param.service';
+import {ConfigitemSections} from '../../Models/Entities/configitemSections';
 
 interface User {
   name: string;
@@ -43,22 +44,11 @@ export class Step2Component implements OnInit {
 
 
   // for test ngModel
-  ConfName: string;
   type = 'number';
   outdata: string;
-  Arr: data_types;
-
-
-// ************* SelectsData ****************
-  SectionName;
-  SectionObject: ConfigItemType;
-  DataTypeName;
-  DataTypeObject: data_types;
-// *******************************************
 
   // *************** Data to Out *********************
   configitemname: string;
-  dinamicflag;
   readonlyflag;
 
   // ******************************************************
@@ -239,9 +229,9 @@ export class Step2Component implements OnInit {
     // this.outdata = user.data_types_name; unnecessary line
     return user ? user.data_types_name : undefined;
   }
-  displaySections(temp?: ConfigItemType): string | undefined {
+  displaySections(temp?: ConfigitemSections): string | undefined {
     // this.outdata = temp.config_item_name; unnecessary line
-    return  temp ? temp.config_item_name : undefined;
+    return  temp ? temp.config_item_section_name : undefined;
   }
    // ****************************************************************************
 
@@ -257,6 +247,7 @@ export class Step2Component implements OnInit {
 
 
   ngOnInit() {
+
     this.step2FormGroup = this.fb.group({
       ctrl_ParamName: ['', Validators.required],
       ctrl_DataType: ['', Validators.required],

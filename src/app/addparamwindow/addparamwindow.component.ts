@@ -1,16 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {map, startWith} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {moduleVersionsEntity} from '../Models/Entities/moduleVersionsEntity';
 import {moduleEntity_bak} from '../Models/moduleEntity_bak';
 import {ServiceHttpService} from '../Service/service-http.service';
 import {HttpClient} from '@angular/common/http';
 import {MessagesService} from '../Service/messages.service';
-import { ConfigItemType} from '../Models/Entities/ConfigItemType';
 import { InterfaceToSave} from './InterfaceToSave';
-import {ThirdStepComponent} from './step3/third-step.component';
-import {HeaderComponent} from '../header/header.component';
+import { ParamService} from './Service/param.service';
 
 export interface Modules {
   name: string;
@@ -29,6 +25,8 @@ export interface User {
 })
 
 export class AddparamwindowComponent implements OnInit {
+
+
 
   // for messaging here is another func recieve
   fromchild;
@@ -50,7 +48,7 @@ export class AddparamwindowComponent implements OnInit {
   filteredOptions: Observable<moduleEntity_bak[]>;
   myControl = new FormControl();
   constructor(private formBuilder: FormBuilder, public httpClient: HttpClient,
-              public ResultMessages: MessagesService,  public service: ServiceHttpService) {
+              public ResultMessages: MessagesService,  public service: ServiceHttpService, private paramService: ParamService) {
   }
 
 
@@ -66,6 +64,8 @@ export class AddparamwindowComponent implements OnInit {
 
 
   ngOnInit() {
+
+    this.paramService.ClearFullDAta();
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ['', Validators.required]
     });

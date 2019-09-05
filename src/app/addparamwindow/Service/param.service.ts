@@ -51,6 +51,44 @@ public FullData: InterfaceToSave2 =  {
   baseUrl = 'http://127.0.0.1:8080/hiberProject/';
   postUrl;
 
+public  ClearFullDAta() {
+    this.FullData =  {
+      configitemdescription : null,
+      configitemname: null,
+      configitemsid: null,
+      configsourcesid: null,
+      congigitemtypeid: null,
+      datatypesid: null,
+      defaultvalue: null,
+      dynamicflag: false,
+      readonlyflag: false,
+      ignoreflag: false,
+      isforeignkey: null,
+      isnullbale: null,
+      isprimarykey: null,
+      maxvalue: null,
+      minvalue: null,
+      configitemsectionsid: null,
+
+      originalposition: null,
+
+      referencedescription: null,
+      verifiedbyexpert: null,
+
+      moduleversions: { module_versions_id: null, modules_id: null, version_number: null  },
+
+      modules: { modules_id: null, module_name: null, responsible_person: null, module_description: null },
+
+      dataType: { data_types_name: null, data_types_id: null},
+      moduleversionsid: null,
+
+      configItemSections: { config_item_sections_id: null, config_item_section_name: null, config_item_section_description: ''}
+
+    } ;
+
+  }
+
+
 
   // ***************************************   function POST   *****************************************************
   // *****************************************               *******************************************************
@@ -84,25 +122,7 @@ public FullData: InterfaceToSave2 =  {
         console.log('Error occurred', err);
       });
   }
-// *******************************************************************************************************************
-//   postParam() {
-//     console.log('postparam');
-//     // const headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
-//     // const options = new RequestOptions({ headers: headers });
-//     this.postUrl = this.baseUrl + 'appparameter';
-//     //  const body = {data};
-//     // module_description
-//     // responsible_person
-//     this.httpClient.post(this.postUrl, this.FullData , // this.moduletosave,
-//       { headers: {'Content-Type': 'text/plain' } }    // text/plain
-//     ).subscribe(
-//       res => {
-//         console.log(res);
-//       },
-//       err => {
-//         console.log('Error occurred', err);
-//       });
-//   }
+
 
   postDataVersions() {
     console.log('postrequest');
@@ -143,7 +163,7 @@ public FullData: InterfaceToSave2 =  {
         default_value: this.FullData.defaultvalue,
         config_item_description: 'test description',
         reference_description: '',
-        column_ordinal_position: null,
+        column_ordinal_position: 0,
         is_nullable: false,
         verified_by_expert: false,
         dynamic_flag: this.FullData.dynamicflag,
@@ -164,7 +184,7 @@ public FullData: InterfaceToSave2 =  {
   }
   postConfigItemsSections() {
     console.log('postrequest');
-    this.postUrl = this.baseUrl + 'config_items_sections';
+    this.postUrl = this.baseUrl + 'config_item_sections';
 
     console.log('new :' + this.FullData.moduleversions.version_number);
     this.httpClient.post(this.postUrl,
@@ -174,8 +194,8 @@ public FullData: InterfaceToSave2 =  {
       { headers: {'Content-Type': 'text/plain'}}    // text/plain
     ).subscribe(
       (res: ConfigitemSections) => {
-        console.log('confItemSectionId : ' + res.config_item_sections_id);
-        this.FullData.configitemsectionsid = res.config_item_sections_id;
+        console.log('confItemSectionId : ' + res[0].config_item_sections_id);
+        this.FullData.configitemsectionsid = res[0].config_item_sections_id;
        // this.FullData.moduleversionsid = res[0].module_versions_id; // put value we got to full arr
         this.postConfigItem();
 

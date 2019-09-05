@@ -19,18 +19,15 @@
         <!--    ********************  Sections ?????? *********************** -->
         <div>
           <mat-form-field class="example-full-width">
-            <input #input2 type="text" placeholder="Section" aria-label="Number" matInput  required [matAutocomplete]="auto2"
-
-                   (click)="this.httpService.getConfigItemsSections()"
-                   (keyup)="ctrl_ConfigItemsSectionsChanged()"
-                   formControlName="ctrl_ConfigItemsSections">
+            <input #input2 (keyup)="ctrl_ConfigItemsSectionsChanged()" matInput [matAutocomplete]="auto2" aria-label="Number" formControlName="ctrl_ConfigItemsSections" placeholder="Section"
+                  (click)=" this.httpService.getConfigItemsSections() "
+                   type="text">
 <!--                   formControlName="step2input2">-->
 
             <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" [displayWith]="displaySections">
               <mat-option
                 *ngFor="let ok of httpService.ConfigItemSectionsData | sectionfilter: input2.value " [value]="ok"
                 (onSelectionChange)="ctrl_ConfigItemsSectionsClick(ok.config_item_section_name)">
-
                 {{ok.config_item_section_name}}
               </mat-option>
             </mat-autocomplete>
@@ -67,7 +64,7 @@
       <!--    ********************  defaultvalue *********************** -->
       <div>
         <mat-form-field>
-          <input  disabled  autocomplete = "off"  #defaultValue formControlName="ctrl_DefaultValue" type="number" matInput placeholder="default value"
+          <input  autocomplete = "off"  #defaultValue formControlName="ctrl_DefaultValue" type="number" matInput placeholder="default value"
           (keyup)="ctrl_DefaultValueChanged()" >
         </mat-form-field>
       </div>
@@ -78,7 +75,7 @@
 
       <div>
         <mat-form-field>
-          <input  disabled autocomplete = "off"  #maxValue formControlName="ctrl_MaxValue" type="number" matInput placeholder="Max value"
+          <input autocomplete = "off"  #maxValue formControlName="ctrl_MaxValue" type="number" matInput placeholder="Max value"
                   (keyup)="ctrl_MaxValueChanged()" >
         </mat-form-field>
       </div>
@@ -91,7 +88,7 @@
       <!--    ********************  minvalue *********************** -->
       <div>
         <mat-form-field>
-          <input disabled autocomplete = "off" #minValue formControlName="ctrl_MinValue" type="number" matInput placeholder="Min value"
+          <input autocomplete = "off" #minValue formControlName="ctrl_MinValue" type="number" matInput placeholder="Min value"
                  (keyup)="ctrl_MinValueChanged()" >
         </mat-form-field>
       </div>
