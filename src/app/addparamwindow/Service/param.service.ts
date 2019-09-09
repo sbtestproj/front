@@ -4,6 +4,8 @@ import { moduleVersionsEntity} from '../../Models/Entities/moduleVersionsEntity'
 import { ConfigitemSections } from '../../Models/Entities/configitemSections';
 import { HttpClient} from '@angular/common/http';
 import { ConfigItemPossibleValues } from '../../Models/Entities/configItemPossibleValues';
+import {of} from 'rxjs';
+import {ConfigItemType} from '../../Models/Entities/ConfigItemType';
 
 @Injectable({
   providedIn: 'root'
@@ -101,7 +103,7 @@ public  ClearFullDAta() {
 
 
   postData() {
-    console.log('postrequest');
+    console.log('save modules');
     // const headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
     // const options = new RequestOptions({ headers: headers });
     this.postUrl = this.baseUrl + 'modules';
@@ -124,13 +126,13 @@ public  ClearFullDAta() {
 
       },
       err => {
-        console.log('Error occurred', err);
+        console.log('Error while saving moudes', err);
       });
   }
 
 
   postDataVersions() {
-    console.log('postrequest');
+    console.log('save dataVersions');
     this.postUrl = this.baseUrl + 'module_versions';
 
     console.log('new :' + this.FullData.moduleversions.version_number);
@@ -148,12 +150,12 @@ public  ClearFullDAta() {
 
       },
       err => {
-        console.log('Error occurred', err);
+        console.log('Error while saving DataVersions', err);
       });
   }
 
   postConfigItem() {
-    console.log('post_config_item');
+    console.log('save_config_item');
     this.postUrl = this.baseUrl + 'config_items';
 
     console.log('new :' + this.FullData.moduleversions.version_number);
@@ -180,15 +182,18 @@ public  ClearFullDAta() {
       } , // this.moduletosave,
       { headers: {'Content-Type': 'text/plain' } }    // text/plain
     ).subscribe(
-      res => {
-        console.log(res);
+      (res: ConfigItemType) => {
+        console.log('New Config Item Id: ' + res.config_items_id);
+        console.log('New Config Item full: ' + res);
+        this.FullData.configitemsid = res.config_items_id;
+        this.SavePossibleValues();
       },
       err => {
-        console.log('Error occurred', err);
+        console.log('Error while saving configItem', err);
       });
   }
   postConfigItemsSections() {
-    console.log('postrequest');
+    console.log('save configitemsSections');
     this.postUrl = this.baseUrl + 'config_item_sections';
 
     console.log('new :' + this.FullData.moduleversions.version_number);
@@ -206,8 +211,37 @@ public  ClearFullDAta() {
 
       },
       err => {
-        console.log('Error occurred', err);
+        console.log('Error while saving configitem sections', err);
       });
+  }
+
+  SavePossibleValues() {
+  const urlway = this.baseUrl +  'config_item_possible_values';
+  console.log('save configitemspossiblevalues');
+
+  for ( const posval of this.FullData.configitempossiblevalues) {
+    console.log( posval.config_item_possible_value);
+    // *******************************************
+    this.httpClient.post(urlway,
+      {config_item_possible_value: posval.config_item_possible_value,
+        config_item_possible_value_description: posval.config_item_possible_value_description,
+        config_items_id: this.FullData.configitemsid,
+        config_item_possible_values_id: null
+      } , // this.moduletosave,
+      { headers: {'Content-Type': 'text/plain'}}    // text/plain
+    ).subscribe(
+      (res: ConfigItemPossibleValues) => {
+        console.log('confItemPossibleValue id : ' + res.config_item_possible_values_id);
+        // this.FullData.configitemsectionsid = res[0].config_item_sections_id;
+        // this.FullData.moduleversionsid = res[0].module_versions_id; // put value we got to full arr
+       // this.postConfigItem();
+
+      },
+      err => {
+        console.log('Error while saving PossibleValues', err);
+      });
+  }
+
   }
 
 
