@@ -1,7 +1,7 @@
-<li *ngFor="let posvalue of this.paramService.FullData.configitempossiblevalues">
-  value:  {{posvalue.config_item_possible_value}} <br>
-  desc: {{posvalue.config_item_possible_value_description}}
-</li>
+<!--<li *ngFor="let posvalue of this.paramService.FullData.configitempossiblevalues">-->
+<!--  value:  {{posvalue.config_item_possible_value}} <br>-->
+<!--  desc: {{posvalue.config_item_possible_value_description}}-->
+<!--</li>-->
 
 <!--<button type="button" (click)="this.paramService.postData()">SendData</button>-->
 <!--<button type="button" (click)="this.paramService.postData()">SendData</button>-->
@@ -12,12 +12,6 @@
 
     </textarea>
   </div>
-<!--  <div style="right: 500px ">-->
-<!--    <button mat-button matStepperPrevious>Back</button>-->
-<!--    <button mat-button matDialogClose="" [disabled]="!fourthFormGroup.valid" (click)="ca.checked ? (head.openDialog()) : false ; saveAndPost()" >Create</button>-->
-<!--    <mat-checkbox style="padding-left: 10px; padding-right: 10px" #ca>Create Another</mat-checkbox>-->
-<!--    <button mat-button matDialogClose="">Close</button>-->
-<!--  </div>-->
 
   <mat-checkbox style="padding-left: 10px; padding-right: 10px" #ca>Create Another</mat-checkbox><br>
   <div mat-dialog-actions style=" position: relative ; " >
@@ -33,9 +27,7 @@
 <!--  {{fourthFormGroup.status}}-->
 <!--  {{fourthFormGroup.value | json}}-->
 </form>
-<li *ngFor="let item of this.paramService.FullData.configitempossiblevalues">
-  {{item.config_item_possible_value_description.toString()}}
-</li>
+
 <!--ConfigItemname: {{paramService.FullData.configitemname}} <br>-->
 <!--Module name:  {{paramService.FullData.modules.module_name}} <br>-->
 <!--DataType: {{paramService.FullData.dataType.data_types_name}}<br>-->
