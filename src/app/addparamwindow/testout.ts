@@ -2,6 +2,7 @@ import { data_types } from '../Models/Entities/data_types';
 import { moduleEntity} from '../Models/Entities/moduleEntity';
 import { moduleVersionsEntity} from '../Models/Entities/moduleVersionsEntity';
 import { ConfigitemSections} from '../Models/Entities/configitemSections';
+import {ConfigItemPossibleValues} from '../Models/Entities/configItemPossibleValues';
 
 
 export interface modules_to_save {
@@ -31,10 +32,9 @@ export interface InterfaceToSave2 {
  isprimarykey: boolean;
  isforeignkey: boolean;
  configitemsectionsid: number;
-
  moduleversions: moduleVersionsEntity;
  modules: moduleEntity;
  dataType: data_types;
  configItemSections: ConfigitemSections;
-
+ configitempossiblevalues: ConfigItemPossibleValues[];
 }

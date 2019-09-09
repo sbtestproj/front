@@ -1,26 +1,46 @@
-ConfigItemname: {{paramService.FullData.configitemname}} <br>
-Module name:  {{paramService.FullData.modules.module_name}} <br>
-DataType: {{paramService.FullData.dataType.data_types_name}}<br>
-<li *ngIf="paramService.FullData.dynamicflag" >Dynamic true </li>
-<li *ngIf="!paramService.FullData.dynamicflag" >Dynamic false </li>
-<li *ngIf="paramService.FullData.readonlyflag" >Read true </li>
-<li *ngIf="!paramService.FullData.readonlyflag" >Read false </li>
-Section: {{this.paramService.FullData.configItemSections.config_item_section_name}}
+<li *ngFor="let posvalue of this.paramService.FullData.configitempossiblevalues">
+  value:  {{posvalue.config_item_possible_value}} <br>
+  desc: {{posvalue.config_item_possible_value_description}}
+</li>
 
 <!--<button type="button" (click)="this.paramService.postData()">SendData</button>-->
-<button type="button" (click)="this.paramService.postData()">SendData</button>
+<!--<button type="button" (click)="this.paramService.postData()">SendData</button>-->
 <form [formGroup]="fourthFormGroup">
   <div>
-    <textarea #description formControlName="fourthCtrl" style="height: 300px; width: 850px; background-color: wheat;" required>
+    <textarea #description formControlName="ctrl_Description" style="height: 300px; width: 850px; background-color: wheat;"
+    (keyup)="ctrl_DescriptionChanged(description.value)">
 
     </textarea>
   </div>
-  <div style="right: 500px ">
-    <button mat-button matStepperPrevious>Back</button>
-    <button mat-button matDialogClose="" [disabled]="!fourthFormGroup.valid" (click)="ca.checked ? (head.openDialog()) : false ; saveAndPost()" >Create</button>
-    <mat-checkbox style="padding-left: 10px; padding-right: 10px" #ca>Create Another</mat-checkbox>
-    <button mat-button matDialogClose="">Close</button>
+<!--  <div style="right: 500px ">-->
+<!--    <button mat-button matStepperPrevious>Back</button>-->
+<!--    <button mat-button matDialogClose="" [disabled]="!fourthFormGroup.valid" (click)="ca.checked ? (head.openDialog()) : false ; saveAndPost()" >Create</button>-->
+<!--    <mat-checkbox style="padding-left: 10px; padding-right: 10px" #ca>Create Another</mat-checkbox>-->
+<!--    <button mat-button matDialogClose="">Close</button>-->
+<!--  </div>-->
+
+  <mat-checkbox style="padding-left: 10px; padding-right: 10px" #ca>Create Another</mat-checkbox><br>
+  <div mat-dialog-actions style=" position: relative ; " >
+
+    <!--        <button mat-button mat-dialog-close>Close</button>-->
+    <button mat-button matStepperPrevious style=" position: relative; background: #dfdfdf" >back</button>
+    <button mat-button matStepperNext matDialogClose="" [disabled]="!fourthFormGroup.valid" (click)="ca.checked ? (head.openDialog()) : false ;
+     this.paramService.postData(); saveAndPost()"
+            style="position: relative; background: #dfdfdf">Create</button>
+    <button mat-button   mat-dialog-close style="position: relative; background: #dfdfdf">Close</button>
+    <!--    <button mat-button [mat-dialog-close]="data.color" cdkFocusInitial>Ok</button>-->
   </div>
-  {{fourthFormGroup.status}}
-  {{fourthFormGroup.value | json}}
+<!--  {{fourthFormGroup.status}}-->
+<!--  {{fourthFormGroup.value | json}}-->
 </form>
+<li *ngFor="let item of this.paramService.FullData.configitempossiblevalues">
+  {{item.config_item_possible_value_description.toString()}}
+</li>
+<!--ConfigItemname: {{paramService.FullData.configitemname}} <br>-->
+<!--Module name:  {{paramService.FullData.modules.module_name}} <br>-->
+<!--DataType: {{paramService.FullData.dataType.data_types_name}}<br>-->
+<!--<li *ngIf="paramService.FullData.dynamicflag" >Dynamic true </li>-->
+<!--<li *ngIf="!paramService.FullData.dynamicflag" >Dynamic false </li>-->
+<!--<li *ngIf="paramService.FullData.readonlyflag" >Read true </li>-->
+<!--<li *ngIf="!paramService.FullData.readonlyflag" >Read false </li>-->
+<!--Section: {{this.paramService.FullData.configItemSections.config_item_section_name}}-->

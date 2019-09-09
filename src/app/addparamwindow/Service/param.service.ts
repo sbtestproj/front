@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {InterfaceToSave2, modules_to_save} from '../testout';
 import { moduleVersionsEntity} from '../../Models/Entities/moduleVersionsEntity';
 import { ConfigitemSections } from '../../Models/Entities/configitemSections';
-import { moduleEntity} from '../../Models/Entities/moduleEntity';
 import { HttpClient} from '@angular/common/http';
+import { ConfigItemPossibleValues } from '../../Models/Entities/configItemPossibleValues';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class ParamService {
   isBoolean: boolean; // to check step2 data type value and dynamically change fields
 
 public FullData: InterfaceToSave2 =  {
-  configitemdescription : null,
+  configitemdescription : ' ',
   configitemname: null,
   configitemsid: null,
   configsourcesid: null,
@@ -43,17 +43,21 @@ public FullData: InterfaceToSave2 =  {
   dataType: { data_types_name: null, data_types_id: null},
   moduleversionsid: null,
 
-  configItemSections: { config_item_sections_id: null, config_item_section_name: null, config_item_section_description: ''}
+  configItemSections: { config_item_sections_id: null, config_item_section_name: null, config_item_section_description: ''},
+
+  configitempossiblevalues: null
+  // {config_item_possible_values_id: null, config_items_id: null, config_item_possible_value: null, config_item_possible_value_description: null}
 
 } ;
 
   moduletosave: modules_to_save;
+  // baseUrl = 'http://10.221.190.40:8080/hiberProject/';
   baseUrl = 'http://127.0.0.1:8080/hiberProject/';
   postUrl;
 
 public  ClearFullDAta() {
     this.FullData =  {
-      configitemdescription : null,
+      configitemdescription : ' ',
       configitemname: null,
       configitemsid: null,
       configsourcesid: null,
@@ -82,8 +86,9 @@ public  ClearFullDAta() {
       dataType: { data_types_name: null, data_types_id: null},
       moduleversionsid: null,
 
-      configItemSections: { config_item_sections_id: null, config_item_section_name: null, config_item_section_description: ''}
+      configItemSections: { config_item_sections_id: null, config_item_section_name: null, config_item_section_description: ''},
 
+      configitempossiblevalues: null
     } ;
 
   }
@@ -161,7 +166,7 @@ public  ClearFullDAta() {
         min_value: this.FullData.minvalue,
         max_value: this.FullData.maxvalue,
         default_value: this.FullData.defaultvalue,
-        config_item_description: 'test description',
+        config_item_description: this.FullData.configitemdescription,
         reference_description: '',
         column_ordinal_position: 0,
         is_nullable: false,
@@ -176,7 +181,7 @@ public  ClearFullDAta() {
       { headers: {'Content-Type': 'text/plain' } }    // text/plain
     ).subscribe(
       res => {
-        console.log(res[0]);
+        console.log(res);
       },
       err => {
         console.log('Error occurred', err);

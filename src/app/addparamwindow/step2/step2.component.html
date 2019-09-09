@@ -103,10 +103,6 @@
       </div>
 
 
-
-
-
-
 <!--    for test   -->
 <!--      <li *ngIf="SectionObject">-->
 <!--    id num {{SectionObject.config_item_name}}-->
@@ -141,8 +137,10 @@
   <!--************************************************************************************************************************************-->
   <!--************************************************************************************************************************************-->
   <!--************************************************************************************************************************************-->
-  <mat-tab label="PROPERTY" (click)="SetConfigItemTypes('Property')">
-<!--    <form [formGroup]="step2FormGroup">-->
+<!--  <mat-tab label="PROPERTY" (click)="SetConfigItemTypes('Property')">-->
+<!--  <mat-tab label="PROPERTY" >-->
+<!--&lt;!&ndash;    <form [formGroup]="step2FormGroup">&ndash;&gt;-->
+<!--    <form>-->
 <!--    <div class="Inputs">-->
 
 <!--      &lt;!&ndash;    ********************  paramerename *********************** &ndash;&gt;-->
@@ -176,13 +174,13 @@
 <!--      <mat-form-field class="example-full-width">-->
 
 <!--        <input #input1 type="text" placeholder="Datatype" aria-label="Number" matInput required  [matAutocomplete]="auto1"-->
-<!--               (change) =" SaveDataTypeName(input1.value)"  (click)="this.httpService.getDataByUrl('/data_types')"-->
+<!--                 (click)="this.httpService.getDataByUrl('/data_types')"-->
 <!--               formControlName="step2input1">-->
 
 <!--        <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete" [displayWith]="displayFn">-->
 <!--          <mat-option-->
 <!--            *ngFor="let o of httpService.outData | datatypefilter: input1.value " [value]="o"-->
-<!--            (onSelectionChange)="SaveDataTypeOject(o)" >-->
+<!--             >-->
 <!--            {{o.data_types_name}}-->
 <!--          </mat-option>-->
 <!--        </mat-autocomplete>-->
@@ -212,7 +210,7 @@
 <!--      </div>-->
 <!--    </div>-->
 <!--    </form>-->
-  </mat-tab>
+<!--  </mat-tab>-->
   <!--************************************************************************************************************************************-->
   <!--************************************************************************************************************************************-->
   <!--************************************************ * * * * * * ***********************************************************************-->
@@ -226,6 +224,6 @@
 
   <mat-tab label="XML"> Content 3 </mat-tab>
 </mat-tab-group>
-{{step2FormGroup.status | json}}
-{{step2FormGroup.value | json}}
+<!--{{step2FormGroup.status | json}}-->
+<!--{{step2FormGroup.value | json}}-->
 

@@ -252,7 +252,7 @@ export class Step2Component implements OnInit {
       ctrl_ParamName: ['', Validators.required],
       ctrl_DataType: ['', Validators.required],
       ctrl_ConfigItemsSections: ['', Validators.required],
-      step2Def: ['', Validators.required],
+      // step2Def: ['', Validators.required],
       ctrl_MaxValue: null,
 //      ctrl_MinValue: [{value: '', disabled: true }, Validators.required],
       ctrl_MinValue: null,

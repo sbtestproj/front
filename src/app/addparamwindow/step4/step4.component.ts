@@ -24,11 +24,14 @@ export class Step4Component implements OnInit {
 
   public fourthFormGroup: FormGroup;
 
+  ctrl_DescriptionChanged(desc: string) {
+    this.paramService.FullData.configitemdescription = desc;
+  }
 
 
   ngOnInit() {
     this.fourthFormGroup = this.fb.group({
-      fourthCtrl: ['', Validators.required]
+      ctrl_Description: ['', Validators.required]
     });
     // this.ForTest = new class implements InterfaceToSave {
     //   configitemname: string;

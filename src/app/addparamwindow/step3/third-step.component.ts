@@ -3,6 +3,7 @@ import { Validators, FormBuilder, FormGroup, FormControl, FormArray } from '@ang
 import {possible} from '../../Models/Entities/possibleValues';
 import {AddparamwindowComponent} from '../addparamwindow.component';
 import { ParamService} from '../Service/param.service';
+import {ConfigItemPossibleValues} from '../../Models/Entities/configItemPossibleValues';
 
 @Component({
   selector: 'app-third-step',
@@ -13,6 +14,7 @@ import { ParamService} from '../Service/param.service';
   providedIn: 'root'
 })
 export class ThirdStepComponent implements OnInit {
+  item: ConfigItemPossibleValues[] = [];
   registrationForm: FormGroup;
   public testResult: possible;
   constructor(
@@ -26,9 +28,10 @@ export class ThirdStepComponent implements OnInit {
    * Form initialization
    */
   ngOnInit() {
+    this.item = [];
+    // this.paramService.FullData.configitempossiblevalues = null;
     this.registrationForm = this.fb.group({
       possibleValues: this.fb.array([
-        this.getUnit()
       ])
     });
     this.main.secondFormGroup = this.registrationForm ;
@@ -58,7 +61,8 @@ export class ThirdStepComponent implements OnInit {
   }
   private getUnit() {
     return this.fb.group({
-      newValue: ['', Validators.required],
+      newValue: ['', Validators.compose([Validators.required, Validators.min(this.paramService.FullData.minvalue),
+      Validators.max(this.paramService.FullData.maxvalue)])],
       newDescription: ['', Validators.required],
     });
   }
@@ -68,6 +72,11 @@ export class ThirdStepComponent implements OnInit {
       possibleValues: [{ newValue: undefined; newDescription: undefined }];
     }
     this.testResult = this.registrationForm.value;
-    this.testResult.possibleValues.forEach(x => console.log('/n description ==' + x.newDescription + '/n value ==' + x.newValue));
+    this.item = [];
+    this.testResult.possibleValues.forEach(x => {
+      console.log('/n description ==' + x.newDescription + '/n value ==' + x.newValue);
+      this.item.push( { config_items_id: null, config_item_possible_values_id: null, config_item_possible_value: x.newValue, config_item_possible_value_description: x.newDescription});
+      this.paramService.FullData.configitempossiblevalues = this.item ;
+    } );
   }
 }

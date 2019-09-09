@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(AddparamwindowComponent, {
       width: '1000px',
-      height: '500px',
+      height: '550px',
       // this.name = 'test';
       // data: {simplestring: this.startPage }
     });

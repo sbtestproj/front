@@ -1,14 +1,15 @@
-min: {{this.paramService.FullData.minvalue}}
+New min: {{this.paramService.FullData.minvalue}}
 max: {{this.paramService.FullData.maxvalue}}
 data Type: {{this.paramService.FullData.dataType.data_types_name}}
-
-
+<li *ngFor="let i of this.item">
+{{this.item[0].config_item_possible_value_description}}
+</li>
 <div class="container-fluid">
   <form [formGroup]="registrationForm">
     <div>
       <h6><b>Are there other possible values ?</b></h6>
       <mat-radio-group>
-        <mat-radio-button #yes (click)="addPossibleValues()" [checked]="true" style="padding-right: 25px">Yes</mat-radio-button>
+        <mat-radio-button #yes [checked]="true" style="padding-right: 25px">Yes</mat-radio-button>
         <mat-radio-button #no (click)="deleteAllPossibleValues()" value="2">No</mat-radio-button>
       </mat-radio-group>
     </div>
@@ -16,8 +17,15 @@ data Type: {{this.paramService.FullData.dataType.data_types_name}}
       <div formArrayName="possibleValues" *ngFor="let possibleValue of possibleValues.controls; let i=index">
         <div [formGroupName]="i">
           <div>
-            <mat-form-field>
-            <input matInput placeholder="Value" formControlName="newValue" required>
+            <mat-form-field *ngIf="this.paramService.isBoolean">
+              <mat-select formControlName="newValue">
+                <mat-option value="True" >True</mat-option>
+                <mat-option value="False" >False</mat-option>
+                <mat-option value="" >None</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="!this.paramService.isBoolean">
+            <input matInput type="number" placeholder="Value" formControlName="newValue" required>
             </mat-form-field>
             <mat-form-field>
             <input matInput placeholder="Description" formControlName="newDescription" (keydown.enter)="addPossibleValues()" required>
@@ -41,8 +49,8 @@ data Type: {{this.paramService.FullData.dataType.data_types_name}}
       <button mat-button matStepperNext (click)="save()" [disabled]="!registrationForm.valid">Next</button>
     </div>
   </form>
-  {{registrationForm.status | json}}
-  {{registrationForm.value | json}}
+<!--  {{registrationForm.status | json}}-->
+<!--  {{registrationForm.value | json}}-->
 
 </div>
 
