@@ -1,9 +1,15 @@
 <div class="Header">
   <p>Siqma Knowhow </p>
 <br/>
-  <span style=" position: absolute; left: 40%; color: white; top: 110px; font-size: 20px"> The S&B KnowledgeBase </span>
+  <span style="   position: absolute;
+  color: white;
+  top: 50%;
+  left: 39%;
+  font-size: 25px;
 
-  <li ngbDropdown class="nav-item dropdown"style="width:120px; background-color: white; float:right">
+  font-weight: lighter ;"> The S&B KnowledgeBase </span>
+
+  <button ngbDropdown class="nav-item dropdown"style="background-color: white; float:right">
   <div>
     <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Create New</a>
   </div>
@@ -11,7 +17,7 @@
       <a class="dropdown-item" (click)="openDialog()" >Parameter</a>
 <!--      <a class="dropdown-item " (click)="httpService.addHero('')">Module</a>-->
     </div>
-  </li>
+  </button>
 
 </div>
 

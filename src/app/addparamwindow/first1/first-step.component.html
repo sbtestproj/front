@@ -1,4 +1,5 @@
 <form [formGroup]="firstStepFormGroup">
+  <div>
   <mat-form-field>
     <div>
       <input #in type="text" placeholder="Module Name" matInput
@@ -12,7 +13,9 @@
       </mat-autocomplete>
     </div>
   </mat-form-field>
-  <mat-divider></mat-divider>
+  </div>
+<!--  <mat-divider></mat-divider>-->
+  <div>
   <mat-form-field style="float: bottom">
     <div>
       <input #in2 type="text" placeholder="Module Version" matInput
@@ -26,10 +29,10 @@
     </div>
   </mat-form-field>
   <div>
-    <button mat-button matDialogClose >Close</button>
     <button mat-button matStepperNext [disabled]="((in.value == '') || (in2.value == ''))" (click)="show(in.value, in2.value)">Next</button>
   </div>
+  </div>
 </form>
-<!--{{firstStepFormGroup.status}}-->
-<!--{{firstStepFormGroup.value | json}}-->
-
+{{firstStepFormGroup.status}}
+{{firstStepFormGroup.value | json}}
+{{this.service.latestVersion}}

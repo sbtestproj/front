@@ -7,6 +7,7 @@ import {ServiceHttpService} from '../../Service/service-http.service';
 import {HttpClient} from '@angular/common/http';
 import {AddparamwindowComponent} from '../addparamwindow.component';
 import {ParamService} from '../Service/param.service';
+import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-first-step',
@@ -44,6 +45,7 @@ export class FirstStepComponent implements OnInit {
    // console.log('moduls name: ' + modulename);
    // console.log('id: ' + id);
     this.service.getModuleVersionsByModuleId(id.toString());
+
   }
 // *************************************************************************************************************************************
 // ************************************ Versions Module Changed ************************************************************************
@@ -54,7 +56,7 @@ export class FirstStepComponent implements OnInit {
   }
   controlVersionsModuleclick(vernum) {
    this.paramservice.FullData.moduleversions.version_number = vernum;
-  // console.log('vernum');
+   console.log(vernum);
   }
 
   // ***********************************************************************************************************************************
@@ -77,9 +79,7 @@ export class FirstStepComponent implements OnInit {
       firstCtrl2: ['', Validators.required],
     });
     this.firstStepFormGroup.statusChanges.subscribe(st => {this.paramWindow.firstFormGroup = this.firstStepFormGroup; });
-    // this.firstStepFormGroup.get('firstCtrl').valueChanges.subscribe(value => {console.log('val ' + value); } );
-
-    }
-
+    // this.firstStepFormGroup.get('firstCtrl').valueChanges.subscribe(value => {console.log('val ' + value.toString()); } );
+  }
 }
 

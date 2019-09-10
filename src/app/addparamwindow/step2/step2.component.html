@@ -60,9 +60,20 @@
     <!--    ********************  next column *********************** -->
     <div style="position: relative; width: 300px; float: right; right: 70px; ">
 
+      <div *ngIf="this.paramService.isBoolean">
+        <mat-form-field>
+          <mat-select [(value)]="selected" >
+            <mat-option value="True" >True</mat-option>
+            <mat-option value="False" >False</mat-option>
+            <mat-option value="" >None</mat-option>
+          </mat-select>
+        </mat-form-field>
+<!--                to see what value we get from selection-->
+                <p>----{{selected}}----</p>
+      </div>
 
       <!--    ********************  defaultvalue *********************** -->
-      <div>
+      <div *ngIf="!paramService.isBoolean">
         <mat-form-field>
           <input  autocomplete = "off"  #defaultValue formControlName="ctrl_DefaultValue" type="number" matInput placeholder="default value"
           (keyup)="ctrl_DefaultValueChanged()" >
@@ -73,7 +84,7 @@
 
       <!--    ********************  maxvalue *********************** -->
 
-      <div>
+      <div *ngIf="!paramService.isBoolean">
         <mat-form-field>
           <input autocomplete = "off"  #maxValue formControlName="ctrl_MaxValue" type="number" matInput placeholder="Max value"
                   (keyup)="ctrl_MaxValueChanged()" >
@@ -86,7 +97,7 @@
       <!--   *********************************************************   -->
 
       <!--    ********************  minvalue *********************** -->
-      <div>
+      <div *ngIf="!paramService.isBoolean">
         <mat-form-field>
           <input autocomplete = "off" #minValue formControlName="ctrl_MinValue" type="number" matInput placeholder="Min value"
                  (keyup)="ctrl_MinValueChanged()" >
@@ -112,9 +123,8 @@
       <div mat-dialog-actions style=" position: relative ; " >
 
 <!--        <button mat-button mat-dialog-close>Close</button>-->
-        <button mat-button  mat-dialog-close style="position: relative; background: #dfdfdf">Close</button>
         <button mat-button matStepperPrevious style=" position: relative; background: #dfdfdf" >back</button>
-        <button mat-button matStepperNext style="position: relative; background: #dfdfdf">next</button>
+        <button mat-button matStepperNext style="position: relative; background: #dfdfdf" [disabled]="step2FormGroup.invalid">next</button>
         <!--    <button mat-button [mat-dialog-close]="data.color" cdkFocusInitial>Ok</button>-->
       </div>
     </div>
@@ -224,6 +234,6 @@
 
   <mat-tab label="XML"> Content 3 </mat-tab>
 </mat-tab-group>
-<!--{{step2FormGroup.status | json}}-->
-<!--{{step2FormGroup.value | json}}-->
+{{step2FormGroup.status | json}}
+{{step2FormGroup.value | json}}
 

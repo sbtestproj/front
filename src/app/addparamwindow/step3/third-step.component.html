@@ -10,7 +10,7 @@ data Type: {{this.paramService.FullData.dataType.data_types_name}}
       <h6><b>Are there other possible values ?</b></h6>
       <mat-radio-group>
         <mat-radio-button #yes [checked]="true" style="padding-right: 25px">Yes</mat-radio-button>
-        <mat-radio-button #no (click)="deleteAllPossibleValues()" value="2">No</mat-radio-button>
+        <mat-radio-button #no (click)="deleteAllPossibleValues(); save()" value="2">No</mat-radio-button>
       </mat-radio-group>
     </div>
     <div *ngIf="yes.checked" class="form-group">
@@ -36,21 +36,20 @@ data Type: {{this.paramService.FullData.dataType.data_types_name}}
           </div>
         </div>
       </div>
-      <mat-form-field (click)="addPossibleValues()">
+      <mat-form-field (click)="addPossibleValues(); checkMate()">
         <input matInput placeholder="Value" [disabled]="true">
       </mat-form-field>
-      <mat-form-field (click)="addPossibleValues()">
+      <mat-form-field (click)="addPossibleValues(); checkMate()">
         <input matInput placeholder="Description" [disabled]="true">
       </mat-form-field>
     </div>
     <div>
-      <button mat-button matDialogClose >Close</button>
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext (click)="save()" [disabled]="!registrationForm.valid">Next</button>
+      <button mat-button matStepperNext (click)="save()" [disabled]="yes.checked ? (!registrationForm.valid || this.check) : false">Next</button>
     </div>
   </form>
-<!--  {{registrationForm.status | json}}-->
-<!--  {{registrationForm.value | json}}-->
+  {{registrationForm.status | json}}
+  {{registrationForm.value | json}}
 
 </div>
 

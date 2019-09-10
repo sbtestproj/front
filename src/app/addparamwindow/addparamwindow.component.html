@@ -1,10 +1,11 @@
-
-
 <!-- <h1 *ngIf="testate">Name {{testate.configitemname}} </h1>-->
-  <form>
+<button mat-button matDialogClose color="warn" style="right: -880px; background-color: white">
+  <mat-icon>close</mat-icon>
+</button>
+<form>
 <!--     if  linear is false - every step of step available to edit
          if linear is true - each step must have validation.require is valid -->
-  <mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-horizontal-stepper  [linear]="true" #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Module</ng-template>
      <app-first-step></app-first-step>
@@ -12,8 +13,9 @@
 
     <mat-step [stepControl]="secondFormGroup" >
       <ng-template matStepLabel>Config Item Details</ng-template>
-      <app-step2 (outToParent)='receiveFromChild($event)' ></app-step2>
+      <app-step2></app-step2>
 <!--      <app-step2></app-step2>-->
+      {{this.secondFormGroup.status}}
     </mat-step>
 
     <mat-step [stepControl]="thirdFormGroup" >

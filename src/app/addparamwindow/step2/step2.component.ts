@@ -28,7 +28,7 @@ export class Step2Component implements OnInit {
   ) {
   }
 
-
+  selected: any;
   flag: boolean;
   // for test ngModel
   // event to parent
@@ -85,6 +85,7 @@ export class Step2Component implements OnInit {
       this.step2FormGroup.get('ctrl_MinValue').setValue('');
       this.step2FormGroup.get('ctrl_MinValue').disable();
       this.paramService.FullData.minvalue = null;
+      this.paramService.isBoolean = false;
       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     if (object.data_types_name === 'Int') {
@@ -94,6 +95,7 @@ export class Step2Component implements OnInit {
       this.step2FormGroup.get('ctrl_MinValue').enable();
       this.step2FormGroup.get('ctrl_DefaultValue').enable();
       this.step2FormGroup.get('ctrl_DefaultValue').enable();
+      this.paramService.isBoolean = false;
     }
     if (object.data_types_name === 'Boolean') {
       this.step2FormGroup.get('ctrl_DefaultValue').enable();
@@ -104,6 +106,7 @@ export class Step2Component implements OnInit {
       this.step2FormGroup.get('ctrl_MinValue').setValue('');
       this.step2FormGroup.get('ctrl_MinValue').disable();
       this.paramService.FullData.minvalue = null;
+      this.paramService.isBoolean = true;
     }
 
   }
@@ -265,6 +268,7 @@ export class Step2Component implements OnInit {
     this.step2FormGroup.get('ctrl_DefaultValue').disable();
 
      // sign child group of controls to parent in order to check if it is valid or not
+    this.paramWindow.secondFormGroup = this.step2FormGroup;
     this.step2FormGroup.statusChanges.subscribe(st => {this.paramWindow.secondFormGroup = this.step2FormGroup;});
 
     // если изменилось минимальное значение то максимум не может быть меньше минимального значения
