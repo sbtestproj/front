@@ -4,7 +4,6 @@ import { moduleVersionsEntity} from '../../Models/Entities/moduleVersionsEntity'
 import { ConfigitemSections } from '../../Models/Entities/configitemSections';
 import { HttpClient} from '@angular/common/http';
 import { ConfigItemPossibleValues } from '../../Models/Entities/configItemPossibleValues';
-import {of} from 'rxjs';
 import {ConfigItemType} from '../../Models/Entities/ConfigItemType';
 
 @Injectable({
@@ -116,7 +115,7 @@ public  ClearFullDAta() {
         module_description: '',
         responsible_person: ''} , // this.moduletosave,
         { headers: {'Content-Type': 'text/plain' } }    // text/plain
-    ).subscribe(
+      ).subscribe(
       (res: moduleVersionsEntity[]) => {
         this.FullData.modules.modules_id = res[0].modules_id;
 

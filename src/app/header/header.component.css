@@ -1,16 +1,28 @@
 .Header{
-  height: 25%;
+  height: 200px;
   background-color: #00afaa;
   position: relative;
 }
 
 .Header p {
-  position: absolute;
+  position: relative;
   color: white;
-  top: 20%;
-  left: 50%;
-  margin-left: -157px;
+  text-align: center;
   font-size: 30px;
+  font-weight: bold;
+}
 
-  font-weight: bold ;
+.Sigma {
+  position: relative;
+  /*border: red solid 2px;*/
+}
+
+.MainSearch {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  border-radius: 30px;
+  width : 250px;
+  padding-left: 20px;
+  height: 25px;
 }

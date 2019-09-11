@@ -145,6 +145,7 @@ export class Step2Component implements OnInit {
   ctrl_MaxValueChanged() {
 
     this.paramService.FullData.maxvalue = this.step2FormGroup.get('ctrl_MaxValue').value;
+
    // update validation
     if (this.step2FormGroup.get('ctrl_DefaultValue').value >= this.step2FormGroup.get('ctrl_MinValue').value ) {
       this.step2FormGroup.get('ctrl_DefaultValue').clearValidators();
@@ -261,8 +262,11 @@ export class Step2Component implements OnInit {
     });
 
     this.step2FormGroup.get('ctrl_MaxValue').disable();
+
     this.step2FormGroup.get('ctrl_MinValue').disable();
+
     this.step2FormGroup.get('ctrl_DefaultValue').disable();
+
 
      // sign child group of controls to parent in order to check if it is valid or not
     this.step2FormGroup.statusChanges.subscribe(st => {this.paramWindow.secondFormGroup = this.step2FormGroup;});

@@ -1,10 +1,13 @@
-
+<div style="border: black solid 1px">
+<button mat-button matDialogClose color="grey"  style=" background-color: white; float:right;  ">
+  <mat-icon>close</mat-icon>
+</button>
 
 <!-- <h1 *ngIf="testate">Name {{testate.configitemname}} </h1>-->
   <form>
 <!--     if  linear is false - every step of step available to edit
          if linear is true - each step must have validation.require is valid -->
-  <mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-horizontal-stepper [linear]="true" #stepper >
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Module</ng-template>
      <app-first-step></app-first-step>
@@ -29,12 +32,12 @@
       </form>
     </mat-step>
 
-
+< /div>
 <!--************************************      Step 5   ***********************************-->
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      You are now done.
+<!--    <mat-step>-->
+<!--      <ng-template matStepLabel>Done</ng-template>-->
+<!--      You are now done.-->
 
-    </mat-step>
-  </mat-horizontal-stepper>
-  </form>
+<!--    </mat-step>-->
+<!--  </mat-horizontal-stepper>-->
+<!--  </form>-->

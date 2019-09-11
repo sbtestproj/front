@@ -1,17 +1,28 @@
 <div class="Header">
-  <p>Siqma Knowhow </p>
-<br/>
-  <span style=" position: absolute; left: 40%; color: white; top: 110px; font-size: 20px"> The S&B KnowledgeBase </span>
 
-  <li ngbDropdown class="nav-item dropdown"style="width:120px; background-color: white; float:right">
-  <div>
-    <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Create New</a>
+  <div style="position: relative; height: 55px; right: 10px;">
+    <button ngbDropdown class="nav-item dropdown"style="position: relative; background-color: white; float: right;">
+      <div>
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Create New</a>
+      </div>
+      <div ngbDropdownMenu class="dropdown-menu " aria-labelledby="dropdown01">
+        <a class="dropdown-item" (click)="openDialog()" >Parameter</a>
+      </div>
+    </button>
+
   </div>
-    <div ngbDropdownMenu class="dropdown-menu " aria-labelledby="dropdown01">
-      <a class="dropdown-item" (click)="openDialog()" >Parameter</a>
-<!--      <a class="dropdown-item " (click)="httpService.addHero('')">Module</a>-->
-    </div>
-  </li>
+
+  <div class="Sigma">
+    <p align="center">Siqma Knowhow </p>
+  </div>
+  <div style=" bottom: 15px;  position: relative;
+    text-align: center;
+     color: white;
+     font-size: 25px;
+     font-weight: lighter ;">The S&B KnowledgeBase
+  </div>
+
+  <input #mainSearch class="MainSearch"  type="text" (keyup.enter)="httpService.getDataTableNew(mainSearch.value.toLowerCase())"  placeholder="Search" autofocus  />
 
 </div>
 
