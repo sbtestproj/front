@@ -93,6 +93,10 @@ export class TableConfigsComponent implements OnInit {
 
     // return this.outData;
 
+  httpEncoder() {
+    
+  }
+
   ngOnInit() {
 
    // this.ServiceHttp.getDataTable(this.stringdata);

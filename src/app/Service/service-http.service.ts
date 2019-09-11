@@ -19,7 +19,7 @@ export class ServiceHttpService {
 
 // *********************************************************************variables********************************************************
   ConfigItemsData;
-   baseUrl = 'http://127.0.0.1:8080/hiberProject/';
+   baseUrl = 'http://127.0.0.1:8181/hiberProject/';
  // baseUrl = 'http://10.221.190.40:8080/hiberProject/';
 
   latestVersion: string; // to get latest version of selected module

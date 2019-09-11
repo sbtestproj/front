@@ -18,7 +18,14 @@
     <td><input [(ngModel)]="confItemType" class="Filter" placeholder="Filter"  /></td>
     <td><input [(ngModel)]="defValue" class="Filter" placeholder="Filter"  /></td>
     <td><input [(ngModel)]="des" class="Filter" placeholder="Filter"  /></td>
-    <td><input [(ngModel)]="deviceName" class="Filter" placeholder="Filter"  /></td>
+    <td style="width: 100px">
+      <mat-select [(ngModel)]="deviceName" style="background-color: white" placeholder="Select">
+        <mat-option value="" >ALL</mat-option>
+        <mat-option value="BOS" >BOS</mat-option>
+        <mat-option value="POS" >POS</mat-option>
+        <mat-option value=" " >None</mat-option>
+      </mat-select>
+    </td>
     <td><input [(ngModel)]="sourceName" class="Filter" placeholder="Filter"  /></td>
     <td><input [(ngModel)]="sourceType" class="Filter" placeholder="Filter"  /></td>
   </tr>
@@ -32,7 +39,7 @@
     <td>{{cell[0]}}</td>
     <td>{{cell[1]}}</td>
     <td>{{cell[2]}}</td>
-    <td>{{cell[3]}}</td>
+    <td [innerHTML]="cell[3]"></td>// to render text inline
     <td>{{cell[4]}}</td>
     <td>{{cell[5]}}</td>
     <td>{{cell[6]}}</td>
