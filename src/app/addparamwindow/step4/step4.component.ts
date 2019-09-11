@@ -2,8 +2,8 @@ import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HeaderComponent} from '../../header/header.component';
 import { ParamService } from '../Service/param.service';
-import {InterfaceToSave2, modules_to_save} from '../testout';
 
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-step4',
@@ -20,7 +20,8 @@ export class Step4Component implements OnInit {
 
   constructor( private fb: FormBuilder, public head: HeaderComponent, public paramService: ParamService ) {}
   // variables
-
+  public text = '<b> text </b>';
+  public Editor = ClassicEditor;
 
   public fourthFormGroup: FormGroup;
 

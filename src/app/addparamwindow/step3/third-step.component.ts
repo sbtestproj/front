@@ -16,6 +16,7 @@ import {ConfigItemPossibleValues} from '../../Models/Entities/configItemPossible
 export class ThirdStepComponent implements OnInit {
   item: ConfigItemPossibleValues[] = [];
   registrationForm: FormGroup;
+  check = true; // to be able to check next button's status
   public testResult: possible;
   constructor(
     private fb: FormBuilder,
@@ -34,7 +35,7 @@ export class ThirdStepComponent implements OnInit {
       possibleValues: this.fb.array([
       ])
     });
-    this.main.secondFormGroup = this.registrationForm ;
+    this.main.thirdFormGroup = this.registrationForm ;
     this.registrationForm.statusChanges.subscribe(st => {this.main.thirdFormGroup = this.registrationForm; } );
   }
   get possibleValues() {
@@ -48,10 +49,10 @@ export class ThirdStepComponent implements OnInit {
     }
   }
   deletePossibleValues(i: number) {
-      this.possibleValues.removeAt(i);
-      // if (i === 0 && this.possibleValues.length === 0) {
-      //   this.addPossibleValues();
-      // }
+    this.possibleValues.removeAt(i);
+    // if (i === 0 && this.possibleValues.length === 0) {
+    //   this.addPossibleValues();
+    // }
   }
 
   addPossibleValues() {
@@ -62,15 +63,22 @@ export class ThirdStepComponent implements OnInit {
   private getUnit() {
     return this.fb.group({
       newValue: ['', Validators.compose([Validators.required, Validators.min(this.paramService.FullData.minvalue),
-      Validators.max(this.paramService.FullData.maxvalue)])],
+        Validators.max(this.paramService.FullData.maxvalue)])],
       newDescription: ['', Validators.required],
     });
+  }
+  // to be able to controll check buttons status
+  checkMate() {
+    this.check = false;
   }
 
   save() {
     this.testResult = new class implements possible {
       possibleValues: [{ newValue: undefined; newDescription: undefined }];
     }
+    //  ******************************************************************
+    this.check = true; //to be able to control next buttons status
+    // *******************************************************************
     this.testResult = this.registrationForm.value;
     this.item = [];
     this.testResult.possibleValues.forEach(x => {

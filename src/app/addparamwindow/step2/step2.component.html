@@ -51,47 +51,65 @@
           </mat-autocomplete>
         </mat-form-field>
           <!--    ********************  end DataType *********************** -->
-
+<!--        <div *ngIf="this.paramService.isBoolean">-->
+<!--          bool-->
+<!--        </div>-->
+<!--        <div *ngIf="!this.paramService.isBoolean">-->
+<!--          no bool-->
+<!--        </div>-->
 
 
       </div>
 
 
-    <!--    ********************  next column *********************** -->
-    <div style="position: relative; width: 300px; float: right; right: 70px; ">
+      <!--    ********************  next column *********************** -->
+      <div style="position: relative; width: 300px; float: right; right: 70px; ">
+
+        <div *ngIf="this.paramService.isBoolean">
+          <mat-form-field>
+            <mat-select [(value)]="this.paramService.FullData.defaultvalue" >
+              <mat-option value="True" >True</mat-option>
+              <mat-option value="False" >False</mat-option>
+              <mat-option value="" >None</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!--                to see what value we get from selection-->
+<!--          <p>&#45;&#45;&#45;&#45;{{this.paramService.FullData.defaultvalue}}&#45;&#45;&#45;&#45;</p>-->
+        </div>
+
+        <!--    ********************  defaultvalue *********************** -->
+        <div *ngIf="!paramService.isBoolean">
+          <mat-form-field>
+            <input  autocomplete = "off"  #defaultValue formControlName="ctrl_DefaultValue" type="{{this.contoltype}}" matInput placeholder="default value"
+                    (keyup)="ctrl_DefaultValueChanged()" >
+          </mat-form-field>
+        </div>
+        <!--   ********************************************************     -->
 
 
-      <!--    ********************  defaultvalue *********************** -->
-      <div>
-        <mat-form-field>
-          <input  autocomplete = "off"  #defaultValue formControlName="ctrl_DefaultValue" type="number" matInput placeholder="default value"
-          (keyup)="ctrl_DefaultValueChanged()" >
-        </mat-form-field>
-      </div>
-      <!--   ********************************************************     -->
+        <!--    ********************  maxvalue *********************** -->
+
+        <div *ngIf="!paramService.isBoolean">
+          <mat-form-field>
+            <input autocomplete = "off"  #maxValue formControlName="ctrl_MaxValue" type="number" matInput placeholder="Max value"
+                   (keyup)="ctrl_MaxValueChanged()" >
+          </mat-form-field>
+        </div>
+        <!--*******************      messaging      *******************-->
+        <!--      <div class="alert" *ngIf="!step2FormGroup.controls['step2Max'].valid && step2FormGroup.controls['step2Max'].touched">-->
+        <!--        <p style="color: cornflowerblue">max value can't be less min value  </p>-->
+        <!--      </div>-->
+        <!--   *********************************************************   -->
+
+        <!--    ********************  minvalue *********************** -->
+        <div *ngIf="!paramService.isBoolean">
+          <mat-form-field>
+            <input autocomplete = "off" #minValue formControlName="ctrl_MinValue" type="number" matInput placeholder="Min value"
+                   (keyup)="ctrl_MinValueChanged()" >
+          </mat-form-field>
+        </div>
 
 
-      <!--    ********************  maxvalue *********************** -->
-
-      <div>
-        <mat-form-field>
-          <input autocomplete = "off"  #maxValue formControlName="ctrl_MaxValue" type="number" matInput placeholder="Max value"
-                  (keyup)="ctrl_MaxValueChanged()" >
-        </mat-form-field>
-      </div>
-      <!--*******************      messaging      *******************-->
-<!--      <div class="alert" *ngIf="!step2FormGroup.controls['step2Max'].valid && step2FormGroup.controls['step2Max'].touched">-->
-<!--        <p style="color: cornflowerblue">max value can't be less min value  </p>-->
-<!--      </div>-->
-      <!--   *********************************************************   -->
-
-      <!--    ********************  minvalue *********************** -->
-      <div>
-        <mat-form-field>
-          <input autocomplete = "off" #minValue formControlName="ctrl_MinValue" type="number" matInput placeholder="Min value"
-                 (keyup)="ctrl_MinValueChanged()" >
-        </mat-form-field>
-      </div>
 
 
 <!--      <div style="margin-left: auto; width: 300px;">-->
@@ -108,15 +126,22 @@
 <!--    id num {{SectionObject.config_item_name}}-->
 <!--      </li>-->
 <!--</div>-->
+        <div mat-dialog-actions style=" position: relative ; " >
 
-      <div mat-dialog-actions style=" position: relative ; " >
 
-<!--        <button mat-button mat-dialog-close>Close</button>-->
-        <button mat-button  mat-dialog-close style="position: relative; background: #dfdfdf">Close</button>
-        <button mat-button matStepperPrevious style=" position: relative; background: #dfdfdf" >back</button>
-        <button mat-button matStepperNext style="position: relative; background: #dfdfdf">next</button>
-        <!--    <button mat-button [mat-dialog-close]="data.color" cdkFocusInitial>Ok</button>-->
-      </div>
+          <button mat-button matStepperPrevious style=" position: relative; background: #dfdfdf" >back</button>
+          <button mat-button matStepperNext style="position: relative; background: #dfdfdf" [disabled]="step2FormGroup.invalid">next</button>
+
+        </div>
+<!--     old type of buttons   -->
+<!--      <div mat-dialog-actions style=" position: relative ; " >-->
+
+<!--&lt;!&ndash;        <button mat-button mat-dialog-close>Close</button>&ndash;&gt;-->
+<!--        <button mat-button  mat-dialog-close style="position: relative; background: #dfdfdf">Close</button>-->
+<!--        <button mat-button matStepperPrevious style=" position: relative; background: #dfdfdf" >back</button>-->
+<!--        <button mat-button matStepperNext style="position: relative; background: #dfdfdf">next</button>-->
+<!--        &lt;!&ndash;    <button mat-button [mat-dialog-close]="data.color" cdkFocusInitial>Ok</button>&ndash;&gt;-->
+<!--      </div>-->
     </div>
 
 

@@ -44,9 +44,10 @@ data Type: {{this.paramService.FullData.dataType.data_types_name}}
       </mat-form-field>
     </div>
     <div>
-      <button mat-button matDialogClose >Close</button>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext (click)="save()" [disabled]="!registrationForm.valid">Next</button>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext (click)="save()" [disabled]="yes.checked ? (!registrationForm.valid || this.check) : false">Next</button>
+      </div>
     </div>
   </form>
 <!--  {{registrationForm.status | json}}-->

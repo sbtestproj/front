@@ -7,10 +7,13 @@
 <!--<button type="button" (click)="this.paramService.postData()">SendData</button>-->
 <form [formGroup]="fourthFormGroup">
   <div>
-    <textarea #description formControlName="ctrl_Description" style="height: 300px; width: 850px; background-color: wheat;"
-    (keyup)="ctrl_DescriptionChanged(description.value)">
-
-    </textarea>
+<!--    old one     -->
+<!--    <textarea #description formControlName="ctrl_Description" style="height: 300px; width: 850px; background-color: wheat;"-->
+<!--    (keyup)="ctrl_DescriptionChanged(description.value)">-->
+<!--    </textarea>-->
+<!--******************-->
+    <ckeditor  formControlName="ctrl_Description" [editor]="Editor"  [(ngModel)]="this.paramService.FullData.configitemdescription" >Test</ckeditor>
+    {{this.paramService.FullData.configitemdescription}}
   </div>
 
   <mat-checkbox style="padding-left: 10px; padding-right: 10px" #ca>Create Another</mat-checkbox><br>

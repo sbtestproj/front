@@ -29,7 +29,7 @@ export class Step2Component implements OnInit {
   }
 
 
-  flag: boolean;
+  selected: any;
   // for test ngModel
   // event to parent
   @Output() public outToParent = new EventEmitter(); // СОБЫТИЕ ДЛЯ ПОСЫЛКИ ДАННЫХ  look for the function   sendToParent()
@@ -41,7 +41,7 @@ export class Step2Component implements OnInit {
   // form groups  see on init iether
   public step2FormGroup: FormGroup;
   test = 'test'; // data_types = { data_types_id: null, data_types_name: 'Int'};
-
+  contoltype = 'text';
 
   // for test ngModel
   type = 'number';
@@ -75,6 +75,8 @@ export class Step2Component implements OnInit {
     this.paramService.FullData.dataType.data_types_name = object.data_types_name;
     this.paramService.FullData.datatypesid = object.data_types_id;
     if (object.data_types_name === 'Varchar') {
+      this.paramService.isBoolean = false;
+      this.contoltype = 'text';
       console.log('datatype:  varchar');
       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       this.step2FormGroup.get('ctrl_DefaultValue').enable();
@@ -85,9 +87,12 @@ export class Step2Component implements OnInit {
       this.step2FormGroup.get('ctrl_MinValue').setValue('');
       this.step2FormGroup.get('ctrl_MinValue').disable();
       this.paramService.FullData.minvalue = null;
+
       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     if (object.data_types_name === 'Int') {
+      this.paramService.isBoolean = false;
+      this.contoltype = 'number';
       this.step2FormGroup.get('ctrl_MaxValue').enable();
       this.step2FormGroup.get('ctrl_MinValue').enable();
       this.step2FormGroup.get('ctrl_MaxValue').enable();
@@ -96,6 +101,7 @@ export class Step2Component implements OnInit {
       this.step2FormGroup.get('ctrl_DefaultValue').enable();
     }
     if (object.data_types_name === 'Boolean') {
+      this.paramService.isBoolean = true;
       this.step2FormGroup.get('ctrl_DefaultValue').enable();
       this.step2FormGroup.get('ctrl_DefaultValue').enable();
       this.step2FormGroup.get('ctrl_MaxValue').setValue('');

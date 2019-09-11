@@ -27,6 +27,9 @@ import { InterceptorModule } from './Modules/interceptor.module';
 import { DetailsComponent } from './details/details.component';
 import {RouterModule} from '@angular/router';
 
+// reachtexteditor
+import { CKEditorModule} from '@ckeditor/ckeditor5-angular';
+
 
 /*material*/
 import { MaterialModule} from './Modules/material.module';
@@ -88,6 +91,8 @@ import {ThirdStepComponent} from './addparamwindow/step3/third-step.component';
 
   ],
   imports: [
+    // reachtexteditor
+    CKEditorModule,
     InterceptorModule,
     BrowserModule,
     Ng2SearchPipeModule,
